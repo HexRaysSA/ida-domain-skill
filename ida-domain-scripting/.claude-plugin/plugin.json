@@ -1,0 +1,9 @@
+{
+  "name": "ida-domain-scripting",
+  "description": "IDA Domain Scripting Skill",
+  "version": "1.0.0",
+  "author": {
+    "name": "Hex-Rays SA",
+    "email": "support@hex-rays.com"
+  }
+}
