@@ -216,13 +216,12 @@ with Database.open('{target_file_escaped}', IdaCommandOptions(auto_analysis=True
     return wrapper
 
 
-def execute_script(code: str, source_desc: str) -> int:
+def execute_script(code: str) -> int:
     """
     Execute the script code via subprocess.
 
     Args:
         code: Python code to execute.
-        source_desc: Description of the code source for error messages.
 
     Returns:
         Exit code from the script execution.
@@ -382,7 +381,7 @@ def main() -> int:
         print_info(f"Executing wrapped {source_desc}...")
 
     # Step 6: Execute
-    return execute_script(final_code, source_desc)
+    return execute_script(final_code)
 
 
 if __name__ == "__main__":
