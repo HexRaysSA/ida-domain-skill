@@ -1,0 +1,6019 @@
+[94mInfo:[0m Executing wrapped file: /tmp/ida-domain-ex01.py...
+Analyzing binary: input
+Architecture: metapc, Bitness: 64-bit
+
+Processed 50 functions...
+Processed 100 functions...
+Processed 150 functions...
+Processed 200 functions...
+Processed 250 functions...
+
+============================================================
+CLASSIFICATION SUMMARY
+============================================================
+Total functions analyzed: 250
+Functions with classification: 247
+
+Category distribution:
+  parsing        :  136 ( 54.4%)
+  crypto         :   71 ( 28.4%)
+  allocator      :   34 ( 13.6%)
+  logging        :    6 (  2.4%)
+  unknown        :    3 (  1.2%)
+  compression    :    0 (  0.0%)
+
+============================================================
+TOP FUNCTIONS BY CATEGORY
+============================================================
+
+CRYPTO:
+  0x0103B960 sub_103B960                              (confidence: 0.67)
+  0x0100E910 sub_100E910                              (confidence: 0.60)
+  0x0101B160 sub_101B160                              (confidence: 0.60)
+  0x0102B000 sub_102B000                              (confidence: 0.60)
+  0x01014B50 sub_1014B50                              (confidence: 0.50)
+
+COMPRESSION:
+
+PARSING:
+  0x010153A0 sub_10153A0                              (confidence: 1.00)
+  0x01019FA0 sub_1019FA0                              (confidence: 1.00)
+  0x01024290 sub_1024290                              (confidence: 1.00)
+  0x01025120 sub_1025120                              (confidence: 1.00)
+  0x01025200 sub_1025200                              (confidence: 1.00)
+
+ALLOCATOR:
+  0x0103B930 sub_103B930                              (confidence: 0.88)
+  0x0103A530 sub_103A530                              (confidence: 0.75)
+  0x0103A560 sub_103A560                              (confidence: 0.75)
+  0x0103A5A0 sub_103A5A0                              (confidence: 0.75)
+  0x0103B8D0 sub_103B8D0                              (confidence: 0.75)
+
+LOGGING:
+  0x010330F0 sub_10330F0                              (confidence: 1.00)
+  0x01033FC0 sub_1033FC0                              (confidence: 1.00)
+  0x0100D900 sub_100D900                              (confidence: 0.78)
+  0x0100F330 sub_100F330                              (confidence: 0.78)
+  0x0103BC20 sub_103BC20                              (confidence: 0.62)
+
+============================================================
+FULL JSON REPORT
+============================================================
+{
+  "module": "input",
+  "total_functions": 250,
+  "classified_functions": 247,
+  "category_counts": {
+    "crypto": 71,
+    "compression": 0,
+    "parsing": 136,
+    "allocator": 34,
+    "logging": 6,
+    "unknown": 3
+  },
+  "functions": [
+    {
+      "ea": "0x0100D410",
+      "name": "start",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0100D420",
+      "name": "sub_100D420",
+      "predicted_label": "parsing",
+      "confidence": 0.67,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x0100D860",
+      "name": "sub_100D860",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0100D890",
+      "name": "sub_100D890",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0100D900",
+      "name": "sub_100D900",
+      "predicted_label": "logging",
+      "confidence": 0.78,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 16.0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {
+          "logging": 16.0
+        },
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x0100E790",
+      "name": "sub_100E790",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0100E7A0",
+      "name": "sub_100E7A0",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0100E840",
+      "name": "sub_100E840",
+      "predicted_label": "parsing",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0100E910",
+      "name": "sub_100E910",
+      "predicted_label": "crypto",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0100EA20",
+      "name": "sub_100EA20",
+      "predicted_label": "parsing",
+      "confidence": 0.55,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x0100EBE0",
+      "name": "sub_100EBE0",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0100ED50",
+      "name": "sub_100ED50",
+      "predicted_label": "unknown",
+      "confidence": 0.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {},
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0100F020",
+      "name": "sub_100F020",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0100F1F0",
+      "name": "sub_100F1F0",
+      "predicted_label": "unknown",
+      "confidence": 0.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {},
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0100F330",
+      "name": "sub_100F330",
+      "predicted_label": "logging",
+      "confidence": 0.78,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 6.0,
+        "logging": 38.0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {
+          "logging": 38.0,
+          "allocator": 6.0
+        },
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01014B50",
+      "name": "sub_1014B50",
+      "predicted_label": "crypto",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01014F60",
+      "name": "sub_1014F60",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01014FD0",
+      "name": "sub_1014FD0",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01015040",
+      "name": "sub_1015040",
+      "predicted_label": "parsing",
+      "confidence": 0.55,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01015240",
+      "name": "sub_1015240",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x010153A0",
+      "name": "sub_10153A0",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01015470",
+      "name": "sub_1015470",
+      "predicted_label": "parsing",
+      "confidence": 0.67,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01015DF0",
+      "name": "sub_1015DF0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01016170",
+      "name": "sub_1016170",
+      "predicted_label": "parsing",
+      "confidence": 0.67,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01019240",
+      "name": "sub_1019240",
+      "predicted_label": "parsing",
+      "confidence": 0.67,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01019D10",
+      "name": "sub_1019D10",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01019FA0",
+      "name": "sub_1019FA0",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0101A160",
+      "name": "sub_101A160",
+      "predicted_label": "crypto",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0101AA40",
+      "name": "sub_101AA40",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0101AB90",
+      "name": "sub_101AB90",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0101ABE0",
+      "name": "sub_101ABE0",
+      "predicted_label": "parsing",
+      "confidence": 0.67,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x0101AF30",
+      "name": "sub_101AF30",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0101B160",
+      "name": "sub_101B160",
+      "predicted_label": "crypto",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0101B2A0",
+      "name": "sub_101B2A0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0101B390",
+      "name": "sub_101B390",
+      "predicted_label": "parsing",
+      "confidence": 0.67,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x0101DB20",
+      "name": "sub_101DB20",
+      "predicted_label": "parsing",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0101DC00",
+      "name": "sub_101DC00",
+      "predicted_label": "parsing",
+      "confidence": 0.67,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x0101FB00",
+      "name": "os.linux.x86_64.getContextInternal",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0101FBC0",
+      "name": "sub_101FBC0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0101FE90",
+      "name": "sub_101FE90",
+      "predicted_label": "parsing",
+      "confidence": 0.55,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01020080",
+      "name": "sub_1020080",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x010200A0",
+      "name": "sub_10200A0",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x010200B0",
+      "name": "sub_10200B0",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x010200C0",
+      "name": "sub_10200C0",
+      "predicted_label": "parsing",
+      "confidence": 0.46,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 2.0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {
+          "logging": 2.0
+        },
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01020900",
+      "name": "sub_1020900",
+      "predicted_label": "parsing",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01020A20",
+      "name": "sub_1020A20",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01020AC0",
+      "name": "sub_1020AC0",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01020B00",
+      "name": "sub_1020B00",
+      "predicted_label": "parsing",
+      "confidence": 0.67,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01023760",
+      "name": "sub_1023760",
+      "predicted_label": "logging",
+      "confidence": 0.42,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 4.0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {
+          "logging": 4.0
+        },
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01023B60",
+      "name": "sub_1023B60",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01023C80",
+      "name": "sub_1023C80",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01023E70",
+      "name": "sub_1023E70",
+      "predicted_label": "parsing",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01023F60",
+      "name": "sub_1023F60",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01024160",
+      "name": "sub_1024160",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01024290",
+      "name": "sub_1024290",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01024410",
+      "name": "sub_1024410",
+      "predicted_label": "parsing",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 2.0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {
+          "logging": 2.0
+        },
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01024600",
+      "name": "sub_1024600",
+      "predicted_label": "parsing",
+      "confidence": 0.55,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x010248E0",
+      "name": "sub_10248E0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01024AA0",
+      "name": "sub_1024AA0",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01024B50",
+      "name": "sub_1024B50",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01024C60",
+      "name": "sub_1024C60",
+      "predicted_label": "parsing",
+      "confidence": 0.67,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01024F60",
+      "name": "sub_1024F60",
+      "predicted_label": "parsing",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01025010",
+      "name": "sub_1025010",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01025120",
+      "name": "sub_1025120",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01025200",
+      "name": "sub_1025200",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x010252E0",
+      "name": "sub_10252E0",
+      "predicted_label": "parsing",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01025390",
+      "name": "sub_1025390",
+      "predicted_label": "parsing",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01025420",
+      "name": "sub_1025420",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x010254D0",
+      "name": "sub_10254D0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01025810",
+      "name": "sub_1025810",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x010258D0",
+      "name": "sub_10258D0",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01025980",
+      "name": "sub_1025980",
+      "predicted_label": "parsing",
+      "confidence": 0.67,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x010262B0",
+      "name": "sub_10262B0",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01026320",
+      "name": "sub_1026320",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x010263D0",
+      "name": "sub_10263D0",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01026470",
+      "name": "sub_1026470",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x010267E0",
+      "name": "sub_10267E0",
+      "predicted_label": "parsing",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01026890",
+      "name": "sub_1026890",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01026940",
+      "name": "sub_1026940",
+      "predicted_label": "crypto",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01027570",
+      "name": "sub_1027570",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x010275D0",
+      "name": "sub_10275D0",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x010276F0",
+      "name": "sub_10276F0",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01027720",
+      "name": "sub_1027720",
+      "predicted_label": "parsing",
+      "confidence": 0.67,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01029BC0",
+      "name": "sub_1029BC0",
+      "predicted_label": "parsing",
+      "confidence": 0.55,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01029D80",
+      "name": "sub_1029D80",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01029DE0",
+      "name": "sub_1029DE0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01029F10",
+      "name": "sub_1029F10",
+      "predicted_label": "parsing",
+      "confidence": 0.55,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x0102A080",
+      "name": "sub_102A080",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102A200",
+      "name": "sub_102A200",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102A460",
+      "name": "sub_102A460",
+      "predicted_label": "parsing",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102A4F0",
+      "name": "sub_102A4F0",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102A510",
+      "name": "sub_102A510",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102A570",
+      "name": "sub_102A570",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102A5F0",
+      "name": "sub_102A5F0",
+      "predicted_label": "parsing",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102A6E0",
+      "name": "sub_102A6E0",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102A790",
+      "name": "sub_102A790",
+      "predicted_label": "parsing",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102A880",
+      "name": "sub_102A880",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102AA20",
+      "name": "sub_102AA20",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102AB80",
+      "name": "sub_102AB80",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102ABB0",
+      "name": "sub_102ABB0",
+      "predicted_label": "parsing",
+      "confidence": 0.55,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x0102ACE0",
+      "name": "sub_102ACE0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102AE20",
+      "name": "sub_102AE20",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102AE90",
+      "name": "sub_102AE90",
+      "predicted_label": "parsing",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102B000",
+      "name": "sub_102B000",
+      "predicted_label": "crypto",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102B190",
+      "name": "sub_102B190",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102B1B0",
+      "name": "sub_102B1B0",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102B1D0",
+      "name": "sub_102B1D0",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102B1E0",
+      "name": "sub_102B1E0",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102B230",
+      "name": "sub_102B230",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102B290",
+      "name": "sub_102B290",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102B3B0",
+      "name": "sub_102B3B0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102B500",
+      "name": "sub_102B500",
+      "predicted_label": "parsing",
+      "confidence": 0.67,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x0102B860",
+      "name": "sub_102B860",
+      "predicted_label": "parsing",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102B8F0",
+      "name": "sub_102B8F0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102BA70",
+      "name": "sub_102BA70",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102BC40",
+      "name": "sub_102BC40",
+      "predicted_label": "parsing",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102BD30",
+      "name": "sub_102BD30",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102BD80",
+      "name": "sub_102BD80",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102BE00",
+      "name": "sub_102BE00",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102BE90",
+      "name": "sub_102BE90",
+      "predicted_label": "parsing",
+      "confidence": 0.67,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x0102DDF0",
+      "name": "sub_102DDF0",
+      "predicted_label": "crypto",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102E1C0",
+      "name": "sub_102E1C0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102E370",
+      "name": "sub_102E370",
+      "predicted_label": "parsing",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102E440",
+      "name": "sub_102E440",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102E600",
+      "name": "sub_102E600",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102E720",
+      "name": "sub_102E720",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102E7B0",
+      "name": "sub_102E7B0",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102E860",
+      "name": "sub_102E860",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0102E8F0",
+      "name": "sub_102E8F0",
+      "predicted_label": "parsing",
+      "confidence": 0.67,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01030250",
+      "name": "sub_1030250",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x010302E0",
+      "name": "sub_10302E0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x010304D0",
+      "name": "sub_10304D0",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01030550",
+      "name": "sub_1030550",
+      "predicted_label": "parsing",
+      "confidence": 0.55,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01030810",
+      "name": "sub_1030810",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x010308A0",
+      "name": "sub_10308A0",
+      "predicted_label": "parsing",
+      "confidence": 0.55,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01030A70",
+      "name": "sub_1030A70",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01030AC0",
+      "name": "sub_1030AC0",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01030B10",
+      "name": "sub_1030B10",
+      "predicted_label": "parsing",
+      "confidence": 0.55,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01030CA0",
+      "name": "sub_1030CA0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01030E30",
+      "name": "sub_1030E30",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01030FD0",
+      "name": "sub_1030FD0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01031160",
+      "name": "sub_1031160",
+      "predicted_label": "parsing",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01031230",
+      "name": "sub_1031230",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01031300",
+      "name": "sub_1031300",
+      "predicted_label": "parsing",
+      "confidence": 0.67,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01031960",
+      "name": "sub_1031960",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01031A00",
+      "name": "sub_1031A00",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01031A90",
+      "name": "sub_1031A90",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01031CE0",
+      "name": "sub_1031CE0",
+      "predicted_label": "parsing",
+      "confidence": 0.55,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01031F40",
+      "name": "sub_1031F40",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01031FD0",
+      "name": "sub_1031FD0",
+      "predicted_label": "crypto",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x010330F0",
+      "name": "sub_10330F0",
+      "predicted_label": "logging",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01033190",
+      "name": "sub_1033190",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x010331E0",
+      "name": "sub_10331E0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01033330",
+      "name": "sub_1033330",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x010333E0",
+      "name": "sub_10333E0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01033530",
+      "name": "sub_1033530",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x010335E0",
+      "name": "sub_10335E0",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01033630",
+      "name": "sub_1033630",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01033670",
+      "name": "sub_1033670",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01033700",
+      "name": "sub_1033700",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x010337F0",
+      "name": "sub_10337F0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01033A40",
+      "name": "sub_1033A40",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01033B90",
+      "name": "sub_1033B90",
+      "predicted_label": "parsing",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01033C30",
+      "name": "sub_1033C30",
+      "predicted_label": "parsing",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01033D40",
+      "name": "sub_1033D40",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01033F00",
+      "name": "sub_1033F00",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01033F20",
+      "name": "sub_1033F20",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01033FC0",
+      "name": "sub_1033FC0",
+      "predicted_label": "logging",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01033FE0",
+      "name": "sub_1033FE0",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01034050",
+      "name": "sub_1034050",
+      "predicted_label": "parsing",
+      "confidence": 0.67,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x010343F0",
+      "name": "sub_10343F0",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x010344A0",
+      "name": "sub_10344A0",
+      "predicted_label": "unknown",
+      "confidence": 0.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {},
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01034580",
+      "name": "sub_1034580",
+      "predicted_label": "parsing",
+      "confidence": 0.67,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01034BE0",
+      "name": "sub_1034BE0",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01034C40",
+      "name": "sub_1034C40",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01034D00",
+      "name": "sub_1034D00",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01034D10",
+      "name": "sub_1034D10",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01034DB0",
+      "name": "sub_1034DB0",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01034EC0",
+      "name": "sub_1034EC0",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01034FD0",
+      "name": "sub_1034FD0",
+      "predicted_label": "parsing",
+      "confidence": 0.67,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01037FD0",
+      "name": "sub_1037FD0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01038140",
+      "name": "sub_1038140",
+      "predicted_label": "parsing",
+      "confidence": 0.55,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01038370",
+      "name": "sub_1038370",
+      "predicted_label": "parsing",
+      "confidence": 0.55,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x010385D0",
+      "name": "sub_10385D0",
+      "predicted_label": "parsing",
+      "confidence": 0.55,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01038830",
+      "name": "sub_1038830",
+      "predicted_label": "parsing",
+      "confidence": 0.55,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01038A90",
+      "name": "sub_1038A90",
+      "predicted_label": "parsing",
+      "confidence": 0.55,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01038C60",
+      "name": "sub_1038C60",
+      "predicted_label": "parsing",
+      "confidence": 0.55,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01038EC0",
+      "name": "sub_1038EC0",
+      "predicted_label": "parsing",
+      "confidence": 0.55,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01039120",
+      "name": "sub_1039120",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01039390",
+      "name": "sub_1039390",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x010395E0",
+      "name": "sub_10395E0",
+      "predicted_label": "parsing",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x010396A0",
+      "name": "sub_10396A0",
+      "predicted_label": "parsing",
+      "confidence": 0.55,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01039840",
+      "name": "sub_1039840",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x010399E0",
+      "name": "sub_10399E0",
+      "predicted_label": "parsing",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01039A70",
+      "name": "sub_1039A70",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01039AA0",
+      "name": "sub_1039AA0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x01039C00",
+      "name": "sub_1039C00",
+      "predicted_label": "parsing",
+      "confidence": 0.55,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x01039EF0",
+      "name": "sub_1039EF0",
+      "predicted_label": "parsing",
+      "confidence": 0.55,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x0103A2A0",
+      "name": "sub_103A2A0",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103A3A0",
+      "name": "sub_103A3A0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103A530",
+      "name": "sub_103A530",
+      "predicted_label": "allocator",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 1.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "allocator": 1.0
+        }
+      }
+    },
+    {
+      "ea": "0x0103A560",
+      "name": "sub_103A560",
+      "predicted_label": "allocator",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 1.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "allocator": 1.0
+        }
+      }
+    },
+    {
+      "ea": "0x0103A590",
+      "name": "sub_103A590",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103A5A0",
+      "name": "sub_103A5A0",
+      "predicted_label": "allocator",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 1.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "allocator": 1.0
+        }
+      }
+    },
+    {
+      "ea": "0x0103A5D0",
+      "name": "sub_103A5D0",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103A600",
+      "name": "sub_103A600",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x0103A730",
+      "name": "sub_103A730",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x0103A860",
+      "name": "sub_103A860",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103A880",
+      "name": "sub_103A880",
+      "predicted_label": "crypto",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 3.5,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 2.0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {
+          "logging": 2.0,
+          "crypto": 2.0
+        },
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103B8D0",
+      "name": "sub_103B8D0",
+      "predicted_label": "allocator",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 1.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "allocator": 1.0
+        }
+      }
+    },
+    {
+      "ea": "0x0103B900",
+      "name": "sub_103B900",
+      "predicted_label": "allocator",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 1.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "allocator": 1.0
+        }
+      }
+    },
+    {
+      "ea": "0x0103B930",
+      "name": "sub_103B930",
+      "predicted_label": "allocator",
+      "confidence": 0.88,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 3.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {
+          "allocator": 2.0
+        },
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "allocator": 1.0
+        }
+      }
+    },
+    {
+      "ea": "0x0103B960",
+      "name": "sub_103B960",
+      "predicted_label": "crypto",
+      "confidence": 0.67,
+      "score_breakdown": {
+        "crypto": 2.0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {
+          "crypto": 2.0
+        },
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103B990",
+      "name": "sub_103B990",
+      "predicted_label": "crypto",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 2.0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 1.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {
+          "crypto": 2.0
+        },
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "allocator": 1.0
+        }
+      }
+    },
+    {
+      "ea": "0x0103B9C0",
+      "name": "sub_103B9C0",
+      "predicted_label": "allocator",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 1.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "allocator": 1.0
+        }
+      }
+    },
+    {
+      "ea": "0x0103B9F0",
+      "name": "sub_103B9F0",
+      "predicted_label": "allocator",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 1.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "allocator": 1.0
+        }
+      }
+    },
+    {
+      "ea": "0x0103BA20",
+      "name": "sub_103BA20",
+      "predicted_label": "crypto",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 2.0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 1.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {
+          "crypto": 2.0
+        },
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "allocator": 1.0
+        }
+      }
+    },
+    {
+      "ea": "0x0103BA50",
+      "name": "sub_103BA50",
+      "predicted_label": "allocator",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 1.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "allocator": 1.0
+        }
+      }
+    },
+    {
+      "ea": "0x0103BA80",
+      "name": "sub_103BA80",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103BB60",
+      "name": "sub_103BB60",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103BBA0",
+      "name": "sub_103BBA0",
+      "predicted_label": "allocator",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 1.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "allocator": 1.0
+        }
+      }
+    },
+    {
+      "ea": "0x0103BBD0",
+      "name": "sub_103BBD0",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103BC20",
+      "name": "sub_103BC20",
+      "predicted_label": "logging",
+      "confidence": 0.62,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 1.5,
+        "logging": 2.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {
+          "logging": 2.0
+        },
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "allocator": 1.0
+        }
+      }
+    },
+    {
+      "ea": "0x0103BC50",
+      "name": "sub_103BC50",
+      "predicted_label": "parsing",
+      "confidence": 0.55,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0.5,
+        "logging": 2.0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {
+          "logging": 2.0
+        },
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x0103BD50",
+      "name": "sub_103BD50",
+      "predicted_label": "parsing",
+      "confidence": 0.71,
+      "score_breakdown": {
+        "crypto": 2.0,
+        "compression": 0,
+        "parsing": 5.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {
+          "crypto": 2.0,
+          "parsing": 2.0
+        },
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x0103BE80",
+      "name": "sub_103BE80",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 3.0,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "parsing": 1.5
+        }
+      }
+    },
+    {
+      "ea": "0x0103BFE0",
+      "name": "sub_103BFE0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103C270",
+      "name": "sub_103C270",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103C3B0",
+      "name": "sub_103C3B0",
+      "predicted_label": "crypto",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 2.0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 1.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {
+          "crypto": 2.0
+        },
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "allocator": 1.0
+        }
+      }
+    },
+    {
+      "ea": "0x0103C3E0",
+      "name": "sub_103C3E0",
+      "predicted_label": "parsing",
+      "confidence": 1.0,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103C420",
+      "name": "sub_103C420",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103C6E0",
+      "name": "sub_103C6E0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103C9B0",
+      "name": "sub_103C9B0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103CC70",
+      "name": "sub_103CC70",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103CDA0",
+      "name": "sub_103CDA0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103CED0",
+      "name": "sub_103CED0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103D010",
+      "name": "sub_103D010",
+      "predicted_label": "parsing",
+      "confidence": 0.75,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0.5,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "parsing": 1.5,
+          "allocator": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103D060",
+      "name": "sub_103D060",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103D320",
+      "name": "sub_103D320",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103D5F0",
+      "name": "sub_103D5F0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103D8B0",
+      "name": "sub_103D8B0",
+      "predicted_label": "parsing",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103D9D0",
+      "name": "sub_103D9D0",
+      "predicted_label": "crypto",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103DEA0",
+      "name": "sub_103DEA0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103DFD0",
+      "name": "sub_103DFD0",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103E100",
+      "name": "sub_103E100",
+      "predicted_label": "crypto",
+      "confidence": 0.38,
+      "score_breakdown": {
+        "crypto": 1.5,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "crypto": 1.5,
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103E240",
+      "name": "sub_103E240",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103E250",
+      "name": "sub_103E250",
+      "predicted_label": "allocator",
+      "confidence": 0.5,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 0,
+        "parsing": 0,
+        "allocator": 0.5,
+        "logging": 0.5
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "allocator": 0.5,
+          "logging": 0.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    },
+    {
+      "ea": "0x0103E260",
+      "name": "sub_103E260",
+      "predicted_label": "parsing",
+      "confidence": 0.43,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 1.0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "logging": 1.0
+        }
+      }
+    },
+    {
+      "ea": "0x0103E3C0",
+      "name": "sub_103E3C0",
+      "predicted_label": "parsing",
+      "confidence": 0.43,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 1.0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {
+          "logging": 1.0
+        }
+      }
+    },
+    {
+      "ea": "0x0103E490",
+      "name": "sub_103E490",
+      "predicted_label": "parsing",
+      "confidence": 0.6,
+      "score_breakdown": {
+        "crypto": 0,
+        "compression": 1.0,
+        "parsing": 1.5,
+        "allocator": 0,
+        "logging": 0
+      },
+      "details": {
+        "api_matches": {},
+        "string_matches": {},
+        "cfg_metrics": {
+          "compression": 1.0,
+          "parsing": 1.5
+        },
+        "constant_matches": {},
+        "callgraph_position": {}
+      }
+    }
+  ]
+}

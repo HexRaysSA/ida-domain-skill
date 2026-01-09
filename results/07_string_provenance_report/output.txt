@@ -1,0 +1,2993 @@
+Info: Executing wrapped file: /tmp/ida-domain-ex07.py...
+================================================================================
+STRING PROVENANCE REPORT
+================================================================================
+
+
+================================================================================
+CATEGORY: Network
+Total strings: 22
+================================================================================
+
+  [1] String: http://evil.example.com/beacon
+      Address: 0x1000010D8
+      Subtypes: Network:URL, Network:Domain
+      Direct References: None
+
+  [2] String: http://evil.example.com/beacon
+      Address: 0x1000010D8
+      Subtypes: Network:URL, Network:Domain
+      Direct References: None
+
+  [3] String: https://cdn.malware-c2.net/update.php
+      Address: 0x1000010F7
+      Subtypes: Network:URL, Network:Domain
+      Direct References (1):
+        - 0x100000938 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [4] String: https://cdn.malware-c2.net/update.php
+      Address: 0x1000010F7
+      Subtypes: Network:URL, Network:Domain
+      Direct References (1):
+        - 0x100000938 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [5] String: http://192.168.1.100:8080/cmd
+      Address: 0x10000111D
+      Subtypes: Network:URL, Network:IP Address, Network:Port
+      Direct References (1):
+        - 0x100000940 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [6] String: http://192.168.1.100:8080/cmd
+      Address: 0x10000111D
+      Subtypes: Network:URL, Network:IP Address, Network:Port
+      Direct References (1):
+        - 0x100000940 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [7] String: http://192.168.1.100:8080/cmd
+      Address: 0x10000111D
+      Subtypes: Network:URL, Network:IP Address, Network:Port
+      Direct References (1):
+        - 0x100000940 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [8] String: https://api.legitimate-service.com/v2/data
+      Address: 0x10000113B
+      Subtypes: Network:URL, Network:Domain
+      Direct References: None
+
+  [9] String: https://api.legitimate-service.com/v2/data
+      Address: 0x10000113B
+      Subtypes: Network:URL, Network:Domain
+      Direct References: None
+
+  [10] String: http://10.0.0.1:443/exfil
+      Address: 0x100001166
+      Subtypes: Network:URL, Network:IP Address, Network:Port
+      Direct References (1):
+        - 0x100000954 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [11] String: http://10.0.0.1:443/exfil
+      Address: 0x100001166
+      Subtypes: Network:URL, Network:IP Address, Network:Port
+      Direct References (1):
+        - 0x100000954 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [12] String: http://10.0.0.1:443/exfil
+      Address: 0x100001166
+      Subtypes: Network:URL, Network:IP Address, Network:Port
+      Direct References (1):
+        - 0x100000954 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [13] String: wss://realtime.tracker.io/socket
+      Address: 0x100001180
+      Subtypes: Network:Domain
+      Direct References: None
+
+  [14] String: 192.168.1.1
+      Address: 0x1000011C2
+      Subtypes: Network:IP Address
+      Direct References (1):
+        - 0x10000097C in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [15] String: 10.0.0.254
+      Address: 0x1000011CE
+      Subtypes: Network:IP Address
+      Direct References (1):
+        - 0x100000984 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [16] String: 172.16.0.1
+      Address: 0x1000011D9
+      Subtypes: Network:IP Address
+      Direct References (1):
+        - 0x10000098C in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [17] String: 8.8.8.8
+      Address: 0x1000011E4
+      Subtypes: Network:IP Address
+      Direct References (1):
+        - 0x100000998 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [18] String: 1.1.1.1
+      Address: 0x1000011EC
+      Subtypes: Network:IP Address
+      Direct References (1):
+        - 0x1000009A4 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [19] String: 203.0.113.50
+      Address: 0x1000011F4
+      Subtypes: Network:IP Address
+      Direct References (1):
+        - 0x1000009AC in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [20] String: 198.51.100.23
+      Address: 0x100001201
+      Subtypes: Network:IP Address
+      Direct References (1):
+        - 0x1000009B4 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [21] String: /api/v1/auth/login
+      Address: 0x10000120F
+      Subtypes: Network:API Endpoint
+      Direct References (1):
+        - 0x1000009C0 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [22] String: /api/v2/users/profile
+      Address: 0x100001222
+      Subtypes: Network:API Endpoint
+      Direct References (1):
+        - 0x1000009C8 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+================================================================================
+CATEGORY: Persistence
+Total strings: 11
+================================================================================
+
+  [1] String: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+      Address: 0x100001288
+      Subtypes: Persistence:Registry Key, Persistence:Registry Software Key, Persistence:Autorun Registry
+      Direct References: None
+
+  [2] String: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+      Address: 0x100001288
+      Subtypes: Persistence:Registry Key, Persistence:Registry Software Key, Persistence:Autorun Registry
+      Direct References: None
+
+  [3] String: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+      Address: 0x100001288
+      Subtypes: Persistence:Registry Key, Persistence:Registry Software Key, Persistence:Autorun Registry
+      Direct References: None
+
+  [4] String: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+      Address: 0x1000012C9
+      Subtypes: Persistence:Registry Key, Persistence:Registry Software Key, Persistence:Autorun Registry
+      Direct References (1):
+        - 0x100000A10 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [5] String: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+      Address: 0x1000012C9
+      Subtypes: Persistence:Registry Key, Persistence:Registry Software Key, Persistence:Autorun Registry
+      Direct References (1):
+        - 0x100000A10 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [6] String: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+      Address: 0x1000012C9
+      Subtypes: Persistence:Registry Key, Persistence:Registry Software Key, Persistence:Autorun Registry
+      Direct References (1):
+        - 0x100000A10 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [7] String: HKCU\Software\Classes\CLSID
+      Address: 0x100001330
+      Subtypes: Persistence:Registry Software Key
+      Direct References: None
+
+  [8] String: HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+      Address: 0x10000134C
+      Subtypes: Persistence:Registry Software Key
+      Direct References (1):
+        - 0x100000A2C in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [9] String: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+      Address: 0x100001387
+      Subtypes: Persistence:Registry Key, Persistence:Registry Software Key
+      Direct References: None
+
+  [10] String: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+      Address: 0x100001387
+      Subtypes: Persistence:Registry Key, Persistence:Registry Software Key
+      Direct References: None
+
+  [11] String: /etc/init.d/
+      Address: 0x1000014A2
+      Subtypes: Persistence:Linux Init, File_Operations:Unix Path
+      Direct References (1):
+        - 0x100000A64 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+================================================================================
+CATEGORY: Anti-Debug
+Total strings: 7
+================================================================================
+
+  [1] String: IsDebuggerPresent
+      Address: 0x100000DA0
+      Subtypes: Anti-Debug:Debug API
+      Direct References: None
+
+  [2] String: CheckRemoteDebuggerPresent
+      Address: 0x100000DB2
+      Subtypes: Anti-Debug:Debug API
+      Direct References (1):
+        - 0x10000071C in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [3] String: NtQueryInformationProcess
+      Address: 0x100000DCD
+      Subtypes: Anti-Debug:Debug API
+      Direct References (1):
+        - 0x100000724 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [4] String: OutputDebugStringA
+      Address: 0x100000DE7
+      Subtypes: Anti-Debug:Debug API
+      Direct References: None
+
+  [5] String: VMwareService.exe
+      Address: 0x100000E2B
+      Subtypes: Anti-Debug:VM Detection, File_Operations:Executable Extension
+      Direct References (1):
+        - 0x100000764 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [6] String: QEMU HARDDISK
+      Address: 0x100000E7E
+      Subtypes: Anti-Debug:VM Detection
+      Direct References (1):
+        - 0x1000007A0 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [7] String: VMWARE
+      Address: 0x100000E8C
+      Subtypes: Anti-Debug:VM Detection
+      Direct References (1):
+        - 0x1000007AC in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+================================================================================
+CATEGORY: File_Operations
+Total strings: 33
+================================================================================
+
+  [1] String: /usr/lib/dyld
+      Address: 0x10000056C
+      Subtypes: File_Operations:Unix Path
+      Direct References: None
+
+  [2] String: /usr/lib/libSystem.B.dylib
+      Address: 0x1000005F8
+      Subtypes: File_Operations:Unix Path
+      Direct References: None
+
+  [3] String: VMwareService.exe
+      Address: 0x100000E2B
+      Subtypes: Anti-Debug:VM Detection, File_Operations:Executable Extension
+      Direct References (1):
+        - 0x100000764 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [4] String: VBoxService.exe
+      Address: 0x100000E3D
+      Subtypes: File_Operations:Executable Extension
+      Direct References (1):
+        - 0x10000076C in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [5] String: vmtoolsd.exe
+      Address: 0x100000E4D
+      Subtypes: File_Operations:Executable Extension
+      Direct References (1):
+        - 0x100000774 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [6] String: vmsrvc.exe
+      Address: 0x100000E5A
+      Subtypes: File_Operations:Executable Extension
+      Direct References (1):
+        - 0x100000780 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [7] String: %APPDATA%\config.dat
+      Address: 0x100000F4E
+      Subtypes: File_Operations:Data Extension
+      Direct References (1):
+        - 0x1000006E8 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [8] String: /tmp/.config
+      Address: 0x100000F63
+      Subtypes: File_Operations:Unix Path
+      Direct References (1):
+        - 0x1000006F0 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [9] String: C:\ProgramData\settings.ini
+      Address: 0x100000F70
+      Subtypes: File_Operations:Windows Path, File_Operations:Config Extension
+      Direct References (1):
+        - 0x1000006FC in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [10] String: C:\ProgramData\settings.ini
+      Address: 0x100000F70
+      Subtypes: File_Operations:Windows Path, File_Operations:Config Extension
+      Direct References (1):
+        - 0x1000006FC in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [11] String: ~/.local/share/app/config.json
+      Address: 0x100000F8C
+      Subtypes: File_Operations:Config Extension
+      Direct References (1):
+        - 0x10000070C in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [12] String: C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp
+      Address: 0x1000013DB
+      Subtypes: File_Operations:Windows Path
+      Direct References (1):
+        - 0x100000A44 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [13] String: C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
+      Address: 0x100001418
+      Subtypes: File_Operations:Windows Path
+      Direct References (1):
+        - 0x100000A54 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [14] String: /etc/init.d/
+      Address: 0x1000014A2
+      Subtypes: Persistence:Linux Init, File_Operations:Unix Path
+      Direct References (1):
+        - 0x100000A64 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [15] String: malware.exe
+      Address: 0x10000153E
+      Subtypes: File_Operations:Executable Extension
+      Direct References (1):
+        - 0x100000AAC in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [16] String: C:\Windows\System32\config\SAM
+      Address: 0x10000154A
+      Subtypes: File_Operations:Windows Path
+      Direct References: None
+
+  [17] String: C:\Windows\System32\config\SYSTEM
+      Address: 0x100001569
+      Subtypes: File_Operations:Windows Path
+      Direct References (1):
+        - 0x100000AC0 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [18] String: /etc/passwd
+      Address: 0x10000158B
+      Subtypes: File_Operations:Unix Path
+      Direct References (1):
+        - 0x100000AC8 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [19] String: /etc/shadow
+      Address: 0x100001597
+      Subtypes: File_Operations:Unix Path
+      Direct References: None
+
+  [20] String: C:\Users\%USERNAME%\Documents
+      Address: 0x1000015B1
+      Subtypes: File_Operations:Windows Path
+      Direct References: None
+
+  [21] String: %TEMP%\payload.dll
+      Address: 0x1000015CF
+      Subtypes: File_Operations:Executable Extension
+      Direct References (1):
+        - 0x100000AEC in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [22] String: /tmp/.hidden_payload
+      Address: 0x1000015E2
+      Subtypes: File_Operations:Unix Path
+      Direct References (1):
+        - 0x100000B08 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [23] String: .sqlite
+      Address: 0x100001628
+      Subtypes: File_Operations:Data Extension
+      Direct References: None
+
+  [24] String: svchost.exe
+      Address: 0x100001630
+      Subtypes: File_Operations:Executable Extension
+      Direct References (1):
+        - 0x100000B80 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [25] String: csrss.exe
+      Address: 0x10000163C
+      Subtypes: File_Operations:Executable Extension
+      Direct References (1):
+        - 0x100000B8C in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [26] String: lsass.exe
+      Address: 0x100001646
+      Subtypes: File_Operations:Executable Extension
+      Direct References (1):
+        - 0x100000B94 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [27] String: winlogon.exe
+      Address: 0x100001650
+      Subtypes: File_Operations:Executable Extension
+      Direct References (1):
+        - 0x100000BA4 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [28] String: explorer.exe
+      Address: 0x10000165D
+      Subtypes: File_Operations:Executable Extension
+      Direct References (1):
+        - 0x100000BAC in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [29] String: rundll32.exe
+      Address: 0x10000166A
+      Subtypes: File_Operations:Executable Extension
+      Direct References: None
+
+  [30] String: system.dll
+      Address: 0x100001677
+      Subtypes: File_Operations:Executable Extension
+      Direct References (1):
+        - 0x100000BC4 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [31] String: kernel32.dll
+      Address: 0x100001682
+      Subtypes: File_Operations:Executable Extension
+      Direct References (1):
+        - 0x100000BDC in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [32] String: cmd.exe /c
+      Address: 0x10000168F
+      Subtypes: File_Operations:Executable Extension
+      Direct References: None
+
+  [33] String: powershell.exe -ExecutionPolicy Bypass
+      Address: 0x10000169A
+      Subtypes: File_Operations:Executable Extension
+      Direct References (1):
+        - 0x100000BFC in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+================================================================================
+CATEGORY: Crypto
+Total strings: 14
+================================================================================
+
+  [1] String: encryption_enabled
+      Address: 0x100000EF7
+      Subtypes: Crypto:Crypto Operation
+      Direct References (1):
+        - 0x1000006A0 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [2] String: AES-256-CBC
+      Address: 0x100000FAB
+      Subtypes: Crypto:Algorithm
+      Direct References: None
+
+  [3] String: AES-128-GCM
+      Address: 0x100000FB7
+      Subtypes: Crypto:Algorithm
+      Direct References (1):
+        - 0x100000818 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [4] String: RSA-2048
+      Address: 0x100000FC3
+      Subtypes: Crypto:Algorithm
+      Direct References (1):
+        - 0x10000082C in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [5] String: RSA-4096
+      Address: 0x100000FCC
+      Subtypes: Crypto:Algorithm
+      Direct References (1):
+        - 0x100000834 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [6] String: HMAC-SHA256
+      Address: 0x100000FF9
+      Subtypes: Crypto:Algorithm
+      Direct References: None
+
+  [7] String: encryption_key
+      Address: 0x100001023
+      Subtypes: Crypto:Crypto Operation
+      Direct References (1):
+        - 0x100000894 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [8] String: private_key
+      Address: 0x100001032
+      Subtypes: Crypto:Key Reference
+      Direct References (1):
+        - 0x10000089C in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [9] String: public_key
+      Address: 0x10000103E
+      Subtypes: Crypto:Key Reference
+      Direct References (1):
+        - 0x1000008AC in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [10] String: -----BEGIN RSA PRIVATE KEY-----
+      Address: 0x100001066
+      Subtypes: Crypto:Algorithm
+      Direct References (1):
+        - 0x1000008D4 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [11] String: -----BEGIN CERTIFICATE-----
+      Address: 0x100001086
+      Subtypes: Crypto:Certificate
+      Direct References (1):
+        - 0x1000008E0 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [12] String: ENCRYPTED
+      Address: 0x1000010A2
+      Subtypes: Crypto:Crypto Operation
+      Direct References (1):
+        - 0x1000008E8 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [13] String: DECRYPT_KEY
+      Address: 0x1000010AC
+      Subtypes: Crypto:Crypto Operation
+      Direct References (1):
+        - 0x1000008F4 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+  [14] String: base64
+      Address: 0x1000010B8
+      Subtypes: Crypto:Encoding
+      Direct References (1):
+        - 0x100000900 in _main (OFFSET)
+      Call Chains (1):
+        Chain 1: _main
+      Functions Involved (1): _main
+
+================================================================================
+SUMMARY
+================================================================================
+Total strings analyzed: 160
+Interesting strings found: 72
+
+Strings by category:
+  - Network: 22
+  - Persistence: 11
+  - Anti-Debug: 7
+  - File_Operations: 33
+  - Crypto: 14
+
+================================================================================
+JSON REPORT
+================================================================================
+{
+  "File_Operations": [
+    {
+      "value": "/usr/lib/dyld",
+      "address": "0x10000056C",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Unix Path"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "/usr/lib/libSystem.B.dylib",
+      "address": "0x1000005F8",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Unix Path"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "VMwareService.exe",
+      "address": "0x100000E2B",
+      "subtypes": [
+        [
+          "Anti-Debug",
+          "VM Detection"
+        ],
+        [
+          "File_Operations",
+          "Executable Extension"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000764",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "VBoxService.exe",
+      "address": "0x100000E3D",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Executable Extension"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x10000076C",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "vmtoolsd.exe",
+      "address": "0x100000E4D",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Executable Extension"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000774",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "vmsrvc.exe",
+      "address": "0x100000E5A",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Executable Extension"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000780",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "%APPDATA%\\config.dat",
+      "address": "0x100000F4E",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Data Extension"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x1000006E8",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "/tmp/.config",
+      "address": "0x100000F63",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Unix Path"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x1000006F0",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "C:\\ProgramData\\settings.ini",
+      "address": "0x100000F70",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Windows Path"
+        ],
+        [
+          "File_Operations",
+          "Config Extension"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x1000006FC",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "C:\\ProgramData\\settings.ini",
+      "address": "0x100000F70",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Windows Path"
+        ],
+        [
+          "File_Operations",
+          "Config Extension"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x1000006FC",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "~/.local/share/app/config.json",
+      "address": "0x100000F8C",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Config Extension"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x10000070C",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\StartUp",
+      "address": "0x1000013DB",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Windows Path"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000A44",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "C:\\Users\\%USERNAME%\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup",
+      "address": "0x100001418",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Windows Path"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000A54",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "/etc/init.d/",
+      "address": "0x1000014A2",
+      "subtypes": [
+        [
+          "Persistence",
+          "Linux Init"
+        ],
+        [
+          "File_Operations",
+          "Unix Path"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000A64",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "malware.exe",
+      "address": "0x10000153E",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Executable Extension"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000AAC",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "C:\\Windows\\System32\\config\\SAM",
+      "address": "0x10000154A",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Windows Path"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "C:\\Windows\\System32\\config\\SYSTEM",
+      "address": "0x100001569",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Windows Path"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000AC0",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "/etc/passwd",
+      "address": "0x10000158B",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Unix Path"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000AC8",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "/etc/shadow",
+      "address": "0x100001597",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Unix Path"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "C:\\Users\\%USERNAME%\\Documents",
+      "address": "0x1000015B1",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Windows Path"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "%TEMP%\\payload.dll",
+      "address": "0x1000015CF",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Executable Extension"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000AEC",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "/tmp/.hidden_payload",
+      "address": "0x1000015E2",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Unix Path"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000B08",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": ".sqlite",
+      "address": "0x100001628",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Data Extension"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "svchost.exe",
+      "address": "0x100001630",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Executable Extension"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000B80",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "csrss.exe",
+      "address": "0x10000163C",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Executable Extension"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000B8C",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "lsass.exe",
+      "address": "0x100001646",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Executable Extension"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000B94",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "winlogon.exe",
+      "address": "0x100001650",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Executable Extension"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000BA4",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "explorer.exe",
+      "address": "0x10000165D",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Executable Extension"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000BAC",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "rundll32.exe",
+      "address": "0x10000166A",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Executable Extension"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "system.dll",
+      "address": "0x100001677",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Executable Extension"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000BC4",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "kernel32.dll",
+      "address": "0x100001682",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Executable Extension"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000BDC",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "cmd.exe /c",
+      "address": "0x10000168F",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Executable Extension"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "powershell.exe -ExecutionPolicy Bypass",
+      "address": "0x10000169A",
+      "subtypes": [
+        [
+          "File_Operations",
+          "Executable Extension"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000BFC",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    }
+  ],
+  "Anti-Debug": [
+    {
+      "value": "IsDebuggerPresent",
+      "address": "0x100000DA0",
+      "subtypes": [
+        [
+          "Anti-Debug",
+          "Debug API"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "CheckRemoteDebuggerPresent",
+      "address": "0x100000DB2",
+      "subtypes": [
+        [
+          "Anti-Debug",
+          "Debug API"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x10000071C",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "NtQueryInformationProcess",
+      "address": "0x100000DCD",
+      "subtypes": [
+        [
+          "Anti-Debug",
+          "Debug API"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000724",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "OutputDebugStringA",
+      "address": "0x100000DE7",
+      "subtypes": [
+        [
+          "Anti-Debug",
+          "Debug API"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "VMwareService.exe",
+      "address": "0x100000E2B",
+      "subtypes": [
+        [
+          "Anti-Debug",
+          "VM Detection"
+        ],
+        [
+          "File_Operations",
+          "Executable Extension"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000764",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "QEMU HARDDISK",
+      "address": "0x100000E7E",
+      "subtypes": [
+        [
+          "Anti-Debug",
+          "VM Detection"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x1000007A0",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "VMWARE",
+      "address": "0x100000E8C",
+      "subtypes": [
+        [
+          "Anti-Debug",
+          "VM Detection"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x1000007AC",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    }
+  ],
+  "Crypto": [
+    {
+      "value": "encryption_enabled",
+      "address": "0x100000EF7",
+      "subtypes": [
+        [
+          "Crypto",
+          "Crypto Operation"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x1000006A0",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "AES-256-CBC",
+      "address": "0x100000FAB",
+      "subtypes": [
+        [
+          "Crypto",
+          "Algorithm"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "AES-128-GCM",
+      "address": "0x100000FB7",
+      "subtypes": [
+        [
+          "Crypto",
+          "Algorithm"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000818",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "RSA-2048",
+      "address": "0x100000FC3",
+      "subtypes": [
+        [
+          "Crypto",
+          "Algorithm"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x10000082C",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "RSA-4096",
+      "address": "0x100000FCC",
+      "subtypes": [
+        [
+          "Crypto",
+          "Algorithm"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000834",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "HMAC-SHA256",
+      "address": "0x100000FF9",
+      "subtypes": [
+        [
+          "Crypto",
+          "Algorithm"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "encryption_key",
+      "address": "0x100001023",
+      "subtypes": [
+        [
+          "Crypto",
+          "Crypto Operation"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000894",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "private_key",
+      "address": "0x100001032",
+      "subtypes": [
+        [
+          "Crypto",
+          "Key Reference"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x10000089C",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "public_key",
+      "address": "0x10000103E",
+      "subtypes": [
+        [
+          "Crypto",
+          "Key Reference"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x1000008AC",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "-----BEGIN RSA PRIVATE KEY-----",
+      "address": "0x100001066",
+      "subtypes": [
+        [
+          "Crypto",
+          "Algorithm"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x1000008D4",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "-----BEGIN CERTIFICATE-----",
+      "address": "0x100001086",
+      "subtypes": [
+        [
+          "Crypto",
+          "Certificate"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x1000008E0",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "ENCRYPTED",
+      "address": "0x1000010A2",
+      "subtypes": [
+        [
+          "Crypto",
+          "Crypto Operation"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x1000008E8",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "DECRYPT_KEY",
+      "address": "0x1000010AC",
+      "subtypes": [
+        [
+          "Crypto",
+          "Crypto Operation"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x1000008F4",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "base64",
+      "address": "0x1000010B8",
+      "subtypes": [
+        [
+          "Crypto",
+          "Encoding"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000900",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    }
+  ],
+  "Network": [
+    {
+      "value": "http://evil.example.com/beacon",
+      "address": "0x1000010D8",
+      "subtypes": [
+        [
+          "Network",
+          "URL"
+        ],
+        [
+          "Network",
+          "Domain"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "http://evil.example.com/beacon",
+      "address": "0x1000010D8",
+      "subtypes": [
+        [
+          "Network",
+          "URL"
+        ],
+        [
+          "Network",
+          "Domain"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "https://cdn.malware-c2.net/update.php",
+      "address": "0x1000010F7",
+      "subtypes": [
+        [
+          "Network",
+          "URL"
+        ],
+        [
+          "Network",
+          "Domain"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000938",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "https://cdn.malware-c2.net/update.php",
+      "address": "0x1000010F7",
+      "subtypes": [
+        [
+          "Network",
+          "URL"
+        ],
+        [
+          "Network",
+          "Domain"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000938",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "http://192.168.1.100:8080/cmd",
+      "address": "0x10000111D",
+      "subtypes": [
+        [
+          "Network",
+          "URL"
+        ],
+        [
+          "Network",
+          "IP Address"
+        ],
+        [
+          "Network",
+          "Port"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000940",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "http://192.168.1.100:8080/cmd",
+      "address": "0x10000111D",
+      "subtypes": [
+        [
+          "Network",
+          "URL"
+        ],
+        [
+          "Network",
+          "IP Address"
+        ],
+        [
+          "Network",
+          "Port"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000940",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "http://192.168.1.100:8080/cmd",
+      "address": "0x10000111D",
+      "subtypes": [
+        [
+          "Network",
+          "URL"
+        ],
+        [
+          "Network",
+          "IP Address"
+        ],
+        [
+          "Network",
+          "Port"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000940",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "https://api.legitimate-service.com/v2/data",
+      "address": "0x10000113B",
+      "subtypes": [
+        [
+          "Network",
+          "URL"
+        ],
+        [
+          "Network",
+          "Domain"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "https://api.legitimate-service.com/v2/data",
+      "address": "0x10000113B",
+      "subtypes": [
+        [
+          "Network",
+          "URL"
+        ],
+        [
+          "Network",
+          "Domain"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "http://10.0.0.1:443/exfil",
+      "address": "0x100001166",
+      "subtypes": [
+        [
+          "Network",
+          "URL"
+        ],
+        [
+          "Network",
+          "IP Address"
+        ],
+        [
+          "Network",
+          "Port"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000954",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "http://10.0.0.1:443/exfil",
+      "address": "0x100001166",
+      "subtypes": [
+        [
+          "Network",
+          "URL"
+        ],
+        [
+          "Network",
+          "IP Address"
+        ],
+        [
+          "Network",
+          "Port"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000954",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "http://10.0.0.1:443/exfil",
+      "address": "0x100001166",
+      "subtypes": [
+        [
+          "Network",
+          "URL"
+        ],
+        [
+          "Network",
+          "IP Address"
+        ],
+        [
+          "Network",
+          "Port"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000954",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "wss://realtime.tracker.io/socket",
+      "address": "0x100001180",
+      "subtypes": [
+        [
+          "Network",
+          "Domain"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "192.168.1.1",
+      "address": "0x1000011C2",
+      "subtypes": [
+        [
+          "Network",
+          "IP Address"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x10000097C",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "10.0.0.254",
+      "address": "0x1000011CE",
+      "subtypes": [
+        [
+          "Network",
+          "IP Address"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000984",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "172.16.0.1",
+      "address": "0x1000011D9",
+      "subtypes": [
+        [
+          "Network",
+          "IP Address"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x10000098C",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "8.8.8.8",
+      "address": "0x1000011E4",
+      "subtypes": [
+        [
+          "Network",
+          "IP Address"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000998",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "1.1.1.1",
+      "address": "0x1000011EC",
+      "subtypes": [
+        [
+          "Network",
+          "IP Address"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x1000009A4",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "203.0.113.50",
+      "address": "0x1000011F4",
+      "subtypes": [
+        [
+          "Network",
+          "IP Address"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x1000009AC",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "198.51.100.23",
+      "address": "0x100001201",
+      "subtypes": [
+        [
+          "Network",
+          "IP Address"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x1000009B4",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "/api/v1/auth/login",
+      "address": "0x10000120F",
+      "subtypes": [
+        [
+          "Network",
+          "API Endpoint"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x1000009C0",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "/api/v2/users/profile",
+      "address": "0x100001222",
+      "subtypes": [
+        [
+          "Network",
+          "API Endpoint"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x1000009C8",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    }
+  ],
+  "Persistence": [
+    {
+      "value": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "address": "0x100001288",
+      "subtypes": [
+        [
+          "Persistence",
+          "Registry Key"
+        ],
+        [
+          "Persistence",
+          "Registry Software Key"
+        ],
+        [
+          "Persistence",
+          "Autorun Registry"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "address": "0x100001288",
+      "subtypes": [
+        [
+          "Persistence",
+          "Registry Key"
+        ],
+        [
+          "Persistence",
+          "Registry Software Key"
+        ],
+        [
+          "Persistence",
+          "Autorun Registry"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "address": "0x100001288",
+      "subtypes": [
+        [
+          "Persistence",
+          "Registry Key"
+        ],
+        [
+          "Persistence",
+          "Registry Software Key"
+        ],
+        [
+          "Persistence",
+          "Autorun Registry"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "address": "0x1000012C9",
+      "subtypes": [
+        [
+          "Persistence",
+          "Registry Key"
+        ],
+        [
+          "Persistence",
+          "Registry Software Key"
+        ],
+        [
+          "Persistence",
+          "Autorun Registry"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000A10",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "address": "0x1000012C9",
+      "subtypes": [
+        [
+          "Persistence",
+          "Registry Key"
+        ],
+        [
+          "Persistence",
+          "Registry Software Key"
+        ],
+        [
+          "Persistence",
+          "Autorun Registry"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000A10",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "address": "0x1000012C9",
+      "subtypes": [
+        [
+          "Persistence",
+          "Registry Key"
+        ],
+        [
+          "Persistence",
+          "Registry Software Key"
+        ],
+        [
+          "Persistence",
+          "Autorun Registry"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000A10",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "HKCU\\Software\\Classes\\CLSID",
+      "address": "0x100001330",
+      "subtypes": [
+        [
+          "Persistence",
+          "Registry Software Key"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon",
+      "address": "0x10000134C",
+      "subtypes": [
+        [
+          "Persistence",
+          "Registry Software Key"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000A2C",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    },
+    {
+      "value": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders",
+      "address": "0x100001387",
+      "subtypes": [
+        [
+          "Persistence",
+          "Registry Key"
+        ],
+        [
+          "Persistence",
+          "Registry Software Key"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders",
+      "address": "0x100001387",
+      "subtypes": [
+        [
+          "Persistence",
+          "Registry Key"
+        ],
+        [
+          "Persistence",
+          "Registry Software Key"
+        ]
+      ],
+      "direct_refs": [],
+      "caller_chains": [],
+      "functions_involved": []
+    },
+    {
+      "value": "/etc/init.d/",
+      "address": "0x1000014A2",
+      "subtypes": [
+        [
+          "Persistence",
+          "Linux Init"
+        ],
+        [
+          "File_Operations",
+          "Unix Path"
+        ]
+      ],
+      "direct_refs": [
+        {
+          "from": "0x100000A64",
+          "function": "_main",
+          "type": "OFFSET"
+        }
+      ],
+      "caller_chains": [
+        [
+          {
+            "ea": "0x100000628",
+            "name": "_main"
+          }
+        ]
+      ],
+      "functions_involved": [
+        "_main"
+      ]
+    }
+  ]
+}

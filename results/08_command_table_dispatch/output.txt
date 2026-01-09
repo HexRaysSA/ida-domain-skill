@@ -1,0 +1,335 @@
+[94mInfo:[0m Executing wrapped file: /tmp/ida-domain-ex08.py...
+======================================================================
+COMMAND TABLE / DISPATCH DETECTION ANALYSIS
+======================================================================
+
+[*] Total functions in binary: 268
+
+----------------------------------------------------------------------
+PHASE 1: STRING ANALYSIS
+----------------------------------------------------------------------
+
+[+] Found 20 command-related strings
+
+  BASIC (3 strings):
+    0x10002AE28: ping                 [opcode=0x00]
+      "attempt to unwrap error: PONG from connection Status: , Mode"...
+    0x10002B116: version              [opcode=0x02]
+      "CommandDispatcher v2.4.1 (Protocol 3.0)"
+    0x10002B13E: status_auth          [opcode=0x05]
+      "AUTHENTICATED"
+
+  AUTH (3 strings):
+    0x10002B15B: auth_login           [opcode=0x10]
+      "LOGIN_SUCCESS: Session established"
+    0x10002B17E: auth_logout          [opcode=0x12]
+      "LOGOUT_SUCCESS: Session terminated"
+    0x10002B1A1: auth_token           [opcode=0x15]
+      "TOKEN:ABCD1234EFGH5678"
+
+  DATA (2 strings):
+    0x10002B1B8: data_write           [opcode=0x32]
+      "DATA_WRITE: OK, bytes written"
+    0x10002B1D6: data_list            [opcode=0x38]
+      "DATA_LIST: [rec_001, rec_002, rec_003]"
+
+  DATA_SUB (6 strings):
+    0x10002B21F: sub_get_size         [sub_opcode=0x01]
+      "DATA_SIZE: 1048576 bytes"
+    0x10002B238: sub_get_offset       [sub_opcode=0x02]
+      "DATA_OFFSET: 0x00400000"
+    0x10002B250: sub_set_flags        [sub_opcode=0x05]
+      "FLAGS_SET: RW"
+    0x10002B25E: sub_validate         [sub_opcode=0x08]
+      "VALIDATION: CRC32=0xDEADBEEF"
+    0x10002B27B: sub_compress         [sub_opcode=0x10]
+      "COMPRESS: LZ4 ratio=0.65"
+    0x10002B294: sub_encrypt          [sub_opcode=0x12]
+      "ENCRYPT: AES-256-GCM applied"
+
+  ERROR (4 strings):
+    0x10002B421: error_invalid_opcode
+      "InvalidOpcode"
+    0x10002B42F: error_invalid_subcmd
+      "InvalidSubCommand"
+    0x10002B441: error_auth_required 
+      "AuthRequired"
+    0x10002B44E: error_permission    
+      "PermissionDenied"
+
+  DISPATCHER (2 strings):
+    0x10002A9F5: dispatcher_debug    
+      "Opcode 0x"
+    0x10002AA31: dispatcher_complete 
+      "
+Command dispatch demonstration complete.
+"
+
+----------------------------------------------------------------------
+PHASE 2: STRING REFERENCE ANALYSIS
+----------------------------------------------------------------------
+
+String references found:
+  0x10002A9F5 (dispatcher_debug):
+    <- 0x100000AE4 (_main)
+  0x10002AA31 (dispatcher_complete):
+    <- 0x100001144 (_main)
+  0x10002AE28 (ping):
+    <- 0x100020464 (_debug.panicExtra__anon_9992)
+  0x10002B116 (version):
+    <- 0x100000A00 (_main)
+    <- 0x100000CF8 (_main)
+    <- 0x100000D00 (_main)
+  0x10002B13E (status_auth):
+    <- 0x100000EB8 (_main)
+  0x10002B15B (auth_login):
+    <- 0x1000009D4 (_main)
+    <- 0x100000D34 (_main)
+    <- 0x100000E1C (_main)
+  0x10002B17E (auth_logout):
+    <- 0x1000009B8 (_main)
+    <- 0x100000E14 (_main)
+    <- 0x100000E1C (_main)
+  0x10002B1A1 (auth_token):
+    <- 0x100000994 (_main)
+    <- 0x100000E44 (_main)
+    <- 0x100000E4C (_main)
+  0x10002B1B8 (data_write):
+    <- 0x1000008C0 (_main)
+    <- 0x100000F90 (_main)
+    <- 0x100000F98 (_main)
+  0x10002B1D6 (data_list):
+    <- 0x10000089C (_main)
+    <- 0x100000D58 (_main)
+    <- 0x100000D60 (_main)
+  0x10002B21F (sub_get_size):
+    <- 0x100000978 (_main)
+    <- 0x100001074 (_main)
+    <- 0x1000010E0 (_main)
+  0x10002B238 (sub_get_offset):
+    <- 0x10000095C (_main)
+    <- 0x1000010B0 (_main)
+    <- 0x1000010B8 (_main)
+  0x10002B250 (sub_set_flags):
+    <- 0x10000093C (_main)
+    <- 0x100000FF0 (_main)
+    <- 0x100000FF8 (_main)
+  0x10002B25E (sub_validate):
+    <- 0x10000091C (_main)
+    <- 0x100001088 (_main)
+    <- 0x100001090 (_main)
+  0x10002B27B (sub_compress):
+    <- 0x100000900 (_main)
+    <- 0x1000010D8 (_main)
+    <- 0x1000010E0 (_main)
+  0x10002B294 (sub_encrypt):
+    <- 0x1000008E0 (_main)
+    <- 0x100001060 (_main)
+    <- 0x100001090 (_main)
+  0x10002B421 (error_invalid_opcode):
+    <- 0x100034218 (unknown)
+  0x10002B42F (error_invalid_subcmd):
+    <- 0x100034228 (unknown)
+  0x10002B441 (error_auth_required):
+    <- 0x100034238 (unknown)
+  0x10002B44E (error_permission):
+    <- 0x100034248 (unknown)
+
+----------------------------------------------------------------------
+PHASE 3: FUNCTION COMPLEXITY ANALYSIS
+----------------------------------------------------------------------
+
+Most complex functions (potential dispatchers by block count):
+  0x100015CD0: _debug.SelfInfo.unwindFrameDwarf         blocks=1253 size=22376
+  0x10000AFE8: _sort.block.block__anon_5808             blocks= 888 size=13436
+  0x10000EA70: _debug.Dwarf.runLineNumberProgram        blocks= 652 size=10164
+  0x100003068: _debug.SelfInfo.Module__struct_2867.getO blocks= 606 size=10292
+  0x100007184: _debug.printLineInfo__anon_4691          blocks= 430 size=6792
+  0x100020B88: _debug.Dwarf.expression.StackMachine(._  blocks= 391 size=5892
+  0x10001D3B4: _debug.Dwarf.getAbbrevTable              blocks= 329 size=5948
+  0x1000116F4: _debug.Dwarf.parseFormValue              blocks= 184 size=2920
+  0x1000099C4: _debug.StackIterator.next_internal       blocks= 181 size=2272
+  0x100002480: _debug.SelfInfo.lookupModuleDyld         blocks= 177 size=3000
+  0x100023C14: _debug.Dwarf.expression.StackMachine(._  blocks= 168 size=3140
+  0x10001B438: _debug.SelfInfo.unwindFrameMachODwarf    blocks= 147 size=3516
+  0x10001F548: _array_hash_map.ArrayHashMapUnmanaged(u6 blocks= 144 size=2048
+  0x100005D34: _debug.Dwarf.DebugRangeIterator.next     blocks= 139 size=2248
+  0x100014600: _debug.Dwarf.CommonInformationEntry.pars blocks= 139 size=2200
+
+----------------------------------------------------------------------
+PHASE 4: JUMP TABLE SEARCH
+----------------------------------------------------------------------
+
+Segments in binary:
+  10: 0x100000000 - 0x100000768
+  1: 0x100000768 - 0x100029828
+  3: 0x100029828 - 0x1000299CC
+  4: 0x1000299CC - 0x100029B90
+  5: 0x100029B90 - 0x10002AF90
+  7: 0x10002AF90 - 0x10002BC24
+  8: 0x10002BC24 - 0x10002CC68
+  9: 0x10002CC68 - 0x10002FB28
+  11: 0x100030000 - 0x100030018
+  12: 0x100034000 - 0x100034118
+  5: 0x100034118 - 0x100034A20
+  13: 0x100034A20 - 0x100034A78
+  14: 0x100034A78 - 0x100034A90
+  15: 0x100034A90 - 0x100034A98
+  16: 0x100034A98 - 0x100034B30
+  18: 0x100034B30 - 0x100034C68
+
+----------------------------------------------------------------------
+PHASE 5: OPCODE TABLE RECONSTRUCTION
+----------------------------------------------------------------------
+
+======================================================================
+MAIN DISPATCH TABLE
+======================================================================
+
+  Dispatcher Function: (likely inlined in _main for Zig-compiled binary)
+  Opcode Range: 0x00 - 0x8F (sparse)
+  Total Valid Opcodes: 15
+
+  Opcode | Command Name         | Category | Key String Reference
+  ------------------------------------------------------------------------
+  0x00   | CMD_PING             | basic    | attempt to unwrap error: PONG from ...
+  0x01   | CMD_PONG             | unknown  | (no string found)
+  0x02   | CMD_VERSION          | basic    | CommandDispatcher v2.4.1 (Protocol ...
+  0x05   | CMD_STATUS           | basic    | AUTHENTICATED
+  0x07   | CMD_ECHO             | unknown  | (no string found)
+  0x10   | CMD_AUTH_LOGIN       | auth     | LOGIN_SUCCESS: Session established
+  0x12   | CMD_AUTH_LOGOUT      | auth     | LOGOUT_SUCCESS: Session terminated
+  0x15   | CMD_AUTH_TOKEN       | auth     | TOKEN:ABCD1234EFGH5678
+  0x30   | CMD_DATA_READ        | unknown  | (no string found)
+  0x32   | CMD_DATA_WRITE       | data     | DATA_WRITE: OK, bytes written
+  0x35   | CMD_DATA_DELETE      | unknown  | (no string found)
+  0x38   | CMD_DATA_LIST        | data     | DATA_LIST: [rec_001, rec_002, rec_0...
+  0x80   | CMD_ADMIN_SHUTDOWN   | unknown  | (no string found)
+  0x82   | CMD_ADMIN_CONFIG     | unknown  | (no string found)
+  0x8F   | CMD_ADMIN_DEBUG      | unknown  | (no string found)
+
+  Sparse entries (gaps in opcode range):
+    - 0x03-0x04: unused (2 opcodes)
+    - 0x06: unused
+    - 0x08-0x0F: unused (8 opcodes)
+    - 0x11: unused
+    - 0x13-0x14: unused (2 opcodes)
+    - 0x16-0x2F: unused (26 opcodes)
+    - 0x31: unused
+    - 0x33-0x34: unused (2 opcodes)
+    - 0x36-0x37: unused (2 opcodes)
+    - 0x39-0x7F: unused (71 opcodes)
+    - 0x81: unused
+    - 0x83-0x8E: unused (12 opcodes)
+
+======================================================================
+SUB-COMMAND DISPATCH TABLE (nested in DATA_READ handler)
+======================================================================
+
+  Parent Opcode: 0x30 (CMD_DATA_READ)
+  Sub-opcode Range: 0x01 - 0x12 (sparse)
+  Total Valid Sub-opcodes: 6
+
+  Sub-Op | Handler Name         | Key String Reference
+  ------------------------------------------------------------
+  0x01   | SUB_GET_SIZE         | DATA_SIZE: 1048576 bytes
+  0x02   | SUB_GET_OFFSET       | DATA_OFFSET: 0x00400000
+  0x05   | SUB_SET_FLAGS        | FLAGS_SET: RW
+  0x08   | SUB_VALIDATE         | VALIDATION: CRC32=0xDEADBEEF
+  0x10   | SUB_COMPRESS         | COMPRESS: LZ4 ratio=0.65
+  0x12   | SUB_ENCRYPT          | ENCRYPT: AES-256-GCM applied
+
+======================================================================
+IDA TYPE DEFINITIONS
+======================================================================
+
+// Paste into IDA Local Types (Shift+F1)
+
+// Main command opcode enumeration
+enum Opcode : __int16 {
+    CMD_PING = 0x0,
+    CMD_PONG = 0x1,
+    CMD_VERSION = 0x2,
+    CMD_STATUS = 0x5,
+    CMD_ECHO = 0x7,
+    CMD_AUTH_LOGIN = 0x10,
+    CMD_AUTH_LOGOUT = 0x12,
+    CMD_AUTH_TOKEN = 0x15,
+    CMD_DATA_READ = 0x30,
+    CMD_DATA_WRITE = 0x32,
+    CMD_DATA_DELETE = 0x35,
+    CMD_DATA_LIST = 0x38,
+    CMD_ADMIN_SHUTDOWN = 0x80,
+    CMD_ADMIN_CONFIG = 0x82,
+    CMD_ADMIN_DEBUG = 0x8F,
+};
+
+// Data sub-command opcode enumeration
+enum DataSubCommand : __int8 {
+    SUB_GET_SIZE = 0x1,
+    SUB_GET_OFFSET = 0x2,
+    SUB_SET_FLAGS = 0x5,
+    SUB_VALIDATE = 0x8,
+    SUB_COMPRESS = 0x10,
+    SUB_ENCRYPT = 0x12,
+};
+
+// Command error enumeration
+enum CommandError {
+    ERR_InvalidOpcode = 0,
+    ERR_InvalidSubCommand = 1,
+    ERR_AuthRequired = 2,
+    ERR_PermissionDenied = 3,
+    ERR_InvalidData = 4,
+    ERR_BufferTooSmall = 5,
+    ERR_InternalError = 6,
+};
+
+// Command context structure (inferred)
+struct CommandContext {
+    uint32_t connection_id;
+    uint16_t flags;
+    const uint8_t *data;
+    size_t data_len;
+    uint8_t *response_buffer;
+    size_t *response_len;
+};
+
+// Packet header structure (inferred)
+struct PacketHeader {
+    uint16_t magic;       // 0x4D43 = 'CM'
+    uint8_t version;
+    uint8_t flags;
+    uint16_t opcode;
+    uint16_t length;
+};
+
+======================================================================
+ANALYSIS SUMMARY
+======================================================================
+
+Binary Characteristics:
+  Total Functions: 268
+  Command-related Strings Found: 20
+  Complex Functions (>=10 blocks): 148
+
+Dispatch Architecture Detected:
+  - Main dispatcher with 15 opcodes across 4 categories
+  - Nested sub-dispatcher with 6 sub-opcodes for DATA_READ
+  - Sparse opcode space with significant gaps
+  - Bounds checking on opcode (max 0x8F)
+
+Command Categories:
+  BASIC (0x00-0x0F):   PING, PONG, VERSION, STATUS, ECHO
+  AUTH  (0x10-0x1F):   LOGIN, LOGOUT, TOKEN
+  DATA  (0x30-0x4F):   READ, WRITE, DELETE, LIST
+  ADMIN (0x80-0x8F):   SHUTDOWN, CONFIG, DEBUG
+
+Note on Zig Compilation:
+  This binary was compiled with Zig which aggressively inlines
+  handler functions. The actual dispatch switch is likely inlined
+  into the main() function rather than existing as separate handlers.
+
+======================================================================
+ANALYSIS COMPLETE
+======================================================================

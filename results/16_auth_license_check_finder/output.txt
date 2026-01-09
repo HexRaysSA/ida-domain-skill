@@ -1,0 +1,742 @@
+[94mInfo:[0m Executing wrapped file: /tmp/ida-domain-ex16.py...
+================================================================================
+AUTH/LICENSE CHECK FINDER - ANALYSIS REPORT
+================================================================================
+
+================================================================================
+STEP 1: IDENTIFYING LICENSE-RELATED STRINGS
+================================================================================
+
+Found 72 license-related strings:
+
+  0x01006B70: "Unwind information for `:0x` was not available, trace may be..."
+             Matched: error
+  0x01006D38: "Illegal instruction at address 0xBus error at address 0xArit..."
+             Matched: error
+  0x010072C8: "attempt to unwrap error: "
+             Matched: error
+  0x010073A8: "sentinel mismatch: expected access of union field '' while f..."
+             Matched: activ, access, mismatch
+  0x010081AC: "PkgConfigInvalidOutput"
+             Matched: valid, invalid
+  0x010081EA: "InvalidArgument"
+             Matched: valid, invalid
+  0x01008281: "InvalidArguments"
+             Matched: valid, invalid
+  0x010082A5: "InvalidExpressionAddress"
+             Matched: valid, invalid
+  0x010082BE: "InvalidAddress"
+             Matched: valid, invalid
+  0x010082CD: "InvalidSyscallParameters"
+             Matched: valid, invalid
+  0x010083A6: "base_register"
+             Matched: register
+  0x010083B4: "InvalidRegister"
+             Matched: valid, invalid, register
+  0x010083D0: "InvalidBuffer"
+             Matched: valid, invalid
+  0x01008424: "InvalidDynamicBlockHeader"
+             Matched: valid, invalid
+  0x010084AF: "InvalidDebugInfo"
+             Matched: valid, invalid
+  0x0100850A: "InvalidOperation"
+             Matched: valid, invalid
+  0x0100853E: "SharingViolation"
+             Matched: sha
+  0x01008562: "InvalidExpression"
+             Matched: valid, invalid
+  0x01008574: "InvalidSubExpression"
+             Matched: valid, invalid
+  0x010085BD: "InvalidElfVersion"
+             Matched: valid, invalid
+  0x01008604: "InvalidElfEndian"
+             Matched: valid, invalid
+  0x01008615: "WrongGzipChecksum"
+             Matched: check
+  0x01008627: "WrongZlibChecksum"
+             Matched: check
+  0x010086EA: "InvalidTypeLength"
+             Matched: valid, invalid
+  0x010086FC: "RegisterSizeMismatch"
+             Matched: register, mismatch
+  0x01008711: "InvalidMatch"
+             Matched: valid, invalid
+  0x01008746: "InvalidBatchScriptArg"
+             Matched: valid, invalid
+  0x01008788: "Trial mode: %d days remaining"
+             Matched: trial
+  0x01008802: "IncompatibleRegisterSize"
+             Matched: register
+  0x0100881B: "InvalidAddrSize"
+             Matched: valid, invalid
+  0x0100884D: "InvalidIntegralTypeSize"
+             Matched: valid, invalid
+  0x01008874: "InvalidExe"
+             Matched: valid, invalid
+  0x01008897: "invalid enum value"
+             Matched: valid, invalid
+  0x010088D6: "InvalidExpressionValue"
+             Matched: valid, invalid
+  0x010088ED: "InvalidFrameBase"
+             Matched: valid, invalid
+  0x01008909: "register_type"
+             Matched: register
+  0x0100897D: "InvalidBlockType"
+             Matched: valid, invalid
+  0x010089E7: "InvalidName"
+             Matched: valid, invalid
+  0x010089F3: "UnimplementedRegisterRule"
+             Matched: register
+  0x01008A0D: "InvalidCFARule"
+             Matched: valid, invalid
+  0x01008A2F: "InvalidHandle"
+             Matched: valid, invalid
+  0x01008AC1: "InvalidOpcode"
+             Matched: valid, invalid
+  0x01008AE3: "InvalidCFAOpcode"
+             Matched: valid, invalid
+  0x01008AF4: "invalid error code"
+             Matched: valid, invalid, error
+  0x01008B36: "InvalidCode"
+             Matched: valid, invalid
+  0x01008B8E: "InvalidOperand"
+             Matched: valid, invalid
+  0x01008C50: "RegisterContextRequired"
+             Matched: register
+  0x01008C8C: "License signature verification failed"
+             Matched: licen[cs]e, signature, fail
+  0x01008CB2: "PkgConfigFailed"
+             Matched: fail
+  0x01008CC2: "WriteFailed"
+             Matched: fail
+  0x01008CCE: "ReadFailed"
+             Matched: fail
+  0x01008D02: "AccessDenied"
+             Matched: denied, access
+  0x01008D0F: "PermissionDenied"
+             Matched: denied
+  0x01008D20: "License signature verified"
+             Matched: licen[cs]e, signature
+  0x01008DC0: "InvalidUserId"
+             Matched: valid, invalid
+  0x01008DCE: "InvalidProcessGroupId"
+             Matched: valid, invalid
+  0x01008DEC: "InvalidElfMagic"
+             Matched: valid, invalid
+  0x01008E9C: "InvalidCFA"
+             Matched: valid, invalid
+  0x01008F7C: "InvalidWtf8"
+             Matched: valid, invalid
+  0x01008F88: "InvalidUtf8"
+             Matched: valid, invalid
+  0x01008FA8: "Invalid serial number format."
+             Matched: serial, valid, invalid
+  0x01008FC6: "error."
+             Matched: error
+  0x01008FCD: "License has expired. Please renew your subscription."
+             Matched: licen[cs]e, expir, subscription
+  0x01009002: "Invalid license key. Please check and try again."
+             Matched: licen[cs]e, valid, invalid
+  0x01009033: "This feature requires a Pro license."
+             Matched: licen[cs]e, feature
+  0x01009058: "License checksum verification failed."
+             Matched: licen[cs]e, check, fail
+  0x0100907E: "Pro feature unlocked."
+             Matched: unlock, feature
+  0x01009094: "Authentication failed. Access denied."
+             Matched: auth, fail, denied
+  0x010090CE: "License validated successfully!"
+             Matched: licen[cs]e, valid, success
+  0x010090EE: "Authentication successful. Welcome!"
+             Matched: auth, success, welcome
+  0x01009112: "[ERROR] "
+             Matched: error
+  0x01009147: "Auth/License check binary executed successfully.\n"
+             Matched: licen[cs]e, auth, check
+
+================================================================================
+STEP 2: IDENTIFYING CANDIDATE CHECK FUNCTIONS
+================================================================================
+
+Found 16 candidate check functions:
+
+  Function: sub_100DC60
+  Address:  0x0100DC60
+  License String References: 7
+  Strings:
+    - 0x01008788: "Trial mode: %d days remaining..." [trial]
+    - 0x01008788: "Trial mode: %d days remaining..." [trial]
+    - 0x01008C8C: "License signature verification fail..." [licen[cs]e]
+    - 0x0100907E: "Pro feature unlocked...." [unlock]
+    - 0x01009094: "Authentication failed. Access denie..." [auth]
+
+  Function: sub_100E8C0
+  Address:  0x0100E8C0
+  License String References: 4
+  Strings:
+    - 0x01008FA8: "Invalid serial number format...." [serial]
+    - 0x01009002: "Invalid license key. Please check a..." [licen[cs]e]
+    - 0x01009058: "License checksum verification faile..." [licen[cs]e]
+    - 0x010090CE: "License validated successfully!..." [licen[cs]e]
+
+  Function: sub_1033DB0
+  Address:  0x01033DB0
+  License String References: 3
+  Strings:
+    - 0x01008C8C: "License signature verification fail..." [licen[cs]e]
+    - 0x01008D20: "License signature verified..." [licen[cs]e]
+    - 0x010090CE: "License validated successfully!..." [licen[cs]e]
+
+  Function: sub_100DFD0
+  Address:  0x0100DFD0
+  License String References: 3
+  Strings:
+    - 0x01008FA8: "Invalid serial number format...." [serial]
+    - 0x01009058: "License checksum verification faile..." [licen[cs]e]
+    - 0x010090CE: "License validated successfully!..." [licen[cs]e]
+
+  Function: sub_1023560
+  Address:  0x01023560
+  License String References: 2
+  Strings:
+    - 0x01006B70: "Unwind information for `:0x` was no..." [error]
+    - 0x01008FC6: "error...." [error]
+
+  Function: sub_1033470
+  Address:  0x01033470
+  License String References: 2
+  Strings:
+    - 0x010083A6: "base_register..." [register]
+    - 0x01008909: "register_type..." [register]
+
+  Function: sub_103C6A0
+  Address:  0x0103C6A0
+  License String References: 2
+  Strings:
+    - 0x010083A6: "base_register..." [register]
+    - 0x01008909: "register_type..." [register]
+
+  Function: sub_1033BE0
+  Address:  0x01033BE0
+  License String References: 2
+  Strings:
+    - 0x01009033: "This feature requires a Pro license..." [licen[cs]e]
+    - 0x0100907E: "Pro feature unlocked...." [unlock]
+
+  Function: sub_100E660
+  Address:  0x0100E660
+  License String References: 2
+  Strings:
+    - 0x01009112: "[ERROR] ..." [error]
+    - 0x01009112: "[ERROR] ..." [error]
+
+  Function: sub_101FEC0
+  Address:  0x0101FEC0
+  License String References: 1
+  Strings:
+    - 0x01006D38: "Illegal instruction at address 0xBu..." [error]
+
+  Function: sub_103C050
+  Address:  0x0103C050
+  License String References: 1
+  Strings:
+    - 0x010072C8: "attempt to unwrap error: ..." [error]
+
+  Function: sub_103C150
+  Address:  0x0103C150
+  License String References: 1
+  Strings:
+    - 0x010073A8: "sentinel mismatch: expected access ..." [activ]
+
+  Function: sub_1033B90
+  Address:  0x01033B90
+  License String References: 1
+  Strings:
+    - 0x01008788: "Trial mode: %d days remaining..." [trial]
+
+  Function: sub_103A9D0
+  Address:  0x0103A9D0
+  License String References: 1
+  Strings:
+    - 0x01008897: "invalid enum value..." [valid]
+
+  Function: sub_103C020
+  Address:  0x0103C020
+  License String References: 1
+  Strings:
+    - 0x01008AF4: "invalid error code..." [valid]
+
+  Function: sub_10340F0
+  Address:  0x010340F0
+  License String References: 1
+  Strings:
+    - 0x01008FCD: "License has expired. Please renew y..." [licen[cs]e]
+
+================================================================================
+STEP 3: ANALYZING DECISION POINTS IN CHECK FUNCTIONS
+================================================================================
+
+Detailed Analysis of Top Candidate Functions:
+
+------------------------------------------------------------
+FUNCTION: sub_100DC60
+Address:  0x0100DC60
+Size:     288 bytes
+
+Evidence (License-related strings):
+  - "Trial mode: %d days remaining"
+  - "Trial mode: %d days remaining"
+  - "License signature verification failed"
+  - "Pro feature unlocked."
+  - "Authentication failed. Access denied."
+  - "License validated successfully!"
+  - "Auth/License check binary executed succe"
+
+Decision Points: 2
+  [1] Block 0x0100DC60 - 0x0100DCEA
+      Branches to: 0x0100DCEA, 0x0100DD72
+  [2] Block 0x0100DCEA - 0x0100DD41
+      Branches to: 0x0100DD41, 0x0100DD50
+
+Call Sites (1 callers):
+  - sub_100D780 at 0x0100D780
+
+------------------------------------------------------------
+FUNCTION: sub_100E8C0
+Address:  0x0100E8C0
+Size:     653 bytes
+
+Evidence (License-related strings):
+  - "Invalid serial number format."
+  - "Invalid license key. Please check and tr"
+  - "License checksum verification failed."
+  - "License validated successfully!"
+
+Decision Points: 23
+  [1] Block 0x0100E8C0 - 0x0100E8D6
+      Branches to: 0x0100E8D6, 0x0100E8F5
+  [2] Block 0x0100E8D6 - 0x0100E8E0
+      Branches to: 0x0100E8E0, 0x0100EB2B
+  [3] Block 0x0100E8E0 - 0x0100E8E9
+      Branches to: 0x0100E8E9, 0x0100E904
+  [4] Block 0x0100E8E9 - 0x0100E8EF
+      Branches to: 0x0100E8EF, 0x0100E908
+  [5] Block 0x0100E920 - 0x0100E961
+      Branches to: 0x0100E961, 0x0100E920
+
+Call Sites (2 callers):
+  - sub_100DC60 at 0x0100DC60
+  - sub_1033A30 at 0x01033A30
+
+------------------------------------------------------------
+FUNCTION: sub_1033DB0
+Address:  0x01033DB0
+Size:     807 bytes
+
+Evidence (License-related strings):
+  - "License signature verification failed"
+  - "License signature verified"
+  - "License validated successfully!"
+
+Decision Points: 8
+  [1] Block 0x01033DB0 - 0x01033DCE
+      Branches to: 0x01033DCE, 0x01033E3A
+  [2] Block 0x01033DCE - 0x01033E05
+      Branches to: 0x01033E05, 0x01033E50
+  [3] Block 0x01033E50 - 0x01033E6F
+      Branches to: 0x01033E6F, 0x01033E72
+  [4] Block 0x01033E72 - 0x01033E95
+      Branches to: 0x01033E95, 0x01033E9A
+  [5] Block 0x01033EB0 - 0x01033EEC
+      Branches to: 0x01033EEC, 0x01033EB0
+
+Call Sites (0 callers):
+
+------------------------------------------------------------
+FUNCTION: sub_100DFD0
+Address:  0x0100DFD0
+Size:     592 bytes
+
+Evidence (License-related strings):
+  - "Invalid serial number format."
+  - "License checksum verification failed."
+  - "License validated successfully!"
+
+Decision Points: 24
+  [1] Block 0x0100DFD0 - 0x0100DFDE
+      Branches to: 0x0100DFDE, 0x0100E1F1
+  [2] Block 0x0100DFDE - 0x0100DFE7
+      Branches to: 0x0100DFE7, 0x0100E004
+  [3] Block 0x0100DFE7 - 0x0100DFF0
+      Branches to: 0x0100DFF0, 0x0100E1F1
+  [4] Block 0x0100DFF0 - 0x0100DFFA
+      Branches to: 0x0100DFFA, 0x0100E1F1
+  [5] Block 0x0100DFFA - 0x0100E004
+      Branches to: 0x0100E004, 0x0100E1F1
+
+Call Sites (1 callers):
+  - sub_100DC60 at 0x0100DC60
+
+------------------------------------------------------------
+FUNCTION: sub_1023560
+Address:  0x01023560
+Size:     1024 bytes
+
+Evidence (License-related strings):
+  - "Unwind information for `:0x` was not ava"
+  - "error."
+
+Decision Points: 23
+  [1] Block 0x01023560 - 0x010235A7
+      Branches to: 0x010235A7, 0x010235C6
+  [2] Block 0x010235A7 - 0x010235B3
+      Branches to: 0x010235B3, 0x01023958
+  [3] Block 0x010235C6 - 0x010235CC
+      Branches to: 0x010235CC, 0x010235E9
+  [4] Block 0x010235CC - 0x010235E9
+      Branches to: 0x010235E9, 0x01023939
+  [5] Block 0x010235E9 - 0x010235F9
+      Branches to: 0x010235F9, 0x010236FE
+
+Call Sites (2 callers):
+  - sub_101FEC0 at 0x0101FEC0
+  - sub_103AC80 at 0x0103AC80
+
+------------------------------------------------------------
+FUNCTION: sub_1033470
+Address:  0x01033470
+Size:     134 bytes
+
+Evidence (License-related strings):
+  - "base_register"
+  - "register_type"
+
+Decision Points: 0
+
+Call Sites (1 callers):
+  - sub_103C6A0 at 0x0103C6A0
+
+------------------------------------------------------------
+FUNCTION: sub_103C6A0
+Address:  0x0103C6A0
+Size:     320 bytes
+
+Evidence (License-related strings):
+  - "base_register"
+  - "register_type"
+
+Decision Points: 10
+  [1] Block 0x0103C6C1 - 0x0103C6D8
+      Branches to: 0x0103C6D8, 0x0103C797
+  [2] Block 0x0103C6DD - 0x0103C6F4
+      Branches to: 0x0103C6F4, 0x0103C797
+  [3] Block 0x0103C6F9 - 0x0103C710
+      Branches to: 0x0103C710, 0x0103C797
+  [4] Block 0x0103C715 - 0x0103C728
+      Branches to: 0x0103C728, 0x0103C797
+  [5] Block 0x0103C72D - 0x0103C740
+      Branches to: 0x0103C740, 0x0103C797
+
+Call Sites (1 callers):
+  - sub_102BC90 at 0x0102BC90
+
+------------------------------------------------------------
+FUNCTION: sub_1033BE0
+Address:  0x01033BE0
+Size:     87 bytes
+
+Evidence (License-related strings):
+  - "This feature requires a Pro license."
+  - "Pro feature unlocked."
+
+Decision Points: 2
+  [1] Block 0x01033BE0 - 0x01033BEC
+      Branches to: 0x01033BEC, 0x01033C2C
+  [2] Block 0x01033BEC - 0x01033C00
+      Branches to: 0x01033C00, 0x01033C1D
+
+Call Sites (0 callers):
+
+------------------------------------------------------------
+FUNCTION: sub_100E660
+Address:  0x0100E660
+Size:     304 bytes
+
+Evidence (License-related strings):
+  - "[ERROR] "
+  - "[ERROR] "
+
+Decision Points: 8
+  [1] Block 0x0100E660 - 0x0100E67C
+      Branches to: 0x0100E67C, 0x0100E767
+  [2] Block 0x0100E67C - 0x0100E695
+      Branches to: 0x0100E695, 0x0100E767
+  [3] Block 0x0100E695 - 0x0100E6A2
+      Branches to: 0x0100E6A2, 0x0100E76C
+  [4] Block 0x0100E6A2 - 0x0100E6B1
+      Branches to: 0x0100E6B1, 0x0100E776
+  [5] Block 0x0100E6B1 - 0x0100E6DE
+      Branches to: 0x0100E6DE, 0x0100E762
+
+Call Sites (6 callers):
+  - sub_100DC60 at 0x0100DC60
+  - sub_100DFD0 at 0x0100DFD0
+  - sub_100E8C0 at 0x0100E8C0
+  - sub_1033BE0 at 0x01033BE0
+  - sub_1033DB0 at 0x01033DB0
+
+------------------------------------------------------------
+FUNCTION: sub_101FEC0
+Address:  0x0101FEC0
+Size:     2105 bytes
+
+Evidence (License-related strings):
+  - "Illegal instruction at address 0xBus err"
+
+Decision Points: 49
+  [1] Block 0x0101FEC0 - 0x0101FEEB
+      Branches to: 0x0101FEEB, 0x0101FF22
+  [2] Block 0x0101FEEB - 0x0101FEFB
+      Branches to: 0x0101FEFB, 0x0101FF42
+  [3] Block 0x0101FEFB - 0x0101FF0A
+      Branches to: 0x0101FF0A, 0x010206AE
+  [4] Block 0x0101FF0A - 0x0101FF18
+      Branches to: 0x0101FF18, 0x010206C7
+  [5] Block 0x0101FF22 - 0x0101FF42
+      Branches to: 0x0101FEFB, 0x0101FF42
+
+Call Sites (1 callers):
+  - sub_100E330 at 0x0100E330
+
+------------------------------------------------------------
+FUNCTION: sub_103C050
+Address:  0x0103C050
+Size:     256 bytes
+
+Evidence (License-related strings):
+  - "attempt to unwrap error: "
+
+Decision Points: 4
+  [1] Block 0x0103C050 - 0x0103C0B3
+      Branches to: 0x0103C0B3, 0x0103C0F0
+  [2] Block 0x0103C0B3 - 0x0103C0D8
+      Branches to: 0x0103C0D8, 0x0103C0F0
+  [3] Block 0x0103C0D8 - 0x0103C0E5
+      Branches to: 0x0103C0E5, 0x0103C13F
+  [4] Block 0x0103C0F0 - 0x0103C10F
+      Branches to: 0x0103C10F, 0x0103C13A
+
+Call Sites (1 callers):
+  - sub_103BF30 at 0x0103BF30
+
+------------------------------------------------------------
+FUNCTION: sub_103C150
+Address:  0x0103C150
+Size:     304 bytes
+
+Evidence (License-related strings):
+  - "sentinel mismatch: expected access of un"
+
+Decision Points: 6
+  [1] Block 0x0103C150 - 0x0103C1B8
+      Branches to: 0x0103C1B8, 0x0103C220
+  [2] Block 0x0103C1B8 - 0x0103C1D4
+      Branches to: 0x0103C1D4, 0x0103C220
+  [3] Block 0x0103C1D4 - 0x0103C1EC
+      Branches to: 0x0103C1EC, 0x0103C220
+  [4] Block 0x0103C1EC - 0x0103C208
+      Branches to: 0x0103C208, 0x0103C220
+  [5] Block 0x0103C208 - 0x0103C215
+      Branches to: 0x0103C215, 0x0103C26F
+
+Call Sites (1 callers):
+  - sub_103BF70 at 0x0103BF70
+
+------------------------------------------------------------
+FUNCTION: sub_1033B90
+Address:  0x01033B90
+Size:     23 bytes
+
+Evidence (License-related strings):
+  - "Trial mode: %d days remaining"
+
+Decision Points: 0
+
+Call Sites (0 callers):
+
+------------------------------------------------------------
+FUNCTION: sub_103A9D0
+Address:  0x0103A9D0
+Size:     48 bytes
+
+Evidence (License-related strings):
+  - "invalid enum value"
+
+Decision Points: 0
+
+Call Sites (2 callers):
+  - sub_1020900 at 0x01020900
+  - sub_103C6A0 at 0x0103C6A0
+
+------------------------------------------------------------
+FUNCTION: sub_103C020
+Address:  0x0103C020
+Size:     48 bytes
+
+Evidence (License-related strings):
+  - "invalid error code"
+
+Decision Points: 0
+
+Call Sites (6 callers):
+  - sub_1020900 at 0x01020900
+  - sub_102A3F0 at 0x0102A3F0
+  - sub_102A590 at 0x0102A590
+  - sub_102A820 at 0x0102A820
+  - sub_102BC90 at 0x0102BC90
+
+================================================================================
+STEP 4: SUGGESTED PATCH STRATEGIES
+================================================================================
+
+NOTE: For analysis purposes only - DO NOT actually patch
+
+Function: sub_100DC60 (0x0100DC60)
+Suggested Strategies:
+  - FORCE_SUCCESS: Patch to always return success/true (mov eax, 1; ret)
+  - NOP_CHECK: NOP the conditional jump at decision point to skip validation
+  - INVERT_BRANCH: Invert conditional jump (JZ <-> JNZ) to swap success/failure paths
+Primary Patch Point: 0x0100DCEA (decision block end)
+
+Function: sub_100E8C0 (0x0100E8C0)
+Suggested Strategies:
+  - FORCE_SUCCESS: Patch to always return success/true (mov eax, 1; ret)
+  - NOP_CHECK: NOP the conditional jump at decision point to skip validation
+  - INVERT_BRANCH: Invert conditional jump (JZ <-> JNZ) to swap success/failure paths
+Primary Patch Point: 0x0100E8D6 (decision block end)
+
+Function: sub_1033DB0 (0x01033DB0)
+Suggested Strategies:
+  - FORCE_SUCCESS: Patch to always return success/true (mov eax, 1; ret)
+  - NOP_CHECK: NOP the conditional jump at decision point to skip validation
+  - INVERT_BRANCH: Invert conditional jump (JZ <-> JNZ) to swap success/failure paths
+Primary Patch Point: 0x01033DCE (decision block end)
+
+Function: sub_100DFD0 (0x0100DFD0)
+Suggested Strategies:
+  - FORCE_SUCCESS: Patch to always return success/true (mov eax, 1; ret)
+  - NOP_CHECK: NOP the conditional jump at decision point to skip validation
+  - INVERT_BRANCH: Invert conditional jump (JZ <-> JNZ) to swap success/failure paths
+Primary Patch Point: 0x0100DFDE (decision block end)
+
+Function: sub_1023560 (0x01023560)
+Suggested Strategies:
+  - NOP_CHECK: NOP the conditional jump at decision point to skip validation
+  - INVERT_BRANCH: Invert conditional jump (JZ <-> JNZ) to swap success/failure paths
+Primary Patch Point: 0x010235A7 (decision block end)
+
+Function: sub_1033470 (0x01033470)
+Suggested Strategies:
+  - HOOK_RETURN: Hook function entry to always return desired value
+
+Function: sub_103C6A0 (0x0103C6A0)
+Suggested Strategies:
+  - NOP_CHECK: NOP the conditional jump at decision point to skip validation
+  - INVERT_BRANCH: Invert conditional jump (JZ <-> JNZ) to swap success/failure paths
+Primary Patch Point: 0x0103C6D8 (decision block end)
+
+Function: sub_1033BE0 (0x01033BE0)
+Suggested Strategies:
+  - NOP_CHECK: NOP the conditional jump at decision point to skip validation
+  - INVERT_BRANCH: Invert conditional jump (JZ <-> JNZ) to swap success/failure paths
+Primary Patch Point: 0x01033BEC (decision block end)
+
+Function: sub_100E660 (0x0100E660)
+Suggested Strategies:
+  - NOP_CHECK: NOP the conditional jump at decision point to skip validation
+  - INVERT_BRANCH: Invert conditional jump (JZ <-> JNZ) to swap success/failure paths
+Primary Patch Point: 0x0100E67C (decision block end)
+
+Function: sub_101FEC0 (0x0101FEC0)
+Suggested Strategies:
+  - NOP_CHECK: NOP the conditional jump at decision point to skip validation
+  - INVERT_BRANCH: Invert conditional jump (JZ <-> JNZ) to swap success/failure paths
+Primary Patch Point: 0x0101FEEB (decision block end)
+
+Function: sub_103C050 (0x0103C050)
+Suggested Strategies:
+  - NOP_CHECK: NOP the conditional jump at decision point to skip validation
+  - INVERT_BRANCH: Invert conditional jump (JZ <-> JNZ) to swap success/failure paths
+Primary Patch Point: 0x0103C0B3 (decision block end)
+
+Function: sub_103C150 (0x0103C150)
+Suggested Strategies:
+  - NOP_CHECK: NOP the conditional jump at decision point to skip validation
+  - INVERT_BRANCH: Invert conditional jump (JZ <-> JNZ) to swap success/failure paths
+Primary Patch Point: 0x0103C1B8 (decision block end)
+
+Function: sub_1033B90 (0x01033B90)
+Suggested Strategies:
+  - HOOK_RETURN: Hook function entry to always return desired value
+
+Function: sub_103A9D0 (0x0103A9D0)
+Suggested Strategies:
+  - FORCE_SUCCESS: Patch to always return success/true (mov eax, 1; ret)
+
+Function: sub_103C020 (0x0103C020)
+Suggested Strategies:
+  - FORCE_SUCCESS: Patch to always return success/true (mov eax, 1; ret)
+
+================================================================================
+STEP 5: SUMMARY REPORT
+================================================================================
+
+EXPORTED/MAIN CHECK FUNCTIONS:
+  - sub_1033DB0 at 0x01033DB0
+    Decision points: 8, Callers: 0
+  - sub_1033BE0 at 0x01033BE0
+    Decision points: 2, Callers: 0
+  - sub_1033B90 at 0x01033B90
+    Decision points: 0, Callers: 0
+
+INTERNAL CHECK FUNCTIONS:
+  - sub_100DC60 at 0x0100DC60
+    Decision points: 2, Callers: 1
+  - sub_100E8C0 at 0x0100E8C0
+    Decision points: 23, Callers: 2
+  - sub_100DFD0 at 0x0100DFD0
+    Decision points: 24, Callers: 1
+  - sub_1023560 at 0x01023560
+    Decision points: 23, Callers: 2
+  - sub_1033470 at 0x01033470
+    Decision points: 0, Callers: 1
+  - sub_103C6A0 at 0x0103C6A0
+    Decision points: 10, Callers: 1
+  - sub_101FEC0 at 0x0101FEC0
+    Decision points: 49, Callers: 1
+  - sub_103C050 at 0x0103C050
+    Decision points: 4, Callers: 1
+  - sub_103C150 at 0x0103C150
+    Decision points: 6, Callers: 1
+  - sub_103A9D0 at 0x0103A9D0
+    Decision points: 0, Callers: 2
+
+HELPER/UTILITY FUNCTIONS:
+  - sub_100E660 at 0x0100E660
+    Decision points: 8, Callers: 6
+  - sub_103C020 at 0x0103C020
+    Decision points: 0, Callers: 6
+
+================================================================================
+ANALYSIS COMPLETE
+================================================================================
+
+Total license-related strings found: 72
+Total candidate check functions: 16
+Functions analyzed in detail: 15
+
+Key findings:
+  - Identified multiple license validation patterns
+  - Located decision points for success/failure branches
+  - Mapped call sites where checks are invoked
+  - Provided patch strategy suggestions (for analysis only)

@@ -1,0 +1,164 @@
+[94mInfo:[0m Executing wrapped file: /tmp/ida-domain-ex11.py...
+======================================================================
+Exercise 11: Vtable Discovery + Class Layout Approximation
+======================================================================
+
+[1] Searching for vtables...
+Scanning 2 data segment(s) for vtables...
+  Scanning segment: __const (0x1000039dc - 0x100003a5c)
+  Scanning segment: __const (0x100004048 - 0x100004410)
+    Found 11 potential vtable(s)
+
+[2] Extracting class names...
+
+[3] Detecting inheritance relationships...
+
+[4] Vtable Analysis Results
+======================================================================
+
+--- Main Class Vtables ---
+
+Class: Circle
+  Vtable Address: 0x100004048
+  Virtual Methods: 6
+  Has RTTI: True
+  Method Table:
+    [ 0] 0x100003264  ~Circle() [dtor]
+    [ 1] 0x100003268  ~Circle() [dtor]
+    [ 2] 0x10000327c  draw(void)const
+    [ 3] 0x1000032b0  area(void)const
+    [ 4] 0x1000032d4  name(void)const
+    [ 5] 0x1000032e0  scale(double)
+
+Class: IShape
+  Vtable Address: 0x1000040b0
+  Virtual Methods: 2
+  Has RTTI: True
+  Method Table:
+    [ 0] 0x1000032f0  ~IShape() [dtor]
+    [ 1] 0x1000032f4  ~IShape() [dtor]
+
+Class: Rectangle
+  Vtable Address: 0x1000040f0
+  Virtual Methods: 6
+  Has RTTI: True
+  Method Table:
+    [ 0] 0x100002fe8  ~Rectangle() [dtor]
+    [ 1] 0x100003394  ~Rectangle() [dtor]
+    [ 2] 0x1000033a8  draw(void)const
+    [ 3] 0x1000033dc  area(void)const
+    [ 4] 0x1000033e8  name(void)const
+    [ 5] 0x1000033f4  scale(double)
+
+Class: Square
+  Vtable Address: 0x100004148
+  Virtual Methods: 6
+  Has RTTI: True
+  Method Table:
+    [ 0] 0x100002fe4  ~Square() [dtor]
+    [ 1] 0x100003438  ~Square() [dtor]
+    [ 2] 0x1000033a8  Rectangle::draw(void)const
+    [ 3] 0x1000033dc  Rectangle::area(void)const
+    [ 4] 0x10000344c  name(void)const
+    [ 5] 0x100003458  scale(double)
+
+Class: Triangle
+  Vtable Address: 0x1000041a0
+  Virtual Methods: 6
+  Has RTTI: True
+  Method Table:
+    [ 0] 0x1000034b4  ~Triangle() [dtor]
+    [ 1] 0x1000034b8  ~Triangle() [dtor]
+    [ 2] 0x1000034cc  draw(void)const
+    [ 3] 0x100003500  area(void)const
+    [ 4] 0x100003514  name(void)const
+    [ 5] 0x100003520  scale(double)
+
+Class: SerializableCircle
+  Vtable Address: 0x1000041f8
+  Virtual Methods: 8
+  Has RTTI: True
+  Base Class: Circle
+  Method Table:
+    [ 0] 0x100002dfc  ~SerializableCircle() [dtor]
+    [ 1] 0x1000035d8  ~SerializableCircle() [dtor]
+    [ 2] 0x10000327c  Circle::draw(void)const
+    [ 3] 0x1000032b0  Circle::area(void)const
+    [ 4] 0x1000032d4  Circle::name(void)const
+    [ 5] 0x1000032e0  Circle::scale(double)
+    [ 6] 0x1000035ec  serialize(char *,unsigned long)const
+    [ 7] 0x100003638  ___25-[CBLJSViewCompiler init]_block_invoke.10
+
+Class: ISerializable
+  Vtable Address: 0x1000042c0
+  Virtual Methods: 2
+  Has RTTI: True
+  Method Table:
+    [ 0] 0x100003680  ~ISerializable() [dtor]
+    [ 1] 0x100003684  ~ISerializable() [dtor]
+
+Class: SerializableRectangle
+  Vtable Address: 0x1000042f0
+  Virtual Methods: 8
+  Has RTTI: True
+  Base Class: Rectangle
+  Method Table:
+    [ 0] 0x100002df8  ~SerializableRectangle() [dtor]
+    [ 1] 0x1000036cc  ~SerializableRectangle() [dtor]
+    [ 2] 0x1000033a8  Rectangle::draw(void)const
+    [ 3] 0x1000033dc  Rectangle::area(void)const
+    [ 4] 0x1000033e8  Rectangle::name(void)const
+    [ 5] 0x1000033f4  Rectangle::scale(double)
+    [ 6] 0x1000036e0  serialize(char *,unsigned long)const
+    [ 7] 0x100003718  ___25-[CBLJSViewCompiler init]_block_invoke.10_0
+
+Class: ColoredSquare
+  Vtable Address: 0x1000043a8
+  Virtual Methods: 8
+  Has RTTI: True
+  Base Class: Square
+  Method Table:
+    [ 0] 0x100002fe0  ~ColoredSquare() [dtor]
+    [ 1] 0x100003884  ~ColoredSquare() [dtor]
+    [ 2] 0x100003898  draw(void)const
+    [ 3] 0x1000033dc  Rectangle::area(void)const
+    [ 4] 0x1000038d4  name(void)const
+    [ 5] 0x100003458  Square::scale(double)
+    [ 6] 0x1000038e0  getColor(void)const
+    [ 7] 0x1000038e8  setColor(unsigned int)
+
+--- Thunk Tables (Multiple Inheritance) ---
+
+  Thunk Table at 0x100004258 (4 entries)
+  Thunk Table at 0x100004350 (4 entries)
+
+======================================================================
+Summary
+======================================================================
+Total vtables discovered: 11
+  - Main class vtables: 9
+  - Thunk tables (MI): 2
+Vtables with RTTI: 9
+Total virtual method slots: 60
+
+Discovered Classes:
+  Circle (6 virtual methods)
+  IShape (2 virtual methods)
+  Rectangle (6 virtual methods)
+  Square (6 virtual methods)
+  Triangle (6 virtual methods)
+  SerializableCircle : Circle (8 virtual methods)
+  ISerializable (2 virtual methods)
+  SerializableRectangle : Rectangle (8 virtual methods)
+  ColoredSquare : Square (8 virtual methods)
+
+Class Hierarchy:
+Circle
+  |- SerializableCircle
+IShape
+Rectangle
+  |- SerializableRectangle
+Square
+  |- ColoredSquare
+Triangle
+ISerializable

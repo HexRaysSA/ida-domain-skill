@@ -1,0 +1,1727 @@
+[94mInfo:[0m Executing wrapped file: /tmp/ida-domain-ex13.py...
+======================================================================
+CONTROL-FLOW FLATTENING DETECTOR
+======================================================================
+Binary: input
+Architecture: metapc 64-bit
+Total functions: 250
+======================================================================
+
+DETECTION RESULTS
+----------------------------------------------------------------------
+Flattened functions detected: 14
+
+
+======================================================================
+FLATTENED FUNCTION 1: sub_1010230
+======================================================================
+
+FUNCTION INFO:
+  Address Range: 0x01010230 - 0x010104F7
+  Basic Blocks: 23
+  Cyclomatic Complexity: 19
+
+DISPATCHER IDENTIFICATION:
+  Location: 0x01010244 - 0x0101024E
+  Predecessor Count: 1
+  Successor Count: 17
+  Detection Score: 34
+  Connection Ratio: 39.13%
+
+STATE VARIABLE:
+  Type: indirect_jump
+  Location: 0x01010247
+  Instruction: jmp     ds:jpt_1010247[rax*8]; switch jump
+
+STATE-TO-BLOCK MAPPING (Case Blocks):
+  Index    Start Address      End Address        Succs    Preds   
+  ------------------------------------------------------------
+  0        0x0101024E         0x0101026D         1        1       
+  1        0x0101026D         0x01010295         1        1       
+  2        0x01010295         0x010102BA         1        1       
+  3        0x010102BA         0x010102DF         1        1       
+  4        0x010102DF         0x010102FB         1        1       
+  5        0x010102FB         0x01010320         1        1       
+  6        0x01010320         0x01010345         1        1       
+  7        0x01010345         0x01010364         1        1       
+  8        0x01010364         0x01010389         1        1       
+  9        0x01010389         0x010103A5         1        1       
+  10       0x010103A5         0x010103CD         1        1       
+  11       0x010103CD         0x010103EC         1        1       
+  12       0x01010434         0x01010456         1        1       
+  13       0x01010456         0x01010478         1        1       
+  14       0x01010478         0x0101049A         1        1       
+  15       0x0101049A         0x010104BC         1        1       
+  16       0x010104BC         0x010104DC         1        1       
+
+FLOW STATISTICS:
+  Blocks jumping TO dispatcher: 1
+  Blocks jumping FROM dispatcher: 17
+
+SUGGESTED ANNOTATIONS:
+  @ 0x01010244 [dispatcher]
+    [FLATTENING DISPATCHER]
+    Predecessors: 1
+    Successors: 17
+    Detection Score: 34
+  @ 0x0101024E [case_block]
+    [CASE BLOCK 0]
+    Range: 0x0101024E - 0x0101026D
+  @ 0x0101026D [case_block]
+    [CASE BLOCK 1]
+    Range: 0x0101026D - 0x01010295
+  @ 0x01010295 [case_block]
+    [CASE BLOCK 2]
+    Range: 0x01010295 - 0x010102BA
+  @ 0x010102BA [case_block]
+    [CASE BLOCK 3]
+    Range: 0x010102BA - 0x010102DF
+  @ 0x010102DF [case_block]
+    [CASE BLOCK 4]
+    Range: 0x010102DF - 0x010102FB
+  @ 0x010102FB [case_block]
+    [CASE BLOCK 5]
+    Range: 0x010102FB - 0x01010320
+  @ 0x01010320 [case_block]
+    [CASE BLOCK 6]
+    Range: 0x01010320 - 0x01010345
+  @ 0x01010345 [case_block]
+    [CASE BLOCK 7]
+    Range: 0x01010345 - 0x01010364
+  @ 0x01010364 [case_block]
+    [CASE BLOCK 8]
+    Range: 0x01010364 - 0x01010389
+  @ 0x01010389 [case_block]
+    [CASE BLOCK 9]
+    Range: 0x01010389 - 0x010103A5
+  @ 0x010103A5 [case_block]
+    [CASE BLOCK 10]
+    Range: 0x010103A5 - 0x010103CD
+  @ 0x010103CD [case_block]
+    [CASE BLOCK 11]
+    Range: 0x010103CD - 0x010103EC
+  @ 0x01010434 [case_block]
+    [CASE BLOCK 12]
+    Range: 0x01010434 - 0x01010456
+  @ 0x01010456 [case_block]
+    [CASE BLOCK 13]
+    Range: 0x01010456 - 0x01010478
+  @ 0x01010478 [case_block]
+    [CASE BLOCK 14]
+    Range: 0x01010478 - 0x0101049A
+  @ 0x0101049A [case_block]
+    [CASE BLOCK 15]
+    Range: 0x0101049A - 0x010104BC
+  @ 0x010104BC [case_block]
+    [CASE BLOCK 16]
+    Range: 0x010104BC - 0x010104DC
+
+GRAPHVIZ CFG (copy to .dot file):
+----------------------------------------
+digraph "sub_1010230" {
+    rankdir=TB;
+    node [shape=box, style=filled];
+
+    block_01010244 [label="DISPATCHER\n0x01010244", fillcolor=yellow];
+    block_0101024E [label="Case 0\n0x0101024E", fillcolor=lightblue];
+    block_0101026D [label="Case 1\n0x0101026D", fillcolor=lightblue];
+    block_01010295 [label="Case 2\n0x01010295", fillcolor=lightblue];
+    block_010102BA [label="Case 3\n0x010102BA", fillcolor=lightblue];
+    block_010102DF [label="Case 4\n0x010102DF", fillcolor=lightblue];
+    block_010102FB [label="Case 5\n0x010102FB", fillcolor=lightblue];
+    block_01010320 [label="Case 6\n0x01010320", fillcolor=lightblue];
+    block_01010345 [label="Case 7\n0x01010345", fillcolor=lightblue];
+    block_01010364 [label="Case 8\n0x01010364", fillcolor=lightblue];
+    block_01010389 [label="Case 9\n0x01010389", fillcolor=lightblue];
+    block_010103A5 [label="Case 10\n0x010103A5", fillcolor=lightblue];
+    block_010103CD [label="Case 11\n0x010103CD", fillcolor=lightblue];
+    block_01010434 [label="Case 12\n0x01010434", fillcolor=lightblue];
+    block_01010456 [label="Case 13\n0x01010456", fillcolor=lightblue];
+    block_01010478 [label="Case 14\n0x01010478", fillcolor=lightblue];
+    block_0101049A [label="Case 15\n0x0101049A", fillcolor=lightblue];
+    block_010104BC [label="Case 16\n0x010104BC", fillcolor=lightblue];
+    block_01010244 -> block_0101024E;
+    block_01010244 -> block_0101026D;
+    block_01010244 -> block_01010295;
+    block_01010244 -> block_010102BA;
+    block_01010244 -> block_010102DF;
+    block_01010244 -> block_010102FB;
+    block_01010244 -> block_01010320;
+    block_01010244 -> block_01010345;
+    block_01010244 -> block_01010364;
+    block_01010244 -> block_01010389;
+    block_01010244 -> block_010103A5;
+    block_01010244 -> block_010103CD;
+    block_01010244 -> block_01010434;
+    block_01010244 -> block_01010456;
+    block_01010244 -> block_01010478;
+    block_01010244 -> block_0101049A;
+    block_01010244 -> block_010104BC;
+    block_0101024E -> block_01010244 [style=dashed, color=gray];
+    block_0101026D -> block_01010244 [style=dashed, color=gray];
+    block_01010295 -> block_01010244 [style=dashed, color=gray];
+    block_010102BA -> block_01010244 [style=dashed, color=gray];
+    block_010102DF -> block_01010244 [style=dashed, color=gray];
+    block_010102FB -> block_01010244 [style=dashed, color=gray];
+    block_01010320 -> block_01010244 [style=dashed, color=gray];
+    block_01010345 -> block_01010244 [style=dashed, color=gray];
+    block_01010364 -> block_01010244 [style=dashed, color=gray];
+    block_01010389 -> block_01010244 [style=dashed, color=gray];
+    block_010103A5 -> block_01010244 [style=dashed, color=gray];
+    block_010103CD -> block_01010244 [style=dashed, color=gray];
+    block_01010434 -> block_01010244 [style=dashed, color=gray];
+    block_01010456 -> block_01010244 [style=dashed, color=gray];
+    block_01010478 -> block_01010244 [style=dashed, color=gray];
+    block_0101049A -> block_01010244 [style=dashed, color=gray];
+    block_010104BC -> block_01010244 [style=dashed, color=gray];
+}
+----------------------------------------
+
+======================================================================
+FLATTENED FUNCTION 2: sub_10106D0
+======================================================================
+
+FUNCTION INFO:
+  Address Range: 0x010106D0 - 0x01010810
+  Basic Blocks: 19
+  Cyclomatic Complexity: 13
+
+DISPATCHER IDENTIFICATION:
+  Location: 0x01010713 - 0x0101071D
+  Predecessor Count: 1
+  Successor Count: 11
+  Detection Score: 22
+  Connection Ratio: 31.58%
+
+STATE VARIABLE:
+  Type: indirect_jump
+  Location: 0x01010716
+  Instruction: jmp     ds:jpt_1010716[rcx*8]; switch jump
+
+STATE-TO-BLOCK MAPPING (Case Blocks):
+  Index    Start Address      End Address        Succs    Preds   
+  ------------------------------------------------------------
+  0        0x0101071D         0x01010734         1        1       
+  1        0x01010734         0x0101074B         1        1       
+  2        0x0101074B         0x01010762         1        1       
+  3        0x01010762         0x01010776         1        1       
+  4        0x01010776         0x0101077B         2        1       
+  5        0x01010793         0x010107A7         1        1       
+  6        0x010107A7         0x010107BB         1        1       
+  7        0x010107BB         0x010107CF         1        1       
+  8        0x010107CF         0x010107D7         1        2       
+  9        0x010107D7         0x010107E9         1        1       
+  10       0x010107F4         0x010107F9         1        1       
+
+FLOW STATISTICS:
+  Blocks jumping TO dispatcher: 1
+  Blocks jumping FROM dispatcher: 11
+
+SUGGESTED ANNOTATIONS:
+  @ 0x01010713 [dispatcher]
+    [FLATTENING DISPATCHER]
+    Predecessors: 1
+    Successors: 11
+    Detection Score: 22
+  @ 0x0101071D [case_block]
+    [CASE BLOCK 0]
+    Range: 0x0101071D - 0x01010734
+  @ 0x01010734 [case_block]
+    [CASE BLOCK 1]
+    Range: 0x01010734 - 0x0101074B
+  @ 0x0101074B [case_block]
+    [CASE BLOCK 2]
+    Range: 0x0101074B - 0x01010762
+  @ 0x01010762 [case_block]
+    [CASE BLOCK 3]
+    Range: 0x01010762 - 0x01010776
+  @ 0x01010776 [case_block]
+    [CASE BLOCK 4]
+    Range: 0x01010776 - 0x0101077B
+  @ 0x01010793 [case_block]
+    [CASE BLOCK 5]
+    Range: 0x01010793 - 0x010107A7
+  @ 0x010107A7 [case_block]
+    [CASE BLOCK 6]
+    Range: 0x010107A7 - 0x010107BB
+  @ 0x010107BB [case_block]
+    [CASE BLOCK 7]
+    Range: 0x010107BB - 0x010107CF
+  @ 0x010107CF [case_block]
+    [CASE BLOCK 8]
+    Range: 0x010107CF - 0x010107D7
+  @ 0x010107D7 [case_block]
+    [CASE BLOCK 9]
+    Range: 0x010107D7 - 0x010107E9
+  @ 0x010107F4 [case_block]
+    [CASE BLOCK 10]
+    Range: 0x010107F4 - 0x010107F9
+
+GRAPHVIZ CFG (copy to .dot file):
+----------------------------------------
+digraph "sub_10106D0" {
+    rankdir=TB;
+    node [shape=box, style=filled];
+
+    block_01010713 [label="DISPATCHER\n0x01010713", fillcolor=yellow];
+    block_0101071D [label="Case 0\n0x0101071D", fillcolor=lightblue];
+    block_01010734 [label="Case 1\n0x01010734", fillcolor=lightblue];
+    block_0101074B [label="Case 2\n0x0101074B", fillcolor=lightblue];
+    block_01010762 [label="Case 3\n0x01010762", fillcolor=lightblue];
+    block_01010776 [label="Case 4\n0x01010776", fillcolor=lightblue];
+    block_01010793 [label="Case 5\n0x01010793", fillcolor=lightblue];
+    block_010107A7 [label="Case 6\n0x010107A7", fillcolor=lightblue];
+    block_010107BB [label="Case 7\n0x010107BB", fillcolor=lightblue];
+    block_010107CF [label="Case 8\n0x010107CF", fillcolor=lightblue];
+    block_010107D7 [label="Case 9\n0x010107D7", fillcolor=lightblue];
+    block_010107F4 [label="Case 10\n0x010107F4", fillcolor=lightblue];
+    block_01010713 -> block_0101071D;
+    block_01010713 -> block_01010734;
+    block_01010713 -> block_0101074B;
+    block_01010713 -> block_01010762;
+    block_01010713 -> block_01010776;
+    block_01010713 -> block_01010793;
+    block_01010713 -> block_010107A7;
+    block_01010713 -> block_010107BB;
+    block_01010713 -> block_010107CF;
+    block_01010713 -> block_010107D7;
+    block_01010713 -> block_010107F4;
+    block_0101071D -> block_01010713 [style=dashed, color=gray];
+    block_01010734 -> block_01010713 [style=dashed, color=gray];
+    block_0101074B -> block_01010713 [style=dashed, color=gray];
+    block_01010762 -> block_01010713 [style=dashed, color=gray];
+    block_01010776 -> block_01010713 [style=dashed, color=gray];
+    block_01010793 -> block_01010713 [style=dashed, color=gray];
+    block_010107A7 -> block_01010713 [style=dashed, color=gray];
+    block_010107BB -> block_01010713 [style=dashed, color=gray];
+    block_010107CF -> block_01010713 [style=dashed, color=gray];
+    block_010107D7 -> block_01010713 [style=dashed, color=gray];
+    block_010107F4 -> block_01010713 [style=dashed, color=gray];
+}
+----------------------------------------
+
+======================================================================
+FLATTENED FUNCTION 3: sub_101CDD0
+======================================================================
+
+FUNCTION INFO:
+  Address Range: 0x0101CDD0 - 0x0101CF10
+  Basic Blocks: 18
+  Cyclomatic Complexity: 14
+
+DISPATCHER IDENTIFICATION:
+  Location: 0x0101CE10 - 0x0101CE19
+  Predecessor Count: 1
+  Successor Count: 13
+  Detection Score: 26
+  Connection Ratio: 38.89%
+
+STATE VARIABLE:
+  Type: indirect_jump
+  Location: 0x0101CE12
+  Instruction: jmp     ds:jpt_101CE12[rdx*8]; switch jump
+
+STATE-TO-BLOCK MAPPING (Case Blocks):
+  Index    Start Address      End Address        Succs    Preds   
+  ------------------------------------------------------------
+  0        0x0101CE19         0x0101CE2F         1        1       
+  1        0x0101CE2F         0x0101CE45         1        1       
+  2        0x0101CE45         0x0101CE5B         1        1       
+  3        0x0101CE5B         0x0101CE6E         1        1       
+  4        0x0101CE6E         0x0101CE81         1        1       
+  5        0x0101CE81         0x0101CE94         1        1       
+  6        0x0101CE94         0x0101CEA7         1        1       
+  7        0x0101CEA7         0x0101CEBA         1        1       
+  8        0x0101CEBA         0x0101CECD         1        1       
+  9        0x0101CECD         0x0101CEE0         1        1       
+  10       0x0101CEE0         0x0101CEE4         1        2       
+  11       0x0101CEE4         0x0101CF02         0        12      
+  12       0x0101CF02         0x0101CF10         1        1       
+
+FLOW STATISTICS:
+  Blocks jumping TO dispatcher: 1
+  Blocks jumping FROM dispatcher: 13
+
+SUGGESTED ANNOTATIONS:
+  @ 0x0101CE10 [dispatcher]
+    [FLATTENING DISPATCHER]
+    Predecessors: 1
+    Successors: 13
+    Detection Score: 26
+  @ 0x0101CE19 [case_block]
+    [CASE BLOCK 0]
+    Range: 0x0101CE19 - 0x0101CE2F
+  @ 0x0101CE2F [case_block]
+    [CASE BLOCK 1]
+    Range: 0x0101CE2F - 0x0101CE45
+  @ 0x0101CE45 [case_block]
+    [CASE BLOCK 2]
+    Range: 0x0101CE45 - 0x0101CE5B
+  @ 0x0101CE5B [case_block]
+    [CASE BLOCK 3]
+    Range: 0x0101CE5B - 0x0101CE6E
+  @ 0x0101CE6E [case_block]
+    [CASE BLOCK 4]
+    Range: 0x0101CE6E - 0x0101CE81
+  @ 0x0101CE81 [case_block]
+    [CASE BLOCK 5]
+    Range: 0x0101CE81 - 0x0101CE94
+  @ 0x0101CE94 [case_block]
+    [CASE BLOCK 6]
+    Range: 0x0101CE94 - 0x0101CEA7
+  @ 0x0101CEA7 [case_block]
+    [CASE BLOCK 7]
+    Range: 0x0101CEA7 - 0x0101CEBA
+  @ 0x0101CEBA [case_block]
+    [CASE BLOCK 8]
+    Range: 0x0101CEBA - 0x0101CECD
+  @ 0x0101CECD [case_block]
+    [CASE BLOCK 9]
+    Range: 0x0101CECD - 0x0101CEE0
+  @ 0x0101CEE0 [case_block]
+    [CASE BLOCK 10]
+    Range: 0x0101CEE0 - 0x0101CEE4
+  @ 0x0101CEE4 [case_block]
+    [CASE BLOCK 11]
+    Range: 0x0101CEE4 - 0x0101CF02
+  @ 0x0101CF02 [case_block]
+    [CASE BLOCK 12]
+    Range: 0x0101CF02 - 0x0101CF10
+
+GRAPHVIZ CFG (copy to .dot file):
+----------------------------------------
+digraph "sub_101CDD0" {
+    rankdir=TB;
+    node [shape=box, style=filled];
+
+    block_0101CE10 [label="DISPATCHER\n0x0101CE10", fillcolor=yellow];
+    block_0101CE19 [label="Case 0\n0x0101CE19", fillcolor=lightblue];
+    block_0101CE2F [label="Case 1\n0x0101CE2F", fillcolor=lightblue];
+    block_0101CE45 [label="Case 2\n0x0101CE45", fillcolor=lightblue];
+    block_0101CE5B [label="Case 3\n0x0101CE5B", fillcolor=lightblue];
+    block_0101CE6E [label="Case 4\n0x0101CE6E", fillcolor=lightblue];
+    block_0101CE81 [label="Case 5\n0x0101CE81", fillcolor=lightblue];
+    block_0101CE94 [label="Case 6\n0x0101CE94", fillcolor=lightblue];
+    block_0101CEA7 [label="Case 7\n0x0101CEA7", fillcolor=lightblue];
+    block_0101CEBA [label="Case 8\n0x0101CEBA", fillcolor=lightblue];
+    block_0101CECD [label="Case 9\n0x0101CECD", fillcolor=lightblue];
+    block_0101CEE0 [label="Case 10\n0x0101CEE0", fillcolor=lightblue];
+    block_0101CEE4 [label="Case 11\n0x0101CEE4", fillcolor=lightblue];
+    block_0101CF02 [label="Case 12\n0x0101CF02", fillcolor=lightblue];
+    block_0101CE10 -> block_0101CE19;
+    block_0101CE10 -> block_0101CE2F;
+    block_0101CE10 -> block_0101CE45;
+    block_0101CE10 -> block_0101CE5B;
+    block_0101CE10 -> block_0101CE6E;
+    block_0101CE10 -> block_0101CE81;
+    block_0101CE10 -> block_0101CE94;
+    block_0101CE10 -> block_0101CEA7;
+    block_0101CE10 -> block_0101CEBA;
+    block_0101CE10 -> block_0101CECD;
+    block_0101CE10 -> block_0101CEE0;
+    block_0101CE10 -> block_0101CEE4;
+    block_0101CE10 -> block_0101CF02;
+    block_0101CE19 -> block_0101CE10 [style=dashed, color=gray];
+    block_0101CE2F -> block_0101CE10 [style=dashed, color=gray];
+    block_0101CE45 -> block_0101CE10 [style=dashed, color=gray];
+    block_0101CE5B -> block_0101CE10 [style=dashed, color=gray];
+    block_0101CE6E -> block_0101CE10 [style=dashed, color=gray];
+    block_0101CE81 -> block_0101CE10 [style=dashed, color=gray];
+    block_0101CE94 -> block_0101CE10 [style=dashed, color=gray];
+    block_0101CEA7 -> block_0101CE10 [style=dashed, color=gray];
+    block_0101CEBA -> block_0101CE10 [style=dashed, color=gray];
+    block_0101CECD -> block_0101CE10 [style=dashed, color=gray];
+    block_0101CEE0 -> block_0101CE10 [style=dashed, color=gray];
+    block_0101CEE4 -> block_0101CE10 [style=dashed, color=gray];
+    block_0101CF02 -> block_0101CE10 [style=dashed, color=gray];
+}
+----------------------------------------
+
+======================================================================
+FLATTENED FUNCTION 4: sub_1025840
+======================================================================
+
+FUNCTION INFO:
+  Address Range: 0x01025840 - 0x01025A30
+  Basic Blocks: 8
+  Cyclomatic Complexity: 4
+
+DISPATCHER IDENTIFICATION:
+  Location: 0x010258FE - 0x01025908
+  Predecessor Count: 1
+  Successor Count: 4
+  Detection Score: 8
+  Connection Ratio: 31.25%
+
+STATE VARIABLE:
+  Type: indirect_jump
+  Location: 0x01025901
+  Instruction: jmp     ds:jpt_1025901[rax*8]; switch jump
+
+STATE-TO-BLOCK MAPPING (Case Blocks):
+  Index    Start Address      End Address        Succs    Preds   
+  ------------------------------------------------------------
+  0        0x01025908         0x010259D0         1        1       
+  1        0x010259D0         0x010259D7         1        1       
+  2        0x010259D7         0x010259E7         1        2       
+  3        0x01025A27         0x01025A30         1        1       
+
+FLOW STATISTICS:
+  Blocks jumping TO dispatcher: 1
+  Blocks jumping FROM dispatcher: 4
+
+SUGGESTED ANNOTATIONS:
+  @ 0x010258FE [dispatcher]
+    [FLATTENING DISPATCHER]
+    Predecessors: 1
+    Successors: 4
+    Detection Score: 8
+  @ 0x01025908 [case_block]
+    [CASE BLOCK 0]
+    Range: 0x01025908 - 0x010259D0
+  @ 0x010259D0 [case_block]
+    [CASE BLOCK 1]
+    Range: 0x010259D0 - 0x010259D7
+  @ 0x010259D7 [case_block]
+    [CASE BLOCK 2]
+    Range: 0x010259D7 - 0x010259E7
+  @ 0x01025A27 [case_block]
+    [CASE BLOCK 3]
+    Range: 0x01025A27 - 0x01025A30
+
+GRAPHVIZ CFG (copy to .dot file):
+----------------------------------------
+digraph "sub_1025840" {
+    rankdir=TB;
+    node [shape=box, style=filled];
+
+    block_010258FE [label="DISPATCHER\n0x010258FE", fillcolor=yellow];
+    block_01025908 [label="Case 0\n0x01025908", fillcolor=lightblue];
+    block_010259D0 [label="Case 1\n0x010259D0", fillcolor=lightblue];
+    block_010259D7 [label="Case 2\n0x010259D7", fillcolor=lightblue];
+    block_01025A27 [label="Case 3\n0x01025A27", fillcolor=lightblue];
+    block_010258FE -> block_01025908;
+    block_010258FE -> block_010259D0;
+    block_010258FE -> block_010259D7;
+    block_010258FE -> block_01025A27;
+    block_01025908 -> block_010258FE [style=dashed, color=gray];
+    block_010259D0 -> block_010258FE [style=dashed, color=gray];
+    block_010259D7 -> block_010258FE [style=dashed, color=gray];
+    block_01025A27 -> block_010258FE [style=dashed, color=gray];
+}
+----------------------------------------
+
+======================================================================
+FLATTENED FUNCTION 5: sub_102CBC0
+======================================================================
+
+FUNCTION INFO:
+  Address Range: 0x0102CBC0 - 0x0102CD50
+  Basic Blocks: 30
+  Cyclomatic Complexity: 23
+
+DISPATCHER IDENTIFICATION:
+  Location: 0x0102CBF3 - 0x0102CBFD
+  Predecessor Count: 1
+  Successor Count: 24
+  Detection Score: 48
+  Connection Ratio: 41.67%
+
+STATE VARIABLE:
+  Type: indirect_jump
+  Location: 0x0102CBF6
+  Instruction: jmp     ds:jpt_102CBF6[rcx*8]; switch jump
+
+STATE-TO-BLOCK MAPPING (Case Blocks):
+  Index    Start Address      End Address        Succs    Preds   
+  ------------------------------------------------------------
+  0        0x0102CBD3         0x0102CBF3         2        2       
+  1        0x0102CBFD         0x0102CC0C         1        1       
+  2        0x0102CC0C         0x0102CC1B         1        1       
+  3        0x0102CC1B         0x0102CC29         0        2       
+  4        0x0102CC29         0x0102CC38         1        1       
+  5        0x0102CC38         0x0102CC47         1        1       
+  6        0x0102CC47         0x0102CC56         1        1       
+  7        0x0102CC56         0x0102CC65         1        1       
+  8        0x0102CC65         0x0102CC74         1        1       
+  9        0x0102CC74         0x0102CC81         2        1       
+  10       0x0102CC92         0x0102CCA1         1        1       
+  11       0x0102CCA1         0x0102CCB0         1        1       
+  12       0x0102CCB0         0x0102CCBC         1        1       
+  13       0x0102CCBC         0x0102CCC8         1        1       
+  14       0x0102CCC8         0x0102CCD4         1        1       
+  15       0x0102CCD4         0x0102CCE0         1        1       
+  16       0x0102CCE0         0x0102CCEC         1        1       
+  17       0x0102CCEC         0x0102CCF8         1        1       
+  18       0x0102CCF8         0x0102CD04         1        1       
+  19       0x0102CD04         0x0102CD10         1        1       
+  20       0x0102CD10         0x0102CD1C         1        1       
+  21       0x0102CD1C         0x0102CD28         1        1       
+  22       0x0102CD28         0x0102CD32         1        1       
+  23       0x0102CD3C         0x0102CD41         1        1       
+
+FLOW STATISTICS:
+  Blocks jumping TO dispatcher: 1
+  Blocks jumping FROM dispatcher: 24
+
+SUGGESTED ANNOTATIONS:
+  @ 0x0102CBF3 [dispatcher]
+    [FLATTENING DISPATCHER]
+    Predecessors: 1
+    Successors: 24
+    Detection Score: 48
+  @ 0x0102CBD3 [case_block]
+    [CASE BLOCK 0]
+    Range: 0x0102CBD3 - 0x0102CBF3
+  @ 0x0102CBFD [case_block]
+    [CASE BLOCK 1]
+    Range: 0x0102CBFD - 0x0102CC0C
+  @ 0x0102CC0C [case_block]
+    [CASE BLOCK 2]
+    Range: 0x0102CC0C - 0x0102CC1B
+  @ 0x0102CC1B [case_block]
+    [CASE BLOCK 3]
+    Range: 0x0102CC1B - 0x0102CC29
+  @ 0x0102CC29 [case_block]
+    [CASE BLOCK 4]
+    Range: 0x0102CC29 - 0x0102CC38
+  @ 0x0102CC38 [case_block]
+    [CASE BLOCK 5]
+    Range: 0x0102CC38 - 0x0102CC47
+  @ 0x0102CC47 [case_block]
+    [CASE BLOCK 6]
+    Range: 0x0102CC47 - 0x0102CC56
+  @ 0x0102CC56 [case_block]
+    [CASE BLOCK 7]
+    Range: 0x0102CC56 - 0x0102CC65
+  @ 0x0102CC65 [case_block]
+    [CASE BLOCK 8]
+    Range: 0x0102CC65 - 0x0102CC74
+  @ 0x0102CC74 [case_block]
+    [CASE BLOCK 9]
+    Range: 0x0102CC74 - 0x0102CC81
+  @ 0x0102CC92 [case_block]
+    [CASE BLOCK 10]
+    Range: 0x0102CC92 - 0x0102CCA1
+  @ 0x0102CCA1 [case_block]
+    [CASE BLOCK 11]
+    Range: 0x0102CCA1 - 0x0102CCB0
+  @ 0x0102CCB0 [case_block]
+    [CASE BLOCK 12]
+    Range: 0x0102CCB0 - 0x0102CCBC
+  @ 0x0102CCBC [case_block]
+    [CASE BLOCK 13]
+    Range: 0x0102CCBC - 0x0102CCC8
+  @ 0x0102CCC8 [case_block]
+    [CASE BLOCK 14]
+    Range: 0x0102CCC8 - 0x0102CCD4
+  @ 0x0102CCD4 [case_block]
+    [CASE BLOCK 15]
+    Range: 0x0102CCD4 - 0x0102CCE0
+  @ 0x0102CCE0 [case_block]
+    [CASE BLOCK 16]
+    Range: 0x0102CCE0 - 0x0102CCEC
+  @ 0x0102CCEC [case_block]
+    [CASE BLOCK 17]
+    Range: 0x0102CCEC - 0x0102CCF8
+  @ 0x0102CCF8 [case_block]
+    [CASE BLOCK 18]
+    Range: 0x0102CCF8 - 0x0102CD04
+  @ 0x0102CD04 [case_block]
+    [CASE BLOCK 19]
+    Range: 0x0102CD04 - 0x0102CD10
+  @ 0x0102CD10 [case_block]
+    [CASE BLOCK 20]
+    Range: 0x0102CD10 - 0x0102CD1C
+  @ 0x0102CD1C [case_block]
+    [CASE BLOCK 21]
+    Range: 0x0102CD1C - 0x0102CD28
+  @ 0x0102CD28 [case_block]
+    [CASE BLOCK 22]
+    Range: 0x0102CD28 - 0x0102CD32
+  @ 0x0102CD3C [case_block]
+    [CASE BLOCK 23]
+    Range: 0x0102CD3C - 0x0102CD41
+
+GRAPHVIZ CFG (copy to .dot file):
+----------------------------------------
+digraph "sub_102CBC0" {
+    rankdir=TB;
+    node [shape=box, style=filled];
+
+    block_0102CBF3 [label="DISPATCHER\n0x0102CBF3", fillcolor=yellow];
+    block_0102CBD3 [label="Case 0\n0x0102CBD3", fillcolor=lightblue];
+    block_0102CBFD [label="Case 1\n0x0102CBFD", fillcolor=lightblue];
+    block_0102CC0C [label="Case 2\n0x0102CC0C", fillcolor=lightblue];
+    block_0102CC1B [label="Case 3\n0x0102CC1B", fillcolor=lightblue];
+    block_0102CC29 [label="Case 4\n0x0102CC29", fillcolor=lightblue];
+    block_0102CC38 [label="Case 5\n0x0102CC38", fillcolor=lightblue];
+    block_0102CC47 [label="Case 6\n0x0102CC47", fillcolor=lightblue];
+    block_0102CC56 [label="Case 7\n0x0102CC56", fillcolor=lightblue];
+    block_0102CC65 [label="Case 8\n0x0102CC65", fillcolor=lightblue];
+    block_0102CC74 [label="Case 9\n0x0102CC74", fillcolor=lightblue];
+    block_0102CC92 [label="Case 10\n0x0102CC92", fillcolor=lightblue];
+    block_0102CCA1 [label="Case 11\n0x0102CCA1", fillcolor=lightblue];
+    block_0102CCB0 [label="Case 12\n0x0102CCB0", fillcolor=lightblue];
+    block_0102CCBC [label="Case 13\n0x0102CCBC", fillcolor=lightblue];
+    block_0102CCC8 [label="Case 14\n0x0102CCC8", fillcolor=lightblue];
+    block_0102CCD4 [label="Case 15\n0x0102CCD4", fillcolor=lightblue];
+    block_0102CCE0 [label="Case 16\n0x0102CCE0", fillcolor=lightblue];
+    block_0102CCEC [label="Case 17\n0x0102CCEC", fillcolor=lightblue];
+    block_0102CCF8 [label="Case 18\n0x0102CCF8", fillcolor=lightblue];
+    block_0102CD04 [label="Case 19\n0x0102CD04", fillcolor=lightblue];
+    block_0102CD10 [label="Case 20\n0x0102CD10", fillcolor=lightblue];
+    block_0102CD1C [label="Case 21\n0x0102CD1C", fillcolor=lightblue];
+    block_0102CD28 [label="Case 22\n0x0102CD28", fillcolor=lightblue];
+    block_0102CD3C [label="Case 23\n0x0102CD3C", fillcolor=lightblue];
+    block_0102CBF3 -> block_0102CBD3;
+    block_0102CBF3 -> block_0102CBFD;
+    block_0102CBF3 -> block_0102CC0C;
+    block_0102CBF3 -> block_0102CC1B;
+    block_0102CBF3 -> block_0102CC29;
+    block_0102CBF3 -> block_0102CC38;
+    block_0102CBF3 -> block_0102CC47;
+    block_0102CBF3 -> block_0102CC56;
+    block_0102CBF3 -> block_0102CC65;
+    block_0102CBF3 -> block_0102CC74;
+    block_0102CBF3 -> block_0102CC92;
+    block_0102CBF3 -> block_0102CCA1;
+    block_0102CBF3 -> block_0102CCB0;
+    block_0102CBF3 -> block_0102CCBC;
+    block_0102CBF3 -> block_0102CCC8;
+    block_0102CBF3 -> block_0102CCD4;
+    block_0102CBF3 -> block_0102CCE0;
+    block_0102CBF3 -> block_0102CCEC;
+    block_0102CBF3 -> block_0102CCF8;
+    block_0102CBF3 -> block_0102CD04;
+    block_0102CBF3 -> block_0102CD10;
+    block_0102CBF3 -> block_0102CD1C;
+    block_0102CBF3 -> block_0102CD28;
+    block_0102CBF3 -> block_0102CD3C;
+    block_0102CBD3 -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CBFD -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CC0C -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CC1B -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CC29 -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CC38 -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CC47 -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CC56 -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CC65 -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CC74 -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CC92 -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CCA1 -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CCB0 -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CCBC -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CCC8 -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CCD4 -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CCE0 -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CCEC -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CCF8 -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CD04 -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CD10 -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CD1C -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CD28 -> block_0102CBF3 [style=dashed, color=gray];
+    block_0102CD3C -> block_0102CBF3 [style=dashed, color=gray];
+}
+----------------------------------------
+
+======================================================================
+FLATTENED FUNCTION 6: sub_102D7A0
+======================================================================
+
+FUNCTION INFO:
+  Address Range: 0x0102D7A0 - 0x0102D8B0
+  Basic Blocks: 25
+  Cyclomatic Complexity: 18
+
+DISPATCHER IDENTIFICATION:
+  Location: 0x0102D7DD - 0x0102D7E7
+  Predecessor Count: 1
+  Successor Count: 19
+  Detection Score: 38
+  Connection Ratio: 40.00%
+
+STATE VARIABLE:
+  Type: indirect_jump
+  Location: 0x0102D7E0
+  Instruction: jmp     ds:jpt_102D7E0[rcx*8]; switch jump
+
+STATE-TO-BLOCK MAPPING (Case Blocks):
+  Index    Start Address      End Address        Succs    Preds   
+  ------------------------------------------------------------
+  0        0x0102D7B9         0x0102D7DD         2        2       
+  1        0x0102D7E7         0x0102D7F8         0        1       
+  2        0x0102D806         0x0102D80F         1        1       
+  3        0x0102D80F         0x0102D818         1        1       
+  4        0x0102D818         0x0102D821         1        1       
+  5        0x0102D821         0x0102D82A         1        1       
+  6        0x0102D82A         0x0102D833         1        1       
+  7        0x0102D833         0x0102D83C         1        1       
+  8        0x0102D83C         0x0102D845         1        1       
+  9        0x0102D845         0x0102D84E         1        1       
+  10       0x0102D84E         0x0102D857         1        1       
+  11       0x0102D857         0x0102D860         1        1       
+  12       0x0102D860         0x0102D869         1        1       
+  13       0x0102D869         0x0102D872         1        1       
+  14       0x0102D872         0x0102D87B         1        1       
+  15       0x0102D87B         0x0102D887         1        1       
+  16       0x0102D887         0x0102D893         1        1       
+  17       0x0102D893         0x0102D8A1         0        2       
+  18       0x0102D8A1         0x0102D8B0         1        1       
+
+FLOW STATISTICS:
+  Blocks jumping TO dispatcher: 1
+  Blocks jumping FROM dispatcher: 19
+
+SUGGESTED ANNOTATIONS:
+  @ 0x0102D7DD [dispatcher]
+    [FLATTENING DISPATCHER]
+    Predecessors: 1
+    Successors: 19
+    Detection Score: 38
+  @ 0x0102D7B9 [case_block]
+    [CASE BLOCK 0]
+    Range: 0x0102D7B9 - 0x0102D7DD
+  @ 0x0102D7E7 [case_block]
+    [CASE BLOCK 1]
+    Range: 0x0102D7E7 - 0x0102D7F8
+  @ 0x0102D806 [case_block]
+    [CASE BLOCK 2]
+    Range: 0x0102D806 - 0x0102D80F
+  @ 0x0102D80F [case_block]
+    [CASE BLOCK 3]
+    Range: 0x0102D80F - 0x0102D818
+  @ 0x0102D818 [case_block]
+    [CASE BLOCK 4]
+    Range: 0x0102D818 - 0x0102D821
+  @ 0x0102D821 [case_block]
+    [CASE BLOCK 5]
+    Range: 0x0102D821 - 0x0102D82A
+  @ 0x0102D82A [case_block]
+    [CASE BLOCK 6]
+    Range: 0x0102D82A - 0x0102D833
+  @ 0x0102D833 [case_block]
+    [CASE BLOCK 7]
+    Range: 0x0102D833 - 0x0102D83C
+  @ 0x0102D83C [case_block]
+    [CASE BLOCK 8]
+    Range: 0x0102D83C - 0x0102D845
+  @ 0x0102D845 [case_block]
+    [CASE BLOCK 9]
+    Range: 0x0102D845 - 0x0102D84E
+  @ 0x0102D84E [case_block]
+    [CASE BLOCK 10]
+    Range: 0x0102D84E - 0x0102D857
+  @ 0x0102D857 [case_block]
+    [CASE BLOCK 11]
+    Range: 0x0102D857 - 0x0102D860
+  @ 0x0102D860 [case_block]
+    [CASE BLOCK 12]
+    Range: 0x0102D860 - 0x0102D869
+  @ 0x0102D869 [case_block]
+    [CASE BLOCK 13]
+    Range: 0x0102D869 - 0x0102D872
+  @ 0x0102D872 [case_block]
+    [CASE BLOCK 14]
+    Range: 0x0102D872 - 0x0102D87B
+  @ 0x0102D87B [case_block]
+    [CASE BLOCK 15]
+    Range: 0x0102D87B - 0x0102D887
+  @ 0x0102D887 [case_block]
+    [CASE BLOCK 16]
+    Range: 0x0102D887 - 0x0102D893
+  @ 0x0102D893 [case_block]
+    [CASE BLOCK 17]
+    Range: 0x0102D893 - 0x0102D8A1
+  @ 0x0102D8A1 [case_block]
+    [CASE BLOCK 18]
+    Range: 0x0102D8A1 - 0x0102D8B0
+
+GRAPHVIZ CFG (copy to .dot file):
+----------------------------------------
+digraph "sub_102D7A0" {
+    rankdir=TB;
+    node [shape=box, style=filled];
+
+    block_0102D7DD [label="DISPATCHER\n0x0102D7DD", fillcolor=yellow];
+    block_0102D7B9 [label="Case 0\n0x0102D7B9", fillcolor=lightblue];
+    block_0102D7E7 [label="Case 1\n0x0102D7E7", fillcolor=lightblue];
+    block_0102D806 [label="Case 2\n0x0102D806", fillcolor=lightblue];
+    block_0102D80F [label="Case 3\n0x0102D80F", fillcolor=lightblue];
+    block_0102D818 [label="Case 4\n0x0102D818", fillcolor=lightblue];
+    block_0102D821 [label="Case 5\n0x0102D821", fillcolor=lightblue];
+    block_0102D82A [label="Case 6\n0x0102D82A", fillcolor=lightblue];
+    block_0102D833 [label="Case 7\n0x0102D833", fillcolor=lightblue];
+    block_0102D83C [label="Case 8\n0x0102D83C", fillcolor=lightblue];
+    block_0102D845 [label="Case 9\n0x0102D845", fillcolor=lightblue];
+    block_0102D84E [label="Case 10\n0x0102D84E", fillcolor=lightblue];
+    block_0102D857 [label="Case 11\n0x0102D857", fillcolor=lightblue];
+    block_0102D860 [label="Case 12\n0x0102D860", fillcolor=lightblue];
+    block_0102D869 [label="Case 13\n0x0102D869", fillcolor=lightblue];
+    block_0102D872 [label="Case 14\n0x0102D872", fillcolor=lightblue];
+    block_0102D87B [label="Case 15\n0x0102D87B", fillcolor=lightblue];
+    block_0102D887 [label="Case 16\n0x0102D887", fillcolor=lightblue];
+    block_0102D893 [label="Case 17\n0x0102D893", fillcolor=lightblue];
+    block_0102D8A1 [label="Case 18\n0x0102D8A1", fillcolor=lightblue];
+    block_0102D7DD -> block_0102D7B9;
+    block_0102D7DD -> block_0102D7E7;
+    block_0102D7DD -> block_0102D806;
+    block_0102D7DD -> block_0102D80F;
+    block_0102D7DD -> block_0102D818;
+    block_0102D7DD -> block_0102D821;
+    block_0102D7DD -> block_0102D82A;
+    block_0102D7DD -> block_0102D833;
+    block_0102D7DD -> block_0102D83C;
+    block_0102D7DD -> block_0102D845;
+    block_0102D7DD -> block_0102D84E;
+    block_0102D7DD -> block_0102D857;
+    block_0102D7DD -> block_0102D860;
+    block_0102D7DD -> block_0102D869;
+    block_0102D7DD -> block_0102D872;
+    block_0102D7DD -> block_0102D87B;
+    block_0102D7DD -> block_0102D887;
+    block_0102D7DD -> block_0102D893;
+    block_0102D7DD -> block_0102D8A1;
+    block_0102D7B9 -> block_0102D7DD [style=dashed, color=gray];
+    block_0102D7E7 -> block_0102D7DD [style=dashed, color=gray];
+    block_0102D806 -> block_0102D7DD [style=dashed, color=gray];
+    block_0102D80F -> block_0102D7DD [style=dashed, color=gray];
+    block_0102D818 -> block_0102D7DD [style=dashed, color=gray];
+    block_0102D821 -> block_0102D7DD [style=dashed, color=gray];
+    block_0102D82A -> block_0102D7DD [style=dashed, color=gray];
+    block_0102D833 -> block_0102D7DD [style=dashed, color=gray];
+    block_0102D83C -> block_0102D7DD [style=dashed, color=gray];
+    block_0102D845 -> block_0102D7DD [style=dashed, color=gray];
+    block_0102D84E -> block_0102D7DD [style=dashed, color=gray];
+    block_0102D857 -> block_0102D7DD [style=dashed, color=gray];
+    block_0102D860 -> block_0102D7DD [style=dashed, color=gray];
+    block_0102D869 -> block_0102D7DD [style=dashed, color=gray];
+    block_0102D872 -> block_0102D7DD [style=dashed, color=gray];
+    block_0102D87B -> block_0102D7DD [style=dashed, color=gray];
+    block_0102D887 -> block_0102D7DD [style=dashed, color=gray];
+    block_0102D893 -> block_0102D7DD [style=dashed, color=gray];
+    block_0102D8A1 -> block_0102D7DD [style=dashed, color=gray];
+}
+----------------------------------------
+
+======================================================================
+FLATTENED FUNCTION 7: sub_10300A0
+======================================================================
+
+FUNCTION INFO:
+  Address Range: 0x010300A0 - 0x010301C0
+  Basic Blocks: 16
+  Cyclomatic Complexity: 3
+
+DISPATCHER IDENTIFICATION:
+  Location: 0x010300D1 - 0x010300DB
+  Predecessor Count: 1
+  Successor Count: 11
+  Detection Score: 22
+  Connection Ratio: 37.50%
+
+STATE VARIABLE:
+  Type: indirect_jump
+  Location: 0x010300D4
+  Instruction: jmp     ds:jpt_10300D4[rcx*8]; switch jump
+
+STATE-TO-BLOCK MAPPING (Case Blocks):
+  Index    Start Address      End Address        Succs    Preds   
+  ------------------------------------------------------------
+  0        0x010300DB         0x010300E4         0        2       
+  1        0x010300E4         0x010300F9         0        1       
+  2        0x010300F9         0x0103010E         0        1       
+  3        0x0103010E         0x01030123         0        1       
+  4        0x01030123         0x01030138         0        1       
+  5        0x01030138         0x0103014D         0        1       
+  6        0x0103014D         0x01030155         2        1       
+  7        0x01030165         0x0103017A         0        1       
+  8        0x0103017A         0x0103018F         0        1       
+  9        0x0103018F         0x010301A4         0        1       
+  10       0x010301B1         0x010301C0         1        2       
+
+FLOW STATISTICS:
+  Blocks jumping TO dispatcher: 1
+  Blocks jumping FROM dispatcher: 11
+
+SUGGESTED ANNOTATIONS:
+  @ 0x010300D1 [dispatcher]
+    [FLATTENING DISPATCHER]
+    Predecessors: 1
+    Successors: 11
+    Detection Score: 22
+  @ 0x010300DB [case_block]
+    [CASE BLOCK 0]
+    Range: 0x010300DB - 0x010300E4
+  @ 0x010300E4 [case_block]
+    [CASE BLOCK 1]
+    Range: 0x010300E4 - 0x010300F9
+  @ 0x010300F9 [case_block]
+    [CASE BLOCK 2]
+    Range: 0x010300F9 - 0x0103010E
+  @ 0x0103010E [case_block]
+    [CASE BLOCK 3]
+    Range: 0x0103010E - 0x01030123
+  @ 0x01030123 [case_block]
+    [CASE BLOCK 4]
+    Range: 0x01030123 - 0x01030138
+  @ 0x01030138 [case_block]
+    [CASE BLOCK 5]
+    Range: 0x01030138 - 0x0103014D
+  @ 0x0103014D [case_block]
+    [CASE BLOCK 6]
+    Range: 0x0103014D - 0x01030155
+  @ 0x01030165 [case_block]
+    [CASE BLOCK 7]
+    Range: 0x01030165 - 0x0103017A
+  @ 0x0103017A [case_block]
+    [CASE BLOCK 8]
+    Range: 0x0103017A - 0x0103018F
+  @ 0x0103018F [case_block]
+    [CASE BLOCK 9]
+    Range: 0x0103018F - 0x010301A4
+  @ 0x010301B1 [case_block]
+    [CASE BLOCK 10]
+    Range: 0x010301B1 - 0x010301C0
+
+GRAPHVIZ CFG (copy to .dot file):
+----------------------------------------
+digraph "sub_10300A0" {
+    rankdir=TB;
+    node [shape=box, style=filled];
+
+    block_010300D1 [label="DISPATCHER\n0x010300D1", fillcolor=yellow];
+    block_010300DB [label="Case 0\n0x010300DB", fillcolor=lightblue];
+    block_010300E4 [label="Case 1\n0x010300E4", fillcolor=lightblue];
+    block_010300F9 [label="Case 2\n0x010300F9", fillcolor=lightblue];
+    block_0103010E [label="Case 3\n0x0103010E", fillcolor=lightblue];
+    block_01030123 [label="Case 4\n0x01030123", fillcolor=lightblue];
+    block_01030138 [label="Case 5\n0x01030138", fillcolor=lightblue];
+    block_0103014D [label="Case 6\n0x0103014D", fillcolor=lightblue];
+    block_01030165 [label="Case 7\n0x01030165", fillcolor=lightblue];
+    block_0103017A [label="Case 8\n0x0103017A", fillcolor=lightblue];
+    block_0103018F [label="Case 9\n0x0103018F", fillcolor=lightblue];
+    block_010301B1 [label="Case 10\n0x010301B1", fillcolor=lightblue];
+    block_010300D1 -> block_010300DB;
+    block_010300D1 -> block_010300E4;
+    block_010300D1 -> block_010300F9;
+    block_010300D1 -> block_0103010E;
+    block_010300D1 -> block_01030123;
+    block_010300D1 -> block_01030138;
+    block_010300D1 -> block_0103014D;
+    block_010300D1 -> block_01030165;
+    block_010300D1 -> block_0103017A;
+    block_010300D1 -> block_0103018F;
+    block_010300D1 -> block_010301B1;
+    block_010300DB -> block_010300D1 [style=dashed, color=gray];
+    block_010300E4 -> block_010300D1 [style=dashed, color=gray];
+    block_010300F9 -> block_010300D1 [style=dashed, color=gray];
+    block_0103010E -> block_010300D1 [style=dashed, color=gray];
+    block_01030123 -> block_010300D1 [style=dashed, color=gray];
+    block_01030138 -> block_010300D1 [style=dashed, color=gray];
+    block_0103014D -> block_010300D1 [style=dashed, color=gray];
+    block_01030165 -> block_010300D1 [style=dashed, color=gray];
+    block_0103017A -> block_010300D1 [style=dashed, color=gray];
+    block_0103018F -> block_010300D1 [style=dashed, color=gray];
+    block_010301B1 -> block_010300D1 [style=dashed, color=gray];
+}
+----------------------------------------
+
+======================================================================
+FLATTENED FUNCTION 8: sub_1035F10
+======================================================================
+
+FUNCTION INFO:
+  Address Range: 0x01035F10 - 0x01035FBA
+  Basic Blocks: 10
+  Cyclomatic Complexity: 2
+
+DISPATCHER IDENTIFICATION:
+  Location: 0x01035F4D - 0x01035F57
+  Predecessor Count: 1
+  Successor Count: 8
+  Detection Score: 16
+  Connection Ratio: 45.00%
+
+STATE VARIABLE:
+  Type: indirect_jump
+  Location: 0x01035F50
+  Instruction: jmp     ds:jpt_1035F50[rcx*8]; switch jump
+
+STATE-TO-BLOCK MAPPING (Case Blocks):
+  Index    Start Address      End Address        Succs    Preds   
+  ------------------------------------------------------------
+  0        0x01035F57         0x01035F60         0        2       
+  1        0x01035F60         0x01035F6D         0        1       
+  2        0x01035F6D         0x01035F7A         0        1       
+  3        0x01035F7A         0x01035F87         0        1       
+  4        0x01035F87         0x01035F94         0        1       
+  5        0x01035F94         0x01035FA1         0        1       
+  6        0x01035FA1         0x01035FAD         0        1       
+  7        0x01035FAD         0x01035FBA         0        1       
+
+FLOW STATISTICS:
+  Blocks jumping TO dispatcher: 1
+  Blocks jumping FROM dispatcher: 8
+
+SUGGESTED ANNOTATIONS:
+  @ 0x01035F4D [dispatcher]
+    [FLATTENING DISPATCHER]
+    Predecessors: 1
+    Successors: 8
+    Detection Score: 16
+  @ 0x01035F57 [case_block]
+    [CASE BLOCK 0]
+    Range: 0x01035F57 - 0x01035F60
+  @ 0x01035F60 [case_block]
+    [CASE BLOCK 1]
+    Range: 0x01035F60 - 0x01035F6D
+  @ 0x01035F6D [case_block]
+    [CASE BLOCK 2]
+    Range: 0x01035F6D - 0x01035F7A
+  @ 0x01035F7A [case_block]
+    [CASE BLOCK 3]
+    Range: 0x01035F7A - 0x01035F87
+  @ 0x01035F87 [case_block]
+    [CASE BLOCK 4]
+    Range: 0x01035F87 - 0x01035F94
+  @ 0x01035F94 [case_block]
+    [CASE BLOCK 5]
+    Range: 0x01035F94 - 0x01035FA1
+  @ 0x01035FA1 [case_block]
+    [CASE BLOCK 6]
+    Range: 0x01035FA1 - 0x01035FAD
+  @ 0x01035FAD [case_block]
+    [CASE BLOCK 7]
+    Range: 0x01035FAD - 0x01035FBA
+
+GRAPHVIZ CFG (copy to .dot file):
+----------------------------------------
+digraph "sub_1035F10" {
+    rankdir=TB;
+    node [shape=box, style=filled];
+
+    block_01035F4D [label="DISPATCHER\n0x01035F4D", fillcolor=yellow];
+    block_01035F57 [label="Case 0\n0x01035F57", fillcolor=lightblue];
+    block_01035F60 [label="Case 1\n0x01035F60", fillcolor=lightblue];
+    block_01035F6D [label="Case 2\n0x01035F6D", fillcolor=lightblue];
+    block_01035F7A [label="Case 3\n0x01035F7A", fillcolor=lightblue];
+    block_01035F87 [label="Case 4\n0x01035F87", fillcolor=lightblue];
+    block_01035F94 [label="Case 5\n0x01035F94", fillcolor=lightblue];
+    block_01035FA1 [label="Case 6\n0x01035FA1", fillcolor=lightblue];
+    block_01035FAD [label="Case 7\n0x01035FAD", fillcolor=lightblue];
+    block_01035F4D -> block_01035F57;
+    block_01035F4D -> block_01035F60;
+    block_01035F4D -> block_01035F6D;
+    block_01035F4D -> block_01035F7A;
+    block_01035F4D -> block_01035F87;
+    block_01035F4D -> block_01035F94;
+    block_01035F4D -> block_01035FA1;
+    block_01035F4D -> block_01035FAD;
+    block_01035F57 -> block_01035F4D [style=dashed, color=gray];
+    block_01035F60 -> block_01035F4D [style=dashed, color=gray];
+    block_01035F6D -> block_01035F4D [style=dashed, color=gray];
+    block_01035F7A -> block_01035F4D [style=dashed, color=gray];
+    block_01035F87 -> block_01035F4D [style=dashed, color=gray];
+    block_01035F94 -> block_01035F4D [style=dashed, color=gray];
+    block_01035FA1 -> block_01035F4D [style=dashed, color=gray];
+    block_01035FAD -> block_01035F4D [style=dashed, color=gray];
+}
+----------------------------------------
+
+======================================================================
+FLATTENED FUNCTION 9: sub_1035FC0
+======================================================================
+
+FUNCTION INFO:
+  Address Range: 0x01035FC0 - 0x01036092
+  Basic Blocks: 17
+  Cyclomatic Complexity: 13
+
+DISPATCHER IDENTIFICATION:
+  Location: 0x01035FFD - 0x01036007
+  Predecessor Count: 1
+  Successor Count: 14
+  Detection Score: 28
+  Connection Ratio: 44.12%
+
+STATE VARIABLE:
+  Type: indirect_jump
+  Location: 0x01036000
+  Instruction: jmp     ds:jpt_1036000[rcx*8]; switch jump
+
+STATE-TO-BLOCK MAPPING (Case Blocks):
+  Index    Start Address      End Address        Succs    Preds   
+  ------------------------------------------------------------
+  0        0x01036007         0x01036015         0        1       
+  1        0x01036015         0x0103601E         1        1       
+  2        0x0103601E         0x01036027         1        1       
+  3        0x01036027         0x01036030         1        1       
+  4        0x01036030         0x01036039         1        1       
+  5        0x01036039         0x01036042         1        1       
+  6        0x01036042         0x0103604B         1        1       
+  7        0x0103604B         0x01036056         0        2       
+  8        0x01036056         0x0103605F         1        1       
+  9        0x0103605F         0x01036068         1        1       
+  10       0x01036068         0x01036071         1        1       
+  11       0x01036071         0x0103607A         1        1       
+  12       0x0103607A         0x01036083         1        1       
+  13       0x01036083         0x0103608A         1        1       
+
+FLOW STATISTICS:
+  Blocks jumping TO dispatcher: 1
+  Blocks jumping FROM dispatcher: 14
+
+SUGGESTED ANNOTATIONS:
+  @ 0x01035FFD [dispatcher]
+    [FLATTENING DISPATCHER]
+    Predecessors: 1
+    Successors: 14
+    Detection Score: 28
+  @ 0x01036007 [case_block]
+    [CASE BLOCK 0]
+    Range: 0x01036007 - 0x01036015
+  @ 0x01036015 [case_block]
+    [CASE BLOCK 1]
+    Range: 0x01036015 - 0x0103601E
+  @ 0x0103601E [case_block]
+    [CASE BLOCK 2]
+    Range: 0x0103601E - 0x01036027
+  @ 0x01036027 [case_block]
+    [CASE BLOCK 3]
+    Range: 0x01036027 - 0x01036030
+  @ 0x01036030 [case_block]
+    [CASE BLOCK 4]
+    Range: 0x01036030 - 0x01036039
+  @ 0x01036039 [case_block]
+    [CASE BLOCK 5]
+    Range: 0x01036039 - 0x01036042
+  @ 0x01036042 [case_block]
+    [CASE BLOCK 6]
+    Range: 0x01036042 - 0x0103604B
+  @ 0x0103604B [case_block]
+    [CASE BLOCK 7]
+    Range: 0x0103604B - 0x01036056
+  @ 0x01036056 [case_block]
+    [CASE BLOCK 8]
+    Range: 0x01036056 - 0x0103605F
+  @ 0x0103605F [case_block]
+    [CASE BLOCK 9]
+    Range: 0x0103605F - 0x01036068
+  @ 0x01036068 [case_block]
+    [CASE BLOCK 10]
+    Range: 0x01036068 - 0x01036071
+  @ 0x01036071 [case_block]
+    [CASE BLOCK 11]
+    Range: 0x01036071 - 0x0103607A
+  @ 0x0103607A [case_block]
+    [CASE BLOCK 12]
+    Range: 0x0103607A - 0x01036083
+  @ 0x01036083 [case_block]
+    [CASE BLOCK 13]
+    Range: 0x01036083 - 0x0103608A
+
+GRAPHVIZ CFG (copy to .dot file):
+----------------------------------------
+digraph "sub_1035FC0" {
+    rankdir=TB;
+    node [shape=box, style=filled];
+
+    block_01035FFD [label="DISPATCHER\n0x01035FFD", fillcolor=yellow];
+    block_01036007 [label="Case 0\n0x01036007", fillcolor=lightblue];
+    block_01036015 [label="Case 1\n0x01036015", fillcolor=lightblue];
+    block_0103601E [label="Case 2\n0x0103601E", fillcolor=lightblue];
+    block_01036027 [label="Case 3\n0x01036027", fillcolor=lightblue];
+    block_01036030 [label="Case 4\n0x01036030", fillcolor=lightblue];
+    block_01036039 [label="Case 5\n0x01036039", fillcolor=lightblue];
+    block_01036042 [label="Case 6\n0x01036042", fillcolor=lightblue];
+    block_0103604B [label="Case 7\n0x0103604B", fillcolor=lightblue];
+    block_01036056 [label="Case 8\n0x01036056", fillcolor=lightblue];
+    block_0103605F [label="Case 9\n0x0103605F", fillcolor=lightblue];
+    block_01036068 [label="Case 10\n0x01036068", fillcolor=lightblue];
+    block_01036071 [label="Case 11\n0x01036071", fillcolor=lightblue];
+    block_0103607A [label="Case 12\n0x0103607A", fillcolor=lightblue];
+    block_01036083 [label="Case 13\n0x01036083", fillcolor=lightblue];
+    block_01035FFD -> block_01036007;
+    block_01035FFD -> block_01036015;
+    block_01035FFD -> block_0103601E;
+    block_01035FFD -> block_01036027;
+    block_01035FFD -> block_01036030;
+    block_01035FFD -> block_01036039;
+    block_01035FFD -> block_01036042;
+    block_01035FFD -> block_0103604B;
+    block_01035FFD -> block_01036056;
+    block_01035FFD -> block_0103605F;
+    block_01035FFD -> block_01036068;
+    block_01035FFD -> block_01036071;
+    block_01035FFD -> block_0103607A;
+    block_01035FFD -> block_01036083;
+    block_01036007 -> block_01035FFD [style=dashed, color=gray];
+    block_01036015 -> block_01035FFD [style=dashed, color=gray];
+    block_0103601E -> block_01035FFD [style=dashed, color=gray];
+    block_01036027 -> block_01035FFD [style=dashed, color=gray];
+    block_01036030 -> block_01035FFD [style=dashed, color=gray];
+    block_01036039 -> block_01035FFD [style=dashed, color=gray];
+    block_01036042 -> block_01035FFD [style=dashed, color=gray];
+    block_0103604B -> block_01035FFD [style=dashed, color=gray];
+    block_01036056 -> block_01035FFD [style=dashed, color=gray];
+    block_0103605F -> block_01035FFD [style=dashed, color=gray];
+    block_01036068 -> block_01035FFD [style=dashed, color=gray];
+    block_01036071 -> block_01035FFD [style=dashed, color=gray];
+    block_0103607A -> block_01035FFD [style=dashed, color=gray];
+    block_01036083 -> block_01035FFD [style=dashed, color=gray];
+}
+----------------------------------------
+
+======================================================================
+FLATTENED FUNCTION 10: sub_103C120
+======================================================================
+
+FUNCTION INFO:
+  Address Range: 0x0103C120 - 0x0103C260
+  Basic Blocks: 11
+  Cyclomatic Complexity: 7
+
+DISPATCHER IDENTIFICATION:
+  Location: 0x0103C1F4 - 0x0103C213
+  Predecessor Count: 5
+  Successor Count: 2
+  Detection Score: 10
+  Connection Ratio: 31.82%
+
+STATE VARIABLE:
+  Type: comparison
+  Location: 0x0103C1FC
+  Instruction: cmp     rax, (offset aMsgTruncated+0Fh); ""
+
+STATE-TO-BLOCK MAPPING (Case Blocks):
+  Index    Start Address      End Address        Succs    Preds   
+  ------------------------------------------------------------
+  0        0x0103C213         0x0103C23E         1        1       
+  1        0x0103C23E         0x0103C243         1        2       
+
+FLOW STATISTICS:
+  Blocks jumping TO dispatcher: 5
+  Blocks jumping FROM dispatcher: 2
+
+SUGGESTED ANNOTATIONS:
+  @ 0x0103C1F4 [dispatcher]
+    [FLATTENING DISPATCHER]
+    Predecessors: 5
+    Successors: 2
+    Detection Score: 10
+  @ 0x0103C213 [case_block]
+    [CASE BLOCK 0]
+    Range: 0x0103C213 - 0x0103C23E
+  @ 0x0103C23E [case_block]
+    [CASE BLOCK 1]
+    Range: 0x0103C23E - 0x0103C243
+
+GRAPHVIZ CFG (copy to .dot file):
+----------------------------------------
+digraph "sub_103C120" {
+    rankdir=TB;
+    node [shape=box, style=filled];
+
+    block_0103C1F4 [label="DISPATCHER\n0x0103C1F4", fillcolor=yellow];
+    block_0103C213 [label="Case 0\n0x0103C213", fillcolor=lightblue];
+    block_0103C23E [label="Case 1\n0x0103C23E", fillcolor=lightblue];
+    block_0103C1F4 -> block_0103C213;
+    block_0103C1F4 -> block_0103C23E;
+    block_0103C213 -> block_0103C1F4 [style=dashed, color=gray];
+    block_0103C23E -> block_0103C1F4 [style=dashed, color=gray];
+}
+----------------------------------------
+
+======================================================================
+FLATTENED FUNCTION 11: sub_103C260
+======================================================================
+
+FUNCTION INFO:
+  Address Range: 0x0103C260 - 0x0103C3A0
+  Basic Blocks: 11
+  Cyclomatic Complexity: 7
+
+DISPATCHER IDENTIFICATION:
+  Location: 0x0103C334 - 0x0103C353
+  Predecessor Count: 5
+  Successor Count: 2
+  Detection Score: 10
+  Connection Ratio: 31.82%
+
+STATE VARIABLE:
+  Type: comparison
+  Location: 0x0103C33C
+  Instruction: cmp     rax, 100959Ch
+
+STATE-TO-BLOCK MAPPING (Case Blocks):
+  Index    Start Address      End Address        Succs    Preds   
+  ------------------------------------------------------------
+  0        0x0103C353         0x0103C37E         1        1       
+  1        0x0103C37E         0x0103C383         1        2       
+
+FLOW STATISTICS:
+  Blocks jumping TO dispatcher: 5
+  Blocks jumping FROM dispatcher: 2
+
+SUGGESTED ANNOTATIONS:
+  @ 0x0103C334 [dispatcher]
+    [FLATTENING DISPATCHER]
+    Predecessors: 5
+    Successors: 2
+    Detection Score: 10
+  @ 0x0103C353 [case_block]
+    [CASE BLOCK 0]
+    Range: 0x0103C353 - 0x0103C37E
+  @ 0x0103C37E [case_block]
+    [CASE BLOCK 1]
+    Range: 0x0103C37E - 0x0103C383
+
+GRAPHVIZ CFG (copy to .dot file):
+----------------------------------------
+digraph "sub_103C260" {
+    rankdir=TB;
+    node [shape=box, style=filled];
+
+    block_0103C334 [label="DISPATCHER\n0x0103C334", fillcolor=yellow];
+    block_0103C353 [label="Case 0\n0x0103C353", fillcolor=lightblue];
+    block_0103C37E [label="Case 1\n0x0103C37E", fillcolor=lightblue];
+    block_0103C334 -> block_0103C353;
+    block_0103C334 -> block_0103C37E;
+    block_0103C353 -> block_0103C334 [style=dashed, color=gray];
+    block_0103C37E -> block_0103C334 [style=dashed, color=gray];
+}
+----------------------------------------
+
+======================================================================
+FLATTENED FUNCTION 12: sub_103D790
+======================================================================
+
+FUNCTION INFO:
+  Address Range: 0x0103D790 - 0x0103D890
+  Basic Blocks: 9
+  Cyclomatic Complexity: 5
+
+DISPATCHER IDENTIFICATION:
+  Location: 0x0103D830 - 0x0103D84F
+  Predecessor Count: 3
+  Successor Count: 2
+  Detection Score: 6
+  Connection Ratio: 27.78%
+
+STATE VARIABLE:
+  Type: comparison
+  Location: 0x0103D838
+  Instruction: cmp     rax, 100959Ch
+
+STATE-TO-BLOCK MAPPING (Case Blocks):
+  Index    Start Address      End Address        Succs    Preds   
+  ------------------------------------------------------------
+  0        0x0103D84F         0x0103D87A         1        1       
+  1        0x0103D87A         0x0103D87F         1        2       
+
+FLOW STATISTICS:
+  Blocks jumping TO dispatcher: 3
+  Blocks jumping FROM dispatcher: 2
+
+SUGGESTED ANNOTATIONS:
+  @ 0x0103D830 [dispatcher]
+    [FLATTENING DISPATCHER]
+    Predecessors: 3
+    Successors: 2
+    Detection Score: 6
+  @ 0x0103D84F [case_block]
+    [CASE BLOCK 0]
+    Range: 0x0103D84F - 0x0103D87A
+  @ 0x0103D87A [case_block]
+    [CASE BLOCK 1]
+    Range: 0x0103D87A - 0x0103D87F
+
+GRAPHVIZ CFG (copy to .dot file):
+----------------------------------------
+digraph "sub_103D790" {
+    rankdir=TB;
+    node [shape=box, style=filled];
+
+    block_0103D830 [label="DISPATCHER\n0x0103D830", fillcolor=yellow];
+    block_0103D84F [label="Case 0\n0x0103D84F", fillcolor=lightblue];
+    block_0103D87A [label="Case 1\n0x0103D87A", fillcolor=lightblue];
+    block_0103D830 -> block_0103D84F;
+    block_0103D830 -> block_0103D87A;
+    block_0103D84F -> block_0103D830 [style=dashed, color=gray];
+    block_0103D87A -> block_0103D830 [style=dashed, color=gray];
+}
+----------------------------------------
+
+======================================================================
+FLATTENED FUNCTION 13: sub_103D890
+======================================================================
+
+FUNCTION INFO:
+  Address Range: 0x0103D890 - 0x0103D9D0
+  Basic Blocks: 11
+  Cyclomatic Complexity: 7
+
+DISPATCHER IDENTIFICATION:
+  Location: 0x0103D966 - 0x0103D985
+  Predecessor Count: 5
+  Successor Count: 2
+  Detection Score: 10
+  Connection Ratio: 31.82%
+
+STATE VARIABLE:
+  Type: comparison
+  Location: 0x0103D96E
+  Instruction: cmp     rax, 100959Ch
+
+STATE-TO-BLOCK MAPPING (Case Blocks):
+  Index    Start Address      End Address        Succs    Preds   
+  ------------------------------------------------------------
+  0        0x0103D985         0x0103D9B0         1        1       
+  1        0x0103D9B0         0x0103D9B5         1        2       
+
+FLOW STATISTICS:
+  Blocks jumping TO dispatcher: 5
+  Blocks jumping FROM dispatcher: 2
+
+SUGGESTED ANNOTATIONS:
+  @ 0x0103D966 [dispatcher]
+    [FLATTENING DISPATCHER]
+    Predecessors: 5
+    Successors: 2
+    Detection Score: 10
+  @ 0x0103D985 [case_block]
+    [CASE BLOCK 0]
+    Range: 0x0103D985 - 0x0103D9B0
+  @ 0x0103D9B0 [case_block]
+    [CASE BLOCK 1]
+    Range: 0x0103D9B0 - 0x0103D9B5
+
+GRAPHVIZ CFG (copy to .dot file):
+----------------------------------------
+digraph "sub_103D890" {
+    rankdir=TB;
+    node [shape=box, style=filled];
+
+    block_0103D966 [label="DISPATCHER\n0x0103D966", fillcolor=yellow];
+    block_0103D985 [label="Case 0\n0x0103D985", fillcolor=lightblue];
+    block_0103D9B0 [label="Case 1\n0x0103D9B0", fillcolor=lightblue];
+    block_0103D966 -> block_0103D985;
+    block_0103D966 -> block_0103D9B0;
+    block_0103D985 -> block_0103D966 [style=dashed, color=gray];
+    block_0103D9B0 -> block_0103D966 [style=dashed, color=gray];
+}
+----------------------------------------
+
+======================================================================
+FLATTENED FUNCTION 14: sub_103D9D0
+======================================================================
+
+FUNCTION INFO:
+  Address Range: 0x0103D9D0 - 0x0103DB30
+  Basic Blocks: 12
+  Cyclomatic Complexity: 8
+
+DISPATCHER IDENTIFICATION:
+  Location: 0x0103DACC - 0x0103DAEB
+  Predecessor Count: 6
+  Successor Count: 2
+  Detection Score: 12
+  Connection Ratio: 33.33%
+
+STATE VARIABLE:
+  Type: comparison
+  Location: 0x0103DAD4
+  Instruction: cmp     rax, 100959Ch
+
+STATE-TO-BLOCK MAPPING (Case Blocks):
+  Index    Start Address      End Address        Succs    Preds   
+  ------------------------------------------------------------
+  0        0x0103DAEB         0x0103DB16         1        1       
+  1        0x0103DB16         0x0103DB1B         1        2       
+
+FLOW STATISTICS:
+  Blocks jumping TO dispatcher: 6
+  Blocks jumping FROM dispatcher: 2
+
+SUGGESTED ANNOTATIONS:
+  @ 0x0103DACC [dispatcher]
+    [FLATTENING DISPATCHER]
+    Predecessors: 6
+    Successors: 2
+    Detection Score: 12
+  @ 0x0103DAEB [case_block]
+    [CASE BLOCK 0]
+    Range: 0x0103DAEB - 0x0103DB16
+  @ 0x0103DB16 [case_block]
+    [CASE BLOCK 1]
+    Range: 0x0103DB16 - 0x0103DB1B
+
+GRAPHVIZ CFG (copy to .dot file):
+----------------------------------------
+digraph "sub_103D9D0" {
+    rankdir=TB;
+    node [shape=box, style=filled];
+
+    block_0103DACC [label="DISPATCHER\n0x0103DACC", fillcolor=yellow];
+    block_0103DAEB [label="Case 0\n0x0103DAEB", fillcolor=lightblue];
+    block_0103DB16 [label="Case 1\n0x0103DB16", fillcolor=lightblue];
+    block_0103DACC -> block_0103DAEB;
+    block_0103DACC -> block_0103DB16;
+    block_0103DAEB -> block_0103DACC [style=dashed, color=gray];
+    block_0103DB16 -> block_0103DACC [style=dashed, color=gray];
+}
+----------------------------------------
+
+======================================================================
+SUMMARY
+======================================================================
+Total flattened functions: 14
+
+Function List:
+  - sub_1010230 @ 0x01010230
+    Blocks: 23, Dispatcher successors: 17
+  - sub_10106D0 @ 0x010106D0
+    Blocks: 19, Dispatcher successors: 11
+  - sub_101CDD0 @ 0x0101CDD0
+    Blocks: 18, Dispatcher successors: 13
+  - sub_1025840 @ 0x01025840
+    Blocks: 8, Dispatcher successors: 4
+  - sub_102CBC0 @ 0x0102CBC0
+    Blocks: 30, Dispatcher successors: 24
+  - sub_102D7A0 @ 0x0102D7A0
+    Blocks: 25, Dispatcher successors: 19
+  - sub_10300A0 @ 0x010300A0
+    Blocks: 16, Dispatcher successors: 11
+  - sub_1035F10 @ 0x01035F10
+    Blocks: 10, Dispatcher successors: 8
+  - sub_1035FC0 @ 0x01035FC0
+    Blocks: 17, Dispatcher successors: 14
+  - sub_103C120 @ 0x0103C120
+    Blocks: 11, Dispatcher successors: 2
+  - sub_103C260 @ 0x0103C260
+    Blocks: 11, Dispatcher successors: 2
+  - sub_103D790 @ 0x0103D790
+    Blocks: 9, Dispatcher successors: 2
+  - sub_103D890 @ 0x0103D890
+    Blocks: 11, Dispatcher successors: 2
+  - sub_103D9D0 @ 0x0103D9D0
+    Blocks: 12, Dispatcher successors: 2
+
+======================================================================
+JSON EXPORT (for further processing):
+======================================================================
+[
+  {
+    "function": "sub_1010230",
+    "start_ea": "0x01010230",
+    "block_count": 23,
+    "dispatcher_ea": "0x01010244",
+    "case_count": 17,
+    "connection_ratio": 0.391304347826087
+  },
+  {
+    "function": "sub_10106D0",
+    "start_ea": "0x010106D0",
+    "block_count": 19,
+    "dispatcher_ea": "0x01010713",
+    "case_count": 11,
+    "connection_ratio": 0.3157894736842105
+  },
+  {
+    "function": "sub_101CDD0",
+    "start_ea": "0x0101CDD0",
+    "block_count": 18,
+    "dispatcher_ea": "0x0101CE10",
+    "case_count": 13,
+    "connection_ratio": 0.3888888888888889
+  },
+  {
+    "function": "sub_1025840",
+    "start_ea": "0x01025840",
+    "block_count": 8,
+    "dispatcher_ea": "0x010258FE",
+    "case_count": 4,
+    "connection_ratio": 0.3125
+  },
+  {
+    "function": "sub_102CBC0",
+    "start_ea": "0x0102CBC0",
+    "block_count": 30,
+    "dispatcher_ea": "0x0102CBF3",
+    "case_count": 24,
+    "connection_ratio": 0.4166666666666667
+  },
+  {
+    "function": "sub_102D7A0",
+    "start_ea": "0x0102D7A0",
+    "block_count": 25,
+    "dispatcher_ea": "0x0102D7DD",
+    "case_count": 19,
+    "connection_ratio": 0.4
+  },
+  {
+    "function": "sub_10300A0",
+    "start_ea": "0x010300A0",
+    "block_count": 16,
+    "dispatcher_ea": "0x010300D1",
+    "case_count": 11,
+    "connection_ratio": 0.375
+  },
+  {
+    "function": "sub_1035F10",
+    "start_ea": "0x01035F10",
+    "block_count": 10,
+    "dispatcher_ea": "0x01035F4D",
+    "case_count": 8,
+    "connection_ratio": 0.45
+  },
+  {
+    "function": "sub_1035FC0",
+    "start_ea": "0x01035FC0",
+    "block_count": 17,
+    "dispatcher_ea": "0x01035FFD",
+    "case_count": 14,
+    "connection_ratio": 0.4411764705882353
+  },
+  {
+    "function": "sub_103C120",
+    "start_ea": "0x0103C120",
+    "block_count": 11,
+    "dispatcher_ea": "0x0103C1F4",
+    "case_count": 2,
+    "connection_ratio": 0.3181818181818182
+  },
+  {
+    "function": "sub_103C260",
+    "start_ea": "0x0103C260",
+    "block_count": 11,
+    "dispatcher_ea": "0x0103C334",
+    "case_count": 2,
+    "connection_ratio": 0.3181818181818182
+  },
+  {
+    "function": "sub_103D790",
+    "start_ea": "0x0103D790",
+    "block_count": 9,
+    "dispatcher_ea": "0x0103D830",
+    "case_count": 2,
+    "connection_ratio": 0.2777777777777778
+  },
+  {
+    "function": "sub_103D890",
+    "start_ea": "0x0103D890",
+    "block_count": 11,
+    "dispatcher_ea": "0x0103D966",
+    "case_count": 2,
+    "connection_ratio": 0.3181818181818182
+  },
+  {
+    "function": "sub_103D9D0",
+    "start_ea": "0x0103D9D0",
+    "block_count": 12,
+    "dispatcher_ea": "0x0103DACC",
+    "case_count": 2,
+    "connection_ratio": 0.3333333333333333
+  }
+]

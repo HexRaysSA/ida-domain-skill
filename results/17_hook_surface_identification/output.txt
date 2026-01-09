@@ -1,0 +1,733 @@
+[94mInfo:[0m Executing wrapped file: /tmp/ida-domain-ex17.py...
+================================================================================
+HOOK SURFACE IDENTIFICATION REPORT
+Binary Analysis for Dynamic Instrumentation (Frida/DynamoRIO)
+================================================================================
+
+Module: input
+Architecture: metapc
+Bitness: 64-bit
+Base Address: 0x01000000
+
+--------------------------------------------------------------------------------
+PHASE 1: Collecting Entry Points and Exports
+--------------------------------------------------------------------------------
+  Entry/Export: start @ 0x0100DB90
+
+Total entries/exports: 1
+
+--------------------------------------------------------------------------------
+PHASE 2: Building Call Graph and Analyzing Functions
+--------------------------------------------------------------------------------
+Analyzing 273 functions...
+Analysis complete.
+
+--------------------------------------------------------------------------------
+PHASE 3: Categorizing Hook Candidates
+--------------------------------------------------------------------------------
+Found 125 hook candidates
+
+--------------------------------------------------------------------------------
+PHASE 4: Hook Candidates by Category
+--------------------------------------------------------------------------------
+
+### EXPORT: Exported functions - stable, easy to hook by name
+
+  Function: start
+    EA: 0x0100DB90
+    Size: 16 bytes
+    Callers: 0, Callees: 1
+    Priority Score: 80
+    Why hook: Export/Entry point - stable hook by name; Entry point - no callers, good for early hooks
+    Suggested: Hook early - capture initialization flow; Log startup parameters
+
+
+### ENTRY_POINT: Entry points - program start, good for early hooks
+
+  Function: sub_1035900
+    EA: 0x01035900
+    Size: 928 bytes
+    Callers: 0, Callees: 11
+    Priority Score: 85
+    Why hook: High fan-out (11 callees) - dispatcher candidate; Entry point - no callers, good for early hooks
+    Suggested: Hook early - capture initialization flow; Log startup parameters
+
+  Function: start
+    EA: 0x0100DB90
+    Size: 16 bytes
+    Callers: 0, Callees: 1
+    Priority Score: 80
+    Why hook: Export/Entry point - stable hook by name; Entry point - no callers, good for early hooks
+    Suggested: Hook early - capture initialization flow; Log startup parameters
+
+  Function: sub_103B4B0
+    EA: 0x0103B4B0
+    Size: 752 bytes
+    Callers: 0, Callees: 7
+    Priority Score: 55
+    Why hook: Entry point - no callers, good for early hooks
+    Suggested: Hook early - capture initialization flow; Log startup parameters
+
+  Function: sub_103B7A0
+    EA: 0x0103B7A0
+    Size: 944 bytes
+    Callers: 0, Callees: 9
+    Priority Score: 55
+    Why hook: Entry point - no callers, good for early hooks
+    Suggested: Hook early - capture initialization flow; Log startup parameters
+
+  Function: sub_1010080
+    EA: 0x01010080
+    Size: 448 bytes
+    Callers: 0, Callees: 7
+    Priority Score: 50
+    Why hook: Entry point - no callers, good for early hooks
+    Suggested: Hook early - capture initialization flow; Log startup parameters
+
+  Function: sub_10216C0
+    EA: 0x010216C0
+    Size: 496 bytes
+    Callers: 0, Callees: 6
+    Priority Score: 50
+    Why hook: Entry point - no callers, good for early hooks
+    Suggested: Hook early - capture initialization flow; Log startup parameters
+
+  Function: sub_102D120
+    EA: 0x0102D120
+    Size: 384 bytes
+    Callers: 0, Callees: 5
+    Priority Score: 50
+    Why hook: Entry point - no callers, good for early hooks
+    Suggested: Hook early - capture initialization flow; Log startup parameters
+
+  Function: sub_10355F0
+    EA: 0x010355F0
+    Size: 448 bytes
+    Callers: 0, Callees: 5
+    Priority Score: 50
+    Why hook: Entry point - no callers, good for early hooks
+    Suggested: Hook early - capture initialization flow; Log startup parameters
+
+  Function: sub_1036660
+    EA: 0x01036660
+    Size: 272 bytes
+    Callers: 0, Callees: 6
+    Priority Score: 50
+    Why hook: Entry point - no callers, good for early hooks
+    Suggested: Hook early - capture initialization flow; Log startup parameters
+
+  Function: sub_100EF70
+    EA: 0x0100EF70
+    Size: 608 bytes
+    Callers: 0, Callees: 4
+    Priority Score: 45
+    Why hook: Entry point - no callers, good for early hooks
+    Suggested: Hook early - capture initialization flow; Log startup parameters
+
+
+### HIGH_FANOUT: High fan-out - calls many functions, likely dispatcher/coordinator
+
+  Function: sub_1035900
+    EA: 0x01035900
+    Size: 928 bytes
+    Callers: 0, Callees: 11
+    Priority Score: 85
+    Why hook: High fan-out (11 callees) - dispatcher candidate; Entry point - no callers, good for early hooks
+    Suggested: Hook early - capture initialization flow; Log startup parameters
+
+  Function: sub_103C140
+    EA: 0x0103C140
+    Size: 4176 bytes
+    Callers: 18, Callees: 22
+    Priority Score: 85
+    Why hook: High fan-out (22 callees) - dispatcher candidate; High fan-in (18 callers) - central utility; Large function (4176 bytes) - complex logic
+    Suggested: Central dispatcher - log dispatch targets; Filter/redirect specific operations
+
+  Function: sub_102F620
+    EA: 0x0102F620
+    Size: 976 bytes
+    Callers: 8, Callees: 12
+    Priority Score: 80
+    Why hook: High fan-out (12 callees) - dispatcher candidate; High fan-in (8 callers) - central utility
+    Suggested: Central dispatcher - log dispatch targets; Filter/redirect specific operations
+
+  Function: sub_1010B60
+    EA: 0x01010B60
+    Size: 22560 bytes
+    Callers: 2, Callees: 40
+    Priority Score: 70
+    Why hook: High fan-out (40 callees) - dispatcher candidate; Large function (22560 bytes) - complex logic
+    Suggested: Central dispatcher - log dispatch targets; Filter/redirect specific operations
+
+  Function: sub_10179A0
+    EA: 0x010179A0
+    Size: 12496 bytes
+    Callers: 2, Callees: 21
+    Priority Score: 70
+    Why hook: High fan-out (21 callees) - dispatcher candidate; Large function (12496 bytes) - complex logic
+    Suggested: Central dispatcher - log dispatch targets; Filter/redirect specific operations
+
+  Function: sub_101CBC0
+    EA: 0x0101CBC0
+    Size: 10114 bytes
+    Callers: 1, Callees: 14
+    Priority Score: 70
+    Why hook: High fan-out (14 callees) - dispatcher candidate; Large function (10114 bytes) - complex logic
+    Suggested: Central dispatcher - log dispatch targets; Filter/redirect specific operations
+
+  Function: sub_101F430
+    EA: 0x0101F430
+    Size: 7935 bytes
+    Callers: 2, Callees: 38
+    Priority Score: 70
+    Why hook: High fan-out (38 callees) - dispatcher candidate; Large function (7935 bytes) - complex logic
+    Suggested: Central dispatcher - log dispatch targets; Filter/redirect specific operations
+
+  Function: sub_1022210
+    EA: 0x01022210
+    Size: 11360 bytes
+    Callers: 2, Callees: 43
+    Priority Score: 70
+    Why hook: High fan-out (43 callees) - dispatcher candidate; Large function (11360 bytes) - complex logic
+    Suggested: Central dispatcher - log dispatch targets; Filter/redirect specific operations
+
+  Function: sub_1028F50
+    EA: 0x01028F50
+    Size: 9376 bytes
+    Callers: 1, Callees: 10
+    Priority Score: 70
+    Why hook: High fan-out (10 callees) - dispatcher candidate; Large function (9376 bytes) - complex logic
+    Suggested: Central dispatcher - log dispatch targets; Filter/redirect specific operations
+
+  Function: sub_102D6C0
+    EA: 0x0102D6C0
+    Size: 8032 bytes
+    Callers: 2, Callees: 23
+    Priority Score: 70
+    Why hook: High fan-out (23 callees) - dispatcher candidate; Large function (8032 bytes) - complex logic
+    Suggested: Central dispatcher - log dispatch targets; Filter/redirect specific operations
+
+
+### HIGH_FANIN: High fan-in - called by many, central utility/wrapper
+
+  Function: sub_103C140
+    EA: 0x0103C140
+    Size: 4176 bytes
+    Callers: 18, Callees: 22
+    Priority Score: 85
+    Why hook: High fan-out (22 callees) - dispatcher candidate; High fan-in (18 callers) - central utility; Large function (4176 bytes) - complex logic
+    Suggested: Central dispatcher - log dispatch targets; Filter/redirect specific operations
+
+  Function: sub_102F620
+    EA: 0x0102F620
+    Size: 976 bytes
+    Callers: 8, Callees: 12
+    Priority Score: 80
+    Why hook: High fan-out (12 callees) - dispatcher candidate; High fan-in (8 callers) - central utility
+    Suggested: Central dispatcher - log dispatch targets; Filter/redirect specific operations
+
+  Function: sub_10254B0
+    EA: 0x010254B0
+    Size: 496 bytes
+    Callers: 6, Callees: 1
+    Priority Score: 60
+    Why hook: High fan-in (6 callers) - central utility; Thin wrapper - single callee with multiple callers
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+  Function: sub_10353C0
+    EA: 0x010353C0
+    Size: 160 bytes
+    Callers: 12, Callees: 1
+    Priority Score: 60
+    Why hook: High fan-in (12 callers) - central utility; Thin wrapper - single callee with multiple callers
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+  Function: sub_103BDF0
+    EA: 0x0103BDF0
+    Size: 48 bytes
+    Callers: 24, Callees: 1
+    Priority Score: 60
+    Why hook: High fan-in (24 callers) - central utility; Thin wrapper - single callee with multiple callers
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+  Function: sub_103BE20
+    EA: 0x0103BE20
+    Size: 48 bytes
+    Callers: 106, Callees: 1
+    Priority Score: 60
+    Why hook: High fan-in (106 callers) - central utility; Thin wrapper - single callee with multiple callers
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+  Function: sub_103BE60
+    EA: 0x0103BE60
+    Size: 48 bytes
+    Callers: 143, Callees: 1
+    Priority Score: 60
+    Why hook: High fan-in (143 callers) - central utility; Thin wrapper - single callee with multiple callers
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+  Function: sub_103D190
+    EA: 0x0103D190
+    Size: 48 bytes
+    Callers: 59, Callees: 1
+    Priority Score: 60
+    Why hook: High fan-in (59 callers) - central utility; Thin wrapper - single callee with multiple callers
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+  Function: sub_103D1C0
+    EA: 0x0103D1C0
+    Size: 48 bytes
+    Callers: 93, Callees: 1
+    Priority Score: 60
+    Why hook: High fan-in (93 callers) - central utility; Thin wrapper - single callee with multiple callers
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+  Function: sub_103D1F0
+    EA: 0x0103D1F0
+    Size: 48 bytes
+    Callers: 43, Callees: 1
+    Priority Score: 60
+    Why hook: High fan-in (43 callers) - central utility; Thin wrapper - single callee with multiple callers
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+
+### STRING_RICH: String-rich - references many strings, likely logging/error handling
+
+  Function: sub_103D610
+    EA: 0x0103D610
+    Size: 304 bytes
+    Callers: 1, Callees: 6
+    Priority Score: 35
+    Why hook: References 3 strings - logging/messages
+    Suggested: Logging/error handling - capture messages; Identify error conditions
+
+  Function: sub_103DB30
+    EA: 0x0103DB30
+    Size: 320 bytes
+    Callers: 1, Callees: 3
+    Priority Score: 30
+    Why hook: References 9 strings - logging/messages
+    Suggested: Logging/error handling - capture messages; Identify error conditions
+
+  Function: sub_1034EA0
+    EA: 0x01034EA0
+    Size: 134 bytes
+    Callers: 1, Callees: 0
+    Priority Score: 20
+    Why hook: References 9 strings - logging/messages
+    Suggested: Logging/error handling - capture messages; Identify error conditions
+
+
+### LARGE_FUNCTION: Large function - complex logic, potential high-value target
+
+  Function: sub_103C140
+    EA: 0x0103C140
+    Size: 4176 bytes
+    Callers: 18, Callees: 22
+    Priority Score: 85
+    Why hook: High fan-out (22 callees) - dispatcher candidate; High fan-in (18 callers) - central utility; Large function (4176 bytes) - complex logic
+    Suggested: Central dispatcher - log dispatch targets; Filter/redirect specific operations
+
+  Function: sub_1010B60
+    EA: 0x01010B60
+    Size: 22560 bytes
+    Callers: 2, Callees: 40
+    Priority Score: 70
+    Why hook: High fan-out (40 callees) - dispatcher candidate; Large function (22560 bytes) - complex logic
+    Suggested: Central dispatcher - log dispatch targets; Filter/redirect specific operations
+
+  Function: sub_10179A0
+    EA: 0x010179A0
+    Size: 12496 bytes
+    Callers: 2, Callees: 21
+    Priority Score: 70
+    Why hook: High fan-out (21 callees) - dispatcher candidate; Large function (12496 bytes) - complex logic
+    Suggested: Central dispatcher - log dispatch targets; Filter/redirect specific operations
+
+  Function: sub_101CBC0
+    EA: 0x0101CBC0
+    Size: 10114 bytes
+    Callers: 1, Callees: 14
+    Priority Score: 70
+    Why hook: High fan-out (14 callees) - dispatcher candidate; Large function (10114 bytes) - complex logic
+    Suggested: Central dispatcher - log dispatch targets; Filter/redirect specific operations
+
+  Function: sub_101F430
+    EA: 0x0101F430
+    Size: 7935 bytes
+    Callers: 2, Callees: 38
+    Priority Score: 70
+    Why hook: High fan-out (38 callees) - dispatcher candidate; Large function (7935 bytes) - complex logic
+    Suggested: Central dispatcher - log dispatch targets; Filter/redirect specific operations
+
+  Function: sub_1022210
+    EA: 0x01022210
+    Size: 11360 bytes
+    Callers: 2, Callees: 43
+    Priority Score: 70
+    Why hook: High fan-out (43 callees) - dispatcher candidate; Large function (11360 bytes) - complex logic
+    Suggested: Central dispatcher - log dispatch targets; Filter/redirect specific operations
+
+  Function: sub_1028F50
+    EA: 0x01028F50
+    Size: 9376 bytes
+    Callers: 1, Callees: 10
+    Priority Score: 70
+    Why hook: High fan-out (10 callees) - dispatcher candidate; Large function (9376 bytes) - complex logic
+    Suggested: Central dispatcher - log dispatch targets; Filter/redirect specific operations
+
+  Function: sub_102D6C0
+    EA: 0x0102D6C0
+    Size: 8032 bytes
+    Callers: 2, Callees: 23
+    Priority Score: 70
+    Why hook: High fan-out (23 callees) - dispatcher candidate; Large function (8032 bytes) - complex logic
+    Suggested: Central dispatcher - log dispatch targets; Filter/redirect specific operations
+
+  Function: sub_1030120
+    EA: 0x01030120
+    Size: 6496 bytes
+    Callers: 1, Callees: 18
+    Priority Score: 70
+    Why hook: High fan-out (18 callees) - dispatcher candidate; Large function (6496 bytes) - complex logic
+    Suggested: Central dispatcher - log dispatch targets; Filter/redirect specific operations
+
+  Function: sub_1036880
+    EA: 0x01036880
+    Size: 12288 bytes
+    Callers: 2, Callees: 25
+    Priority Score: 70
+    Why hook: High fan-out (25 callees) - dispatcher candidate; Large function (12288 bytes) - complex logic
+    Suggested: Central dispatcher - log dispatch targets; Filter/redirect specific operations
+
+
+### BOUNDARY: Boundary function - interface between subsystems
+
+  Function: sub_101B990
+    EA: 0x0101B990
+    Size: 2272 bytes
+    Callers: 3, Callees: 5
+    Priority Score: 45
+    Why hook: Large function (2272 bytes) - complex logic; Boundary function - interface between subsystems
+    Suggested: Subsystem boundary - trace data between modules; Complex logic - multiple hook points within
+
+  Function: sub_1026D00
+    EA: 0x01026D00
+    Size: 832 bytes
+    Callers: 9, Callees: 3
+    Priority Score: 40
+    Why hook: High fan-in (9 callers) - central utility; Boundary function - interface between subsystems
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+  Function: sub_101CAD0
+    EA: 0x0101CAD0
+    Size: 240 bytes
+    Callers: 13, Callees: 4
+    Priority Score: 35
+    Why hook: High fan-in (13 callers) - central utility; Boundary function - interface between subsystems
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+  Function: sub_102D2A0
+    EA: 0x0102D2A0
+    Size: 464 bytes
+    Callers: 3, Callees: 5
+    Priority Score: 35
+    Why hook: Boundary function - interface between subsystems
+    Suggested: Subsystem boundary - trace data between modules
+
+  Function: sub_102D470
+    EA: 0x0102D470
+    Size: 240 bytes
+    Callers: 8, Callees: 4
+    Priority Score: 35
+    Why hook: High fan-in (8 callers) - central utility; Boundary function - interface between subsystems
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+  Function: sub_102F9F0
+    EA: 0x0102F9F0
+    Size: 432 bytes
+    Callers: 7, Callees: 3
+    Priority Score: 35
+    Why hook: High fan-in (7 callers) - central utility; Boundary function - interface between subsystems
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+  Function: sub_10365C0
+    EA: 0x010365C0
+    Size: 160 bytes
+    Callers: 3, Callees: 5
+    Priority Score: 35
+    Why hook: Boundary function - interface between subsystems
+    Suggested: Subsystem boundary - trace data between modules
+
+  Function: sub_1039880
+    EA: 0x01039880
+    Size: 368 bytes
+    Callers: 7, Callees: 4
+    Priority Score: 35
+    Why hook: High fan-in (7 callers) - central utility; Boundary function - interface between subsystems
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+  Function: sub_103D310
+    EA: 0x0103D310
+    Size: 224 bytes
+    Callers: 3, Callees: 5
+    Priority Score: 35
+    Why hook: Boundary function - interface between subsystems
+    Suggested: Subsystem boundary - trace data between modules
+
+  Function: sub_1017620
+    EA: 0x01017620
+    Size: 896 bytes
+    Callers: 2, Callees: 5
+    Priority Score: 30
+    Why hook: Boundary function - interface between subsystems
+    Suggested: Subsystem boundary - trace data between modules
+
+
+### WRAPPER: Thin wrapper - wraps single callee, good for API interception
+
+  Function: sub_10254B0
+    EA: 0x010254B0
+    Size: 496 bytes
+    Callers: 6, Callees: 1
+    Priority Score: 60
+    Why hook: High fan-in (6 callers) - central utility; Thin wrapper - single callee with multiple callers
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+  Function: sub_10353C0
+    EA: 0x010353C0
+    Size: 160 bytes
+    Callers: 12, Callees: 1
+    Priority Score: 60
+    Why hook: High fan-in (12 callers) - central utility; Thin wrapper - single callee with multiple callers
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+  Function: sub_103BDF0
+    EA: 0x0103BDF0
+    Size: 48 bytes
+    Callers: 24, Callees: 1
+    Priority Score: 60
+    Why hook: High fan-in (24 callers) - central utility; Thin wrapper - single callee with multiple callers
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+  Function: sub_103BE20
+    EA: 0x0103BE20
+    Size: 48 bytes
+    Callers: 106, Callees: 1
+    Priority Score: 60
+    Why hook: High fan-in (106 callers) - central utility; Thin wrapper - single callee with multiple callers
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+  Function: sub_103BE60
+    EA: 0x0103BE60
+    Size: 48 bytes
+    Callers: 143, Callees: 1
+    Priority Score: 60
+    Why hook: High fan-in (143 callers) - central utility; Thin wrapper - single callee with multiple callers
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+  Function: sub_103D190
+    EA: 0x0103D190
+    Size: 48 bytes
+    Callers: 59, Callees: 1
+    Priority Score: 60
+    Why hook: High fan-in (59 callers) - central utility; Thin wrapper - single callee with multiple callers
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+  Function: sub_103D1C0
+    EA: 0x0103D1C0
+    Size: 48 bytes
+    Callers: 93, Callees: 1
+    Priority Score: 60
+    Why hook: High fan-in (93 callers) - central utility; Thin wrapper - single callee with multiple callers
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+  Function: sub_103D1F0
+    EA: 0x0103D1F0
+    Size: 48 bytes
+    Callers: 43, Callees: 1
+    Priority Score: 60
+    Why hook: High fan-in (43 callers) - central utility; Thin wrapper - single callee with multiple callers
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+  Function: sub_103D220
+    EA: 0x0103D220
+    Size: 48 bytes
+    Callers: 8, Callees: 1
+    Priority Score: 60
+    Why hook: High fan-in (8 callers) - central utility; Thin wrapper - single callee with multiple callers
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+  Function: sub_103D250
+    EA: 0x0103D250
+    Size: 48 bytes
+    Callers: 12, Callees: 1
+    Priority Score: 60
+    Why hook: High fan-in (12 callers) - central utility; Thin wrapper - single callee with multiple callers
+    Suggested: Widely used utility - log all calls; Monitor data flow through this point
+
+--------------------------------------------------------------------------------
+PHASE 5: Priority Ranking (Top 25 Hook Points)
+--------------------------------------------------------------------------------
+
+Rank  Priority  Function                Size      In/Out      Categories
+--------------------------------------------------------------------------------
+1     85        sub_1035900             928       0/11        ENTRY_POINT, HIGH_FANOUT
+2     85        sub_103C140             4176      18/22       HIGH_FANOUT, HIGH_FANIN
+3     80        start                   16        0/1         EXPORT, ENTRY_POINT
+4     80        sub_102F620             976       8/12        HIGH_FANOUT, HIGH_FANIN
+5     70        sub_1010B60             22560     2/40        HIGH_FANOUT, LARGE_FUNCTION
+6     70        sub_10179A0             12496     2/21        HIGH_FANOUT, LARGE_FUNCTION
+7     70        sub_101CBC0             10114     1/14        HIGH_FANOUT, LARGE_FUNCTION
+8     70        sub_101F430             7935      2/38        HIGH_FANOUT, LARGE_FUNCTION
+9     70        sub_1022210             11360     2/43        HIGH_FANOUT, LARGE_FUNCTION
+10    70        sub_1028F50             9376      1/10        HIGH_FANOUT, LARGE_FUNCTION
+11    70        sub_102D6C0             8032      2/23        HIGH_FANOUT, LARGE_FUNCTION
+12    70        sub_1030120             6496      1/18        HIGH_FANOUT, LARGE_FUNCTION
+13    70        sub_1036880             12288     2/25        HIGH_FANOUT, LARGE_FUNCTION
+14    65        sub_101AA70             2768      2/26        HIGH_FANOUT, LARGE_FUNCTION
+15    65        sub_10218F0             2105      1/19        HIGH_FANOUT, LARGE_FUNCTION
+16    65        sub_10271B0             2352      1/18        HIGH_FANOUT, LARGE_FUNCTION
+17    60        sub_10254B0             496       6/1         HIGH_FANIN, WRAPPER
+18    60        sub_1025E30             736       1/10        HIGH_FANOUT
+19    60        sub_1026490             768       1/13        HIGH_FANOUT
+20    60        sub_10353C0             160       12/1        HIGH_FANIN, WRAPPER
+21    60        sub_103BDF0             48        24/1        HIGH_FANIN, WRAPPER
+22    60        sub_103BE20             48        106/1       HIGH_FANIN, WRAPPER
+23    60        sub_103BE60             48        143/1       HIGH_FANIN, WRAPPER
+24    60        sub_103D190             48        59/1        HIGH_FANIN, WRAPPER
+25    60        sub_103D1C0             48        93/1        HIGH_FANIN, WRAPPER
+
+--------------------------------------------------------------------------------
+PHASE 6: Frida Snippet Templates
+--------------------------------------------------------------------------------
+
+// Hook for sub_1035900 (Priority: 85)
+// Categories: ENTRY_POINT, HIGH_FANOUT
+
+    var base = Module.findBaseAddress("input");
+    var funcAddr = base.add(0x35900);
+
+    Interceptor.attach(funcAddr, {
+        onEnter: function(args) {
+            console.log("[sub_1035900] Called from: " + this.returnAddress);
+            console.log("  arg0: " + args[0]);
+            console.log("  arg1: " + args[1]);
+            console.log("  arg2: " + args[2]);
+        },
+        onLeave: function(retval) {
+            console.log("[sub_1035900] Returned: " + retval);
+        }
+    });
+    
+// Hook for dispatcher sub_1035900 (calls 11 functions)
+
+    var base = Module.findBaseAddress("input");
+    var dispatchAddr = base.add(0x35900);
+
+    Interceptor.attach(dispatchAddr, {
+        onEnter: function(args) {
+            console.log("[DISPATCH] sub_1035900");
+            console.log("  Possible command/opcode: " + args[0]);
+            console.log("  Possible arg1: " + args[1]);
+            console.log("  Possible arg2: " + args[2]);
+        },
+        onLeave: function(retval) {
+            console.log("[DISPATCH] Result: " + retval);
+        }
+    });
+    
+// Hook for wrapper sub_10254B0 (thin wrapper with 6 callers)
+
+    var base = Module.findBaseAddress("input");
+    var wrapperAddr = base.add(0x254B0);
+
+    Interceptor.attach(wrapperAddr, {
+        onEnter: function(args) {
+            console.log("[WRAPPER] sub_10254B0 - intercept at API boundary");
+            // Dump buffer if it looks like data
+            if (args[1].toInt32() > 0 && args[1].toInt32() < 0x10000) {
+                try {
+                    console.log("  Data: " + hexdump(args[0], { length: Math.min(args[1].toInt32(), 64) }));
+                } catch(e) {}
+            }
+        },
+        onLeave: function(retval) {
+            console.log("[WRAPPER] Result: " + retval);
+        }
+    });
+    
+--------------------------------------------------------------------------------
+SUMMARY
+--------------------------------------------------------------------------------
+
+Binary: input
+Architecture: metapc 64-bit
+Base Address: 0x01000000
+Total functions analyzed: 273
+Total hook candidates: 125
+
+Candidates by category:
+  BOUNDARY: 44
+  ENTRY_POINT: 29
+  HIGH_FANIN: 28
+  WRAPPER: 27
+  HIGH_FANOUT: 17
+  LARGE_FUNCTION: 17
+  STRING_RICH: 3
+  EXPORT: 1
+
+Top 10 highest priority hooks:
+  1. sub_1035900 (base+0x35900) - Priority: 85
+  2. sub_103C140 (base+0x3C140) - Priority: 85
+  3. start (base+0xDB90) - Priority: 80
+  4. sub_102F620 (base+0x2F620) - Priority: 80
+  5. sub_1010B60 (base+0x10B60) - Priority: 70
+  6. sub_10179A0 (base+0x179A0) - Priority: 70
+  7. sub_101CBC0 (base+0x1CBC0) - Priority: 70
+  8. sub_101F430 (base+0x1F430) - Priority: 70
+  9. sub_1022210 (base+0x22210) - Priority: 70
+  10. sub_1028F50 (base+0x28F50) - Priority: 70
+
+--------------------------------------------------------------------------------
+HOOK SURFACE ANALYSIS RECOMMENDATIONS
+--------------------------------------------------------------------------------
+
+For dynamic instrumentation of this binary:
+
+1. PRIMARY TARGETS (High Priority):
+   - sub_1035900 @ base+0x35900
+     Categories: ENTRY_POINT, HIGH_FANOUT
+     Reason: High fan-out (11 callees) - dispatcher candidate
+
+   - sub_103C140 @ base+0x3C140
+     Categories: HIGH_FANOUT, HIGH_FANIN, LARGE_FUNCTION
+     Reason: High fan-out (22 callees) - dispatcher candidate
+
+   - start @ base+0xDB90
+     Categories: EXPORT, ENTRY_POINT
+     Reason: Export/Entry point - stable hook by name
+
+   - sub_102F620 @ base+0x2F620
+     Categories: HIGH_FANOUT, HIGH_FANIN
+     Reason: High fan-out (12 callees) - dispatcher candidate
+
+   - sub_1010B60 @ base+0x10B60
+     Categories: HIGH_FANOUT, LARGE_FUNCTION
+     Reason: High fan-out (40 callees) - dispatcher candidate
+
+2. DISPATCHER FUNCTIONS (Command/Message Routing):
+   - sub_1035900 @ base+0x35900 (calls 11 functions)
+   - sub_103C140 @ base+0x3C140 (calls 22 functions)
+   - sub_102F620 @ base+0x2F620 (calls 12 functions)
+
+3. WRAPPER/BOUNDARY FUNCTIONS (API Interception):
+   - sub_10254B0 @ base+0x254B0 (6 callers)
+   - sub_10353C0 @ base+0x353C0 (12 callers)
+   - sub_103BDF0 @ base+0x3BDF0 (24 callers)
+   - sub_103BE20 @ base+0x3BE20 (106 callers)
+   - sub_103BE60 @ base+0x3BE60 (143 callers)
+
+================================================================================
+Analysis complete. Hook surface report generated.
+================================================================================

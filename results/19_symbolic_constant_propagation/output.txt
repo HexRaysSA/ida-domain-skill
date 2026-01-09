@@ -1,0 +1,673 @@
+[94mInfo:[0m Executing wrapped file: /tmp/ida-domain-ex19.py...
+======================================================================
+Exercise 19: Lightweight Symbolic Constant Propagation
+======================================================================
+
+Architecture: ARM
+Binary: symbolic_constants_debug
+
+Analyzing 32 target functions...
+
+Function: _debug.SelfInfo.lookupModuleDyld (0x10000c280)
+--------------------------------------------------
+  [0x10000c2a8] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10000c2ac] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x10000c2fc] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10000c300] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x10000c6e8] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10000c6ec] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x10000c9cc] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10000c9d0] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x10000caec] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10000caf0] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x10000cb48] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10000cb4c] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x10000cbac] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10000cbb0] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x10000cc80] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10000cc84] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x10000ccc8] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10000cccc] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+
+Function: _debug.resetSegfaultHandler (0x100018f9c)
+--------------------------------------------------
+  [0x100018fac] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x100018fb0] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x100018fc8] address_computation
+    Expression: ADRP            X9, #qword_1000C60A0@PAGE
+    Resolved value: 0x1000c6000 (data pointer)
+  [0x100018fcc] table_lookup
+    Expression: LDR             X9, [X9,#qword_1000C60A0@PAGEOFF]
+    Resolved value: 0x0 (from table at 0x1000c60a0)
+  [0x100018ff0] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x100018ff4] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+
+Function: _debug.SelfInfo.lookupModuleNameDyld (0x100027514)
+--------------------------------------------------
+  [0x10002752c] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x100027530] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x10002755c] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x100027560] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x100027904] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x100027908] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+
+Function: _fmt.float.Backend128_Tables.computeInvPow5 (0x100090e24)
+--------------------------------------------------
+  [0x100090e3c] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x100090e40] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x100090f9c] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x100090fa0] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x1000911a0] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x1000911a4] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+
+Function: _fmt.float.Backend128_Tables.computePow5 (0x10009139c)
+--------------------------------------------------
+  [0x1000913b4] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x1000913b8] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x100091484] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x100091488] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x100091688] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10009168c] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+
+Function: _debug.attachSegfaultHandler (0x100099978)
+--------------------------------------------------
+  [0x100099988] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10009998c] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x1000999a4] address_computation
+    Expression: ADRP            X9, #off_1000EDB48@PAGE
+    Resolved value: 0x1000ed000 (data pointer)
+  [0x1000999a8] table_lookup
+    Expression: LDR             X9, [X9,#off_1000EDB48@PAGEOFF]; _debug.handleSegfaultPosix
+    Resolved value: 0x10009a068 (from table at 0x1000edb48)
+  [0x1000999d0] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x1000999d4] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+
+Function: _symbolic_constants.computedJumpDispatch (0x100099a14)
+--------------------------------------------------
+  [0x100099a28] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x100099a2c] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x100099a64] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x100099a68] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+
+Function: _test_jump_dispatch (0x10009b038)
+--------------------------------------------------
+  [0x10009b04c] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10009b050] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x10009b084] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10009b088] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+
+Function: _test_call_dispatch (0x10009b0b4)
+--------------------------------------------------
+  [0x10009b0c8] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10009b0cc] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x10009b100] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10009b104] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+
+Function: _test_lea_compute (0x10009b1ac)
+--------------------------------------------------
+  [0x10009b1c8] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10009b1cc] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x10009b204] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10009b208] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+
+Function: _test_switch (0x10009b234)
+--------------------------------------------------
+  [0x10009b248] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10009b24c] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x10009b280] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10009b284] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+
+Function: _test_computed_ptr (0x10009b32c)
+--------------------------------------------------
+  [0x10009b348] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10009b34c] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x10009b384] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10009b388] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+
+Function: _test_xor_decrypt (0x10009b3b4)
+--------------------------------------------------
+  [0x10009b3c4] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10009b3c8] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x10009b3f8] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10009b3fc] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+
+Function: _test_add_deobfuscate (0x10009b428)
+--------------------------------------------------
+  [0x10009b438] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10009b43c] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+  [0x10009b46c] address_computation
+    Expression: ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    Resolved value: 0x1000e8000 (data pointer)
+  [0x10009b470] table_lookup
+    Expression: LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    Resolved value: 0x1000f0c50 (from table at 0x1000e8010)
+
+======================================================================
+RESOLUTION SUMMARY
+======================================================================
+
+Functions analyzed: 32
+Total resolutions: 80
+
+Resolutions by type:
+  address_computation: 40
+  table_lookup: 40
+
+======================================================================
+DETAILED RESOLUTION REPORT
+======================================================================
+
+
+TABLE LOOKUP (40 found)
+--------------------------------------------------
+  0x10000c2ac in _debug.SelfInfo.lookupModuleDyld
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10000c300 in _debug.SelfInfo.lookupModuleDyld
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10000c6ec in _debug.SelfInfo.lookupModuleDyld
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10000c9d0 in _debug.SelfInfo.lookupModuleDyld
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10000caf0 in _debug.SelfInfo.lookupModuleDyld
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10000cb4c in _debug.SelfInfo.lookupModuleDyld
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10000cbb0 in _debug.SelfInfo.lookupModuleDyld
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10000cc84 in _debug.SelfInfo.lookupModuleDyld
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10000cccc in _debug.SelfInfo.lookupModuleDyld
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x100018fb0 in _debug.resetSegfaultHandler
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x100018fcc in _debug.resetSegfaultHandler
+    LDR             X9, [X9,#qword_1000C60A0@PAGEOFF]
+    -> 0x0
+    table_address: 0x1000c60a0
+    element_size: 0x8
+  0x100018ff4 in _debug.resetSegfaultHandler
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x100027530 in _debug.SelfInfo.lookupModuleNameDyld
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x100027560 in _debug.SelfInfo.lookupModuleNameDyld
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x100027908 in _debug.SelfInfo.lookupModuleNameDyld
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x100090e40 in _fmt.float.Backend128_Tables.computeInvPow5
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x100090fa0 in _fmt.float.Backend128_Tables.computeInvPow5
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x1000911a4 in _fmt.float.Backend128_Tables.computeInvPow5
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x1000913b8 in _fmt.float.Backend128_Tables.computePow5
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x100091488 in _fmt.float.Backend128_Tables.computePow5
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10009168c in _fmt.float.Backend128_Tables.computePow5
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10009998c in _debug.attachSegfaultHandler
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x1000999a8 in _debug.attachSegfaultHandler
+    LDR             X9, [X9,#off_1000EDB48@PAGEOFF]; _debug.handleSegfaultPosix
+    -> 0x10009a068
+    table_address: 0x1000edb48
+    element_size: 0x8
+  0x1000999d4 in _debug.attachSegfaultHandler
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x100099a2c in _symbolic_constants.computedJumpDispatch
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x100099a68 in _symbolic_constants.computedJumpDispatch
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10009b050 in _test_jump_dispatch
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10009b088 in _test_jump_dispatch
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10009b0cc in _test_call_dispatch
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10009b104 in _test_call_dispatch
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10009b1cc in _test_lea_compute
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10009b208 in _test_lea_compute
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10009b24c in _test_switch
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10009b284 in _test_switch
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10009b34c in _test_computed_ptr
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10009b388 in _test_computed_ptr
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10009b3c8 in _test_xor_decrypt
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10009b3fc in _test_xor_decrypt
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10009b43c in _test_add_deobfuscate
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+  0x10009b470 in _test_add_deobfuscate
+    LDR             X8, [X8,#___stack_chk_guard_ptr@PAGEOFF]; ___stack_chk_guard
+    -> 0x1000f0c50
+    table_address: 0x1000e8010
+    element_size: 0x8
+
+ADDRESS COMPUTATION (40 found)
+--------------------------------------------------
+  0x10000c2a8 in _debug.SelfInfo.lookupModuleDyld
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10000c2fc in _debug.SelfInfo.lookupModuleDyld
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10000c6e8 in _debug.SelfInfo.lookupModuleDyld
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10000c9cc in _debug.SelfInfo.lookupModuleDyld
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10000caec in _debug.SelfInfo.lookupModuleDyld
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10000cb48 in _debug.SelfInfo.lookupModuleDyld
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10000cbac in _debug.SelfInfo.lookupModuleDyld
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10000cc80 in _debug.SelfInfo.lookupModuleDyld
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10000ccc8 in _debug.SelfInfo.lookupModuleDyld
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x100018fac in _debug.resetSegfaultHandler
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x100018fc8 in _debug.resetSegfaultHandler
+    ADRP            X9, #qword_1000C60A0@PAGE
+    -> 0x1000c6000
+    is_data_ptr: 0x1
+  0x100018ff0 in _debug.resetSegfaultHandler
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10002752c in _debug.SelfInfo.lookupModuleNameDyld
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10002755c in _debug.SelfInfo.lookupModuleNameDyld
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x100027904 in _debug.SelfInfo.lookupModuleNameDyld
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x100090e3c in _fmt.float.Backend128_Tables.computeInvPow5
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x100090f9c in _fmt.float.Backend128_Tables.computeInvPow5
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x1000911a0 in _fmt.float.Backend128_Tables.computeInvPow5
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x1000913b4 in _fmt.float.Backend128_Tables.computePow5
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x100091484 in _fmt.float.Backend128_Tables.computePow5
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x100091688 in _fmt.float.Backend128_Tables.computePow5
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x100099988 in _debug.attachSegfaultHandler
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x1000999a4 in _debug.attachSegfaultHandler
+    ADRP            X9, #off_1000EDB48@PAGE
+    -> 0x1000ed000
+    is_data_ptr: 0x1
+  0x1000999d0 in _debug.attachSegfaultHandler
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x100099a28 in _symbolic_constants.computedJumpDispatch
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x100099a64 in _symbolic_constants.computedJumpDispatch
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10009b04c in _test_jump_dispatch
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10009b084 in _test_jump_dispatch
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10009b0c8 in _test_call_dispatch
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10009b100 in _test_call_dispatch
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10009b1c8 in _test_lea_compute
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10009b204 in _test_lea_compute
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10009b248 in _test_switch
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10009b280 in _test_switch
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10009b348 in _test_computed_ptr
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10009b384 in _test_computed_ptr
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10009b3c4 in _test_xor_decrypt
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10009b3f8 in _test_xor_decrypt
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10009b438 in _test_add_deobfuscate
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
+  0x10009b46c in _test_add_deobfuscate
+    ADRP            X8, #___stack_chk_guard_ptr@PAGE
+    -> 0x1000e8000
+    is_data_ptr: 0x1
