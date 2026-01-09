@@ -12,8 +12,5 @@ keywords = ["ida-pro", "reverse-engineering", "binary-analysis", "ida-domain"]
 
 dependencies = []
 
-[tool.uv]
-dev-dependencies = []
-
-[tool.uv.sources]
-ida-domain = { path = "./ida-domain", editable = true }
+[dependency-groups]
+dev = []
