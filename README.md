@@ -26,9 +26,19 @@ cd skills/ida-domain-scripting && uv run python setup.py
 
 The setup script will:
 1. Verify uv is installed
-2. Install Python dependencies (ida-domain)
-3. Check that IDADIR is set correctly
-4. Validate IDA Domain can load
+2. Clone ida-domain repository from GitHub (latest release by default)
+3. Install dependencies with uv sync
+4. Check that IDADIR is set correctly
+5. Validate IDA Domain can load
+
+**Using a specific version:**
+```bash
+# Use a specific release tag
+uv run python setup.py --ref v0.1.0
+
+# Use main branch (bleeding edge)
+uv run python setup.py --ref main
+```
 
 ### Setting IDADIR
 

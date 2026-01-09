@@ -15,8 +15,27 @@ Run setup before first use:
 cd $SKILL_DIR && uv run python setup.py
 ```
 
+Setup clones the ida-domain repository from GitHub and installs it in editable mode.
+By default, it uses the latest release tag.
+
+**Using a specific version or branch:**
+```bash
+# Use latest release (default)
+uv run python setup.py
+
+# Use a specific release tag
+uv run python setup.py --ref v0.1.0
+
+# Use main branch (bleeding edge)
+uv run python setup.py --ref main
+
+# Use a development branch
+uv run python setup.py --ref develop
+```
+
 Requirements:
 - uv package manager
+- git (for cloning ida-domain)
 - IDA Pro 9.1+
 - IDADIR environment variable pointing to IDA installation
 
