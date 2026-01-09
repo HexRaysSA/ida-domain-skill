@@ -1,1 +1,18 @@
-# TODO: implement
+[project]
+name = "ida-domain-scripting"
+version = "1.0.0"
+description = "IDA Domain scripting skill for Claude Code"
+readme = "SKILL.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [
+    { name = "Hex-Rays SA", email = "support@hex-rays.com" }
+]
+keywords = ["ida-pro", "reverse-engineering", "binary-analysis", "ida-domain"]
+
+dependencies = [
+    "ida-domain>=0.1.0",
+]
+
+[tool.uv]
+dev-dependencies = []
