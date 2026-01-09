@@ -75,6 +75,7 @@ def check_uv() -> bool:
             capture_output=True,
             text=True,
             check=True,
+            timeout=30,
         )
         version = result.stdout.strip()
         print_success(f"uv is installed ({version})")
@@ -98,6 +99,9 @@ def check_uv() -> bool:
     except subprocess.CalledProcessError as e:
         print_error(f"uv check failed: {e.stderr.strip()}")
         return False
+    except subprocess.TimeoutExpired:
+        print_error("uv version check timed out after 30 seconds")
+        return False
 
 
 def run_uv_sync() -> bool:
@@ -118,6 +122,7 @@ def run_uv_sync() -> bool:
             capture_output=True,
             text=True,
             check=True,
+            timeout=300,
         )
         print_success("Dependencies installed successfully")
 
@@ -139,6 +144,14 @@ def run_uv_sync() -> bool:
         print("    - Ensure pyproject.toml exists and is valid")
         print("    - Check your internet connection")
         print("    - Try running: uv cache clean")
+        return False
+    except subprocess.TimeoutExpired:
+        print_error("uv sync timed out after 5 minutes")
+        print()
+        print("  Possible causes:")
+        print("    - Slow network connection")
+        print("    - Large dependencies to download")
+        print("    - Try running manually: uv sync")
         return False
     except Exception as e:
         print_error(f"Unexpected error: {e}")
@@ -257,7 +270,7 @@ except Exception as e:
             cwd=skill_dir,
             capture_output=True,
             text=True,
-            env={**os.environ},  # Pass through IDADIR
+            timeout=60,
         )
 
         output = result.stdout.strip()
@@ -299,6 +312,12 @@ except Exception as e:
             print("    - Check IDA Domain docs: https://ida-domain.docs.hex-rays.com/")
             return False
 
+    except subprocess.TimeoutExpired:
+        print_error("Validation test timed out after 60 seconds")
+        print()
+        print("  The import test took too long to complete.")
+        print("  This may indicate a problem with the IDA Domain installation.")
+        return False
     except Exception as e:
         print_error(f"Validation test failed: {e}")
         return False
