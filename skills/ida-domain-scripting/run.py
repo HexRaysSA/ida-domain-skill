@@ -20,6 +20,7 @@ Command-line flags:
     -c, --code      Inline code string
     -s, --save      Enable save_on_close=True (default: False)
     --no-wrap       Skip auto-wrapping (for complete scripts)
+    --timeout       Execution timeout in seconds (default: 1800, 0 for no timeout)
 
 Exit codes:
     0 - Success
@@ -90,7 +91,7 @@ def prompt_setup() -> None:
 
 def cleanup_old_temp_files() -> int:
     """
-    Remove temp files older than 1 hour matching /tmp/ida-domain-*.py pattern.
+    Remove temp files older than 1 hour matching ida-domain-*.py pattern in temp directory.
 
     Returns:
         Number of files cleaned up.
@@ -99,7 +100,8 @@ def cleanup_old_temp_files() -> int:
     cutoff_time = time.time() - 3600  # 1 hour ago
 
     # Find all matching temp files
-    pattern = "/tmp/ida-domain-*.py"
+    temp_dir = tempfile.gettempdir()
+    pattern = str(Path(temp_dir) / "ida-domain-*.py")
     for filepath in glob.glob(pattern):
         try:
             file_path = Path(filepath)
@@ -216,17 +218,19 @@ with Database.open('{target_file_escaped}', IdaCommandOptions(auto_analysis=True
     return wrapper
 
 
-def execute_script(code: str) -> int:
+def execute_script(code: str, timeout: int | None = None) -> int:
     """
     Execute the script code via subprocess.
 
     Args:
         code: Python code to execute.
+        timeout: Timeout in seconds (None for no timeout).
 
     Returns:
         Exit code from the script execution.
     """
     skill_dir = get_skill_dir()
+    temp_dir = tempfile.gettempdir()
 
     # Create a temporary file for the wrapped script
     # Using a predictable prefix for cleanup
@@ -234,7 +238,7 @@ def execute_script(code: str) -> int:
         mode="w",
         prefix="ida-domain-",
         suffix=".py",
-        dir="/tmp",
+        dir=temp_dir,
         delete=False,
         encoding="utf-8",
     ) as f:
@@ -247,8 +251,17 @@ def execute_script(code: str) -> int:
             ["uv", "run", "python", temp_script],
             cwd=skill_dir,
             text=True,
+            timeout=timeout,
         )
         return result.returncode
+    except subprocess.TimeoutExpired:
+        print_error(f"Script execution timed out after {timeout} seconds.")
+        print()
+        print("To increase the timeout, use the --timeout flag:")
+        print(f"  uv run python run.py --timeout 3600 ...")
+        print()
+        print("To disable the timeout entirely, use --timeout 0")
+        return 124  # Standard timeout exit code
     except FileNotFoundError:
         print_error("uv is not installed. Please install uv first.")
         print()
@@ -330,6 +343,14 @@ Examples:
         help="Skip auto-wrapping (for complete scripts that handle their own setup)",
     )
 
+    parser.add_argument(
+        "--timeout",
+        dest="timeout",
+        type=int,
+        default=1800,
+        help="Execution timeout in seconds (default: 1800 = 30 minutes, 0 for no timeout)",
+    )
+
     return parser.parse_args()
 
 
@@ -381,7 +402,9 @@ def main() -> int:
         print_info(f"Executing wrapped {source_desc}...")
 
     # Step 6: Execute
-    return execute_script(final_code)
+    # Convert timeout: 0 means no timeout (None), otherwise use the value
+    timeout = args.timeout if args.timeout > 0 else None
+    return execute_script(final_code, timeout=timeout)
 
 
 if __name__ == "__main__":
