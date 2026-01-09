@@ -391,9 +391,9 @@ def get_string_xrefs(
         ```python
         for string_item in db.strings:
             xrefs = get_string_xrefs(db, string_item.address)
-            if len(xrefs) > 5:
-                print(f"String at {format_address(string_item.address)} "
-                      f"is referenced {len(xrefs)} times")
+            for from_ea, containing_func in xrefs:
+                func_name = db.functions.get_name(containing_func) if containing_func else "N/A"
+                print(f"Referenced from {format_address(from_ea)} in {func_name}")
         ```
     """
     results = []
@@ -480,7 +480,10 @@ def find_pattern(
     """
     # Convert hex string to bytes if needed
     if isinstance(pattern, str):
-        pattern = bytes.fromhex(pattern.replace(" ", ""))
+        try:
+            pattern = bytes.fromhex(pattern.replace(" ", ""))
+        except ValueError as e:
+            raise ValueError(f"Invalid hex pattern: {pattern}") from e
 
     return db.bytes.find_binary_sequence(pattern, start_ea, end_ea)
 
