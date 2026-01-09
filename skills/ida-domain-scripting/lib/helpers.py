@@ -18,11 +18,11 @@ from __future__ import annotations
 import json
 import re
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Dict, Iterator, List, Optional, Tuple, Union
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple, Union
 
 from ida_domain import Database
 from ida_domain.database import IdaCommandOptions
-from ida_domain.xrefs import XrefInfo, XrefType
+from ida_domain.xrefs import XrefInfo
 
 if TYPE_CHECKING:
     from ida_funcs import func_t
