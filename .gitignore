@@ -1,1 +1,21 @@
+# IDE
 .idea
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# uv
+uv.lock
+
+# OS
+.DS_Store
+Thumbs.db
