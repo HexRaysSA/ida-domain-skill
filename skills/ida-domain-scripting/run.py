@@ -5,6 +5,15 @@ IDA Domain Universal Script Executor
 Executes Python scripts that use IDA Domain with automatic boilerplate wrapping.
 This is the main entry point for Claude-generated analysis scripts.
 
+Input file isolation:
+    The executor creates a temporary run directory (/tmp/ida-domain-run-<uuid>/)
+    and copies the input file there before execution. This prevents IDA from
+    creating artifact files (id0, id1, id2, nam, til) in the original directory.
+    The run directory is automatically cleaned up after execution.
+
+    When --save is used with an IDA database (.i64/.idb), the modified database
+    is copied back to the original location before cleanup.
+
 Usage:
     # 1. Execute a script file
     uv run python run.py /tmp/analyze.py -f /path/to/binary.exe
@@ -29,10 +38,12 @@ Exit codes:
 
 import argparse
 import glob
+import shutil
 import subprocess
 import sys
 import tempfile
 import time
+import uuid
 from pathlib import Path
 
 
@@ -115,6 +126,108 @@ def cleanup_old_temp_files() -> int:
             pass
 
     return cleaned
+
+
+def cleanup_old_run_directories() -> int:
+    """
+    Remove run directories older than 1 hour.
+
+    This handles cleanup of orphaned directories from crashed runs.
+
+    Returns:
+        Number of directories cleaned up.
+    """
+    cleaned = 0
+    cutoff_time = time.time() - 3600  # 1 hour ago
+
+    temp_dir = Path(tempfile.gettempdir())
+    for dirpath in temp_dir.glob("ida-domain-run-*"):
+        try:
+            if dirpath.is_dir():
+                mtime = dirpath.stat().st_mtime
+                if mtime < cutoff_time:
+                    shutil.rmtree(dirpath)
+                    cleaned += 1
+        except (OSError, PermissionError):
+            pass
+
+    return cleaned
+
+
+# IDA database file extensions (created when opening a binary)
+IDA_ARTIFACT_EXTENSIONS = {".i64", ".idb", ".id0", ".id1", ".id2", ".nam", ".til"}
+
+
+def is_ida_database(path: Path) -> bool:
+    """
+    Check if the file is an IDA database.
+
+    Args:
+        path: Path to check.
+
+    Returns:
+        True if the file is an IDA database (.i64 or .idb).
+    """
+    return path.suffix.lower() in {".i64", ".idb"}
+
+
+def create_run_directory(target_path: Path) -> tuple[Path, Path]:
+    """
+    Create a temporary run directory and copy the input file there.
+
+    This isolates IDA's generated files (id0, id1, id2, nam, til) from the
+    original input directory.
+
+    Args:
+        target_path: Path to the target binary or .i64 file.
+
+    Returns:
+        Tuple of (run_directory, copied_file_path).
+    """
+    # Create a unique run directory
+    run_id = uuid.uuid4().hex[:8]
+    run_dir = Path(tempfile.gettempdir()) / f"ida-domain-run-{run_id}"
+    run_dir.mkdir(parents=True, exist_ok=True)
+
+    # Copy the input file to the run directory
+    copied_path = run_dir / target_path.name
+    shutil.copy2(target_path, copied_path)
+
+    print_info(f"Created run directory: {run_dir}")
+    return run_dir, copied_path
+
+
+def cleanup_run_directory(
+    run_dir: Path,
+    original_path: Path,
+    copied_path: Path,
+    save_requested: bool,
+) -> None:
+    """
+    Clean up the run directory after execution.
+
+    If save was requested and the input was an IDA database, copy the
+    modified database back to the original location.
+
+    Args:
+        run_dir: The temporary run directory to clean up.
+        original_path: Original path to the input file.
+        copied_path: Path to the copied file in the run directory.
+        save_requested: Whether --save was requested.
+    """
+    try:
+        # If save was requested and input was an IDA database, copy it back
+        if save_requested and is_ida_database(original_path):
+            if copied_path.exists():
+                shutil.copy2(copied_path, original_path)
+                print_info(f"Saved modified database back to: {original_path}")
+
+        # Clean up the entire run directory
+        if run_dir.exists():
+            shutil.rmtree(run_dir)
+            print_info(f"Cleaned up run directory: {run_dir}")
+    except OSError as e:
+        print_warning(f"Failed to clean up run directory: {e}")
 
 
 def get_user_code(args: argparse.Namespace) -> tuple[str, str]:
@@ -362,10 +475,11 @@ def main() -> int:
         prompt_setup()
         return 1
 
-    # Step 2: Clean up old temp files (non-blocking, best effort)
-    cleaned = cleanup_old_temp_files()
-    if cleaned > 0:
-        print_info(f"Cleaned up {cleaned} old temp file(s).")
+    # Step 2: Clean up old temp files and orphaned run directories (non-blocking, best effort)
+    cleaned_files = cleanup_old_temp_files()
+    cleaned_dirs = cleanup_old_run_directories()
+    if cleaned_files > 0 or cleaned_dirs > 0:
+        print_info(f"Cleaned up {cleaned_files} old temp file(s) and {cleaned_dirs} orphaned run dir(s).")
 
     # Step 3: Get user code
     try:
@@ -384,20 +498,32 @@ def main() -> int:
         return 1
 
     # Resolve to absolute path
-    target_file = str(target_path.resolve())
+    original_path = target_path.resolve()
 
-    # Step 5: Wrap code (unless --no-wrap)
-    if args.no_wrap:
-        final_code = user_code
-        print_info(f"Executing {source_desc} without wrapping...")
-    else:
-        final_code = wrap_code(user_code, target_file, args.save)
-        print_info(f"Executing wrapped {source_desc}...")
+    # Step 5: Create isolated run directory with copied input file
+    # This prevents IDA from creating artifacts (id0, id1, id2, nam, til)
+    # in the original input directory
+    run_dir, copied_path = create_run_directory(original_path)
 
-    # Step 6: Execute
-    # Convert timeout: 0 means no timeout (None), otherwise use the value
-    timeout = args.timeout if args.timeout > 0 else None
-    return execute_script(final_code, timeout=timeout)
+    try:
+        # Step 6: Wrap code (unless --no-wrap)
+        # Use the copied file path so IDA operates in the temp directory
+        if args.no_wrap:
+            final_code = user_code
+            print_info(f"Executing {source_desc} without wrapping...")
+        else:
+            final_code = wrap_code(user_code, str(copied_path), args.save)
+            print_info(f"Executing wrapped {source_desc}...")
+
+        # Step 7: Execute
+        # Convert timeout: 0 means no timeout (None), otherwise use the value
+        timeout = args.timeout if args.timeout > 0 else None
+        exit_code = execute_script(final_code, timeout=timeout)
+        return exit_code
+    finally:
+        # Step 8: Clean up run directory
+        # If --save was used with an IDA database, copy it back first
+        cleanup_run_directory(run_dir, original_path, copied_path, args.save)
 
 
 if __name__ == "__main__":
