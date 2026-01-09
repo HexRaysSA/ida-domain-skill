@@ -19,3 +19,6 @@ uv.lock
 # OS
 .DS_Store
 Thumbs.db
+
+# Cloned ida-domain repo
+skills/ida-domain-scripting/ida-domain/

@@ -6,23 +6,28 @@ This script validates the environment and installs dependencies required for
 the IDA Domain scripting skill. Run this before using the skill for the first time.
 
 Usage:
-    uv run python setup.py
+    uv run python setup.py [--ref <git-ref>]
 
 Steps performed:
     1. Check that uv package manager is installed
-    2. Run uv sync to install dependencies (ida-domain)
-    3. Verify IDADIR environment variable is set and valid
-    4. Run a validation test to confirm IDA Domain works
+    2. Clone or update ida-domain repository from GitHub
+    3. Run uv sync to install dependencies (ida-domain)
+    4. Verify IDADIR environment variable is set and valid
+    5. Run a validation test to confirm IDA Domain works
 
 Exit codes:
     0 - Success, setup complete
     1 - Error occurred (check output for details)
 """
 
+import argparse
+import json
 import os
 import subprocess
 import sys
+import urllib.request
 from pathlib import Path
+from typing import Optional
 
 
 # ANSI color codes for terminal output
@@ -37,7 +42,12 @@ class Colors:
 
 def print_step(step_num: int, message: str) -> None:
     """Print a numbered step header."""
-    print(f"\n{Colors.BLUE}{Colors.BOLD}[{step_num}/4]{Colors.RESET} {message}")
+    print(f"\n{Colors.BLUE}{Colors.BOLD}[{step_num}/5]{Colors.RESET} {message}")
+
+
+def print_warning(message: str) -> None:
+    """Print a warning message."""
+    print(f"  {Colors.YELLOW}!{Colors.RESET} {message}")
 
 
 def print_success(message: str) -> None:
@@ -104,14 +114,112 @@ def check_uv() -> bool:
         return False
 
 
+def get_latest_release_tag() -> Optional[str]:
+    """Fetch the latest release tag from GitHub API."""
+    url = "https://api.github.com/repos/HexRaysSA/ida-domain/releases/latest"
+    try:
+        with urllib.request.urlopen(url, timeout=30) as response:
+            data = json.loads(response.read())
+            return data.get("tag_name")
+    except Exception as e:
+        print_warning(f"Could not fetch latest release: {e}")
+        return None
+
+
+def clone_or_update_ida_domain(ref: Optional[str] = None) -> bool:
+    """
+    Step 2: Clone or update ida-domain repository.
+
+    Args:
+        ref: Git ref (branch, tag, or commit). If None, uses latest release tag.
+
+    Returns:
+        True if successful, False otherwise.
+    """
+    skill_dir = get_skill_dir()
+    ida_domain_dir = skill_dir / "ida-domain"
+    repo_url = "https://github.com/HexRaysSA/ida-domain.git"
+
+    # Determine which ref to use
+    if ref is None:
+        print_info("Fetching latest release tag from GitHub...")
+        ref = get_latest_release_tag()
+        if ref is None:
+            print_warning("Could not determine latest release, falling back to 'main'")
+            ref = "main"
+        else:
+            print_info(f"Latest release: {ref}")
+
+    if ida_domain_dir.exists():
+        # Update existing clone
+        print_step(2, f"Updating ida-domain repository (ref: {ref})...")
+        try:
+            subprocess.run(
+                ["git", "fetch", "--all", "--tags"],
+                cwd=ida_domain_dir,
+                check=True,
+                capture_output=True,
+                timeout=120,
+            )
+            subprocess.run(
+                ["git", "checkout", ref],
+                cwd=ida_domain_dir,
+                check=True,
+                capture_output=True,
+                timeout=30,
+            )
+            # If it's a branch, pull latest
+            result = subprocess.run(
+                ["git", "symbolic-ref", "HEAD"],
+                cwd=ida_domain_dir,
+                capture_output=True,
+                text=True,
+            )
+            if result.returncode == 0:  # It's a branch
+                subprocess.run(
+                    ["git", "pull"],
+                    cwd=ida_domain_dir,
+                    check=True,
+                    capture_output=True,
+                    timeout=120,
+                )
+            print_success(f"ida-domain updated to {ref}")
+            return True
+        except subprocess.CalledProcessError as e:
+            print_error(f"Failed to update ida-domain: {e.stderr or e.stdout}")
+            return False
+    else:
+        # Fresh clone
+        print_step(2, f"Cloning ida-domain repository (ref: {ref})...")
+        try:
+            subprocess.run(
+                ["git", "clone", repo_url, str(ida_domain_dir)],
+                check=True,
+                capture_output=True,
+                timeout=300,
+            )
+            subprocess.run(
+                ["git", "checkout", ref],
+                cwd=ida_domain_dir,
+                check=True,
+                capture_output=True,
+                timeout=30,
+            )
+            print_success(f"ida-domain cloned at {ref}")
+            return True
+        except subprocess.CalledProcessError as e:
+            print_error(f"Failed to clone ida-domain: {e.stderr or e.stdout}")
+            return False
+
+
 def run_uv_sync() -> bool:
     """
-    Step 2: Run uv sync to install dependencies.
+    Step 3: Run uv sync to install dependencies.
 
     Returns:
         True if sync succeeds, False otherwise.
     """
-    print_step(2, "Installing dependencies with uv sync...")
+    print_step(3, "Installing dependencies with uv sync...")
 
     skill_dir = get_skill_dir()
 
@@ -160,12 +268,12 @@ def run_uv_sync() -> bool:
 
 def check_idadir() -> bool:
     """
-    Step 3: Verify IDADIR environment variable is set and points to valid IDA installation.
+    Step 4: Verify IDADIR environment variable is set and points to valid IDA installation.
 
     Returns:
         True if IDADIR is valid, False otherwise.
     """
-    print_step(3, "Checking IDADIR environment variable...")
+    print_step(4, "Checking IDADIR environment variable...")
 
     idadir = os.environ.get("IDADIR")
 
@@ -239,12 +347,12 @@ def check_idadir() -> bool:
 
 def run_validation_test() -> bool:
     """
-    Step 4: Run a minimal script to verify IDA Domain can load.
+    Step 5: Run a minimal script to verify IDA Domain can load.
 
     Returns:
         True if validation succeeds, False otherwise.
     """
-    print_step(4, "Running IDA Domain validation test...")
+    print_step(5, "Running IDA Domain validation test...")
 
     skill_dir = get_skill_dir()
 
@@ -330,6 +438,17 @@ def main() -> int:
     Returns:
         Exit code (0 for success, 1 for failure).
     """
+    parser = argparse.ArgumentParser(
+        description="Setup IDA Domain scripting skill environment"
+    )
+    parser.add_argument(
+        "--ref",
+        type=str,
+        default=None,
+        help="Git ref (branch, tag, or commit) for ida-domain. Default: latest release tag",
+    )
+    args = parser.parse_args()
+
     print(f"\n{Colors.BOLD}IDA Domain Skill Setup{Colors.RESET}")
     print("=" * 50)
 
@@ -337,15 +456,19 @@ def main() -> int:
     if not check_uv():
         return 1
 
-    # Step 2: Run uv sync
+    # Step 2: Clone/update ida-domain
+    if not clone_or_update_ida_domain(args.ref):
+        return 1
+
+    # Step 3: Run uv sync
     if not run_uv_sync():
         return 1
 
-    # Step 3: Check IDADIR
+    # Step 4: Check IDADIR
     if not check_idadir():
         return 1
 
-    # Step 4: Validation test
+    # Step 5: Validation test
     if not run_validation_test():
         return 1
 
