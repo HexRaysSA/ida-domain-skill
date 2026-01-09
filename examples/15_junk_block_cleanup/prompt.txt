@@ -1,0 +1,59 @@
+# Exercise 15: Automated Cleanup for Junk Blocks
+Category: D. Control-Flow Obfuscation and Normalization
+
+## Binary
+input.i64
+
+## Binary Requirements
+- Binary with inserted junk/dead code:
+  - Register shuffles (mov rax, rbx; mov rbx, rax)
+  - Dead stores (writes to never-read locations)
+  - No-op sequences (xchg same, lea rax,[rax+0])
+  - Always-fallthrough conditional jumps
+  - Unreachable blocks (post-unconditional jump)
+- Mixed with legitimate code
+- At least 20-30 junk block instances across multiple functions
+
+## Task
+Identify small basic blocks with no semantic effect:
+
+1. Detect junk patterns:
+   - Register shuffle sequences (net zero effect)
+   - Dead stores (value never read)
+   - Semantic no-ops (add 0, xor 0, etc.)
+   - Always-fallthrough branches
+   - Unreachable code blocks
+
+2. Classify blocks:
+   - Pure junk (entire block is useless)
+   - Partial junk (some instructions useless)
+   - Suspicious (needs human verification)
+
+3. Mark and export:
+   - Color-code junk blocks in IDA
+   - Generate "clean CFG" with junk edges/blocks removed
+   - Export listing of meaningful-only blocks
+
+## Expected Output
+- Junk block report:
+  - Block EA
+  - Junk type
+  - Affected instructions
+  - Confidence level
+- Visual marking in IDA (colors/tags)
+- Clean CFG export (JSON/Graphviz)
+
+## Expected Class of Solution
+- Basic block enumeration
+- Instruction effect analysis:
+  - Register read/write tracking
+  - Memory effect analysis
+  - Control flow effect analysis
+- Liveness analysis for dead store detection
+- Conservative classification (avoid false positives)
+
+## Evaluation Criteria
+- Junk detection accuracy
+- False positive avoidance (don't mark real code as junk)
+- Clean CFG usefulness
+- Performance on larger functions

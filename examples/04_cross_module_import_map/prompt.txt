@@ -1,0 +1,44 @@
+# Exercise 04: Cross-Module Import Usage Map
+Category: A. Triage & Global Mapping
+
+## Binary
+input.i64
+
+## Binary Requirements
+- Dynamically linked binary with diverse imports:
+  - Standard library (libc, kernel32, etc.)
+  - Crypto libraries (OpenSSL, CryptoAPI)
+  - Network APIs (socket, WinHTTP, etc.)
+  - File I/O functions
+- Should include some dynamic import resolution:
+  - GetProcAddress / dlsym patterns
+  - LoadLibrary / dlopen usage
+- ~100+ import references across the binary
+
+## Task
+Enumerate imports and build a per-import usage map:
+- Which functions call which imports
+- Call frequency per import
+- Call site addresses
+
+Bonus: Detect dynamically resolved imports (GetProcAddress patterns) and include them as "pseudo-imports"
+
+## Expected Output
+- Import usage map (JSON or structured report):
+  - import_name -> [{caller_func, call_site, count}]
+- Per-function import profile
+- Bonus: pseudo-import discoveries with resolution patterns
+
+## Expected Class of Solution
+- Complete import enumeration via IDA APIs
+- Xref traversal from import entries
+- For bonus: pattern matching on GetProcAddress/dlsym:
+  - Track string argument to resolve function name
+  - Handle both immediate strings and string references
+  - Map resolved address usage
+
+## Evaluation Criteria
+- Complete coverage of static imports
+- Accurate call site mapping
+- Bonus: quality of dynamic import detection
+- Output format usefulness for further analysis

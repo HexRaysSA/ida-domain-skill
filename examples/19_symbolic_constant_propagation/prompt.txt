@@ -1,0 +1,62 @@
+# Exercise 19: Lightweight Symbolic-ish Constant Propagation for Decryption
+Category: F. Advanced: Emulation-ish, Microcode, and Scalability
+
+## Binary
+input.i64
+
+## Binary Requirements
+- Binary with computed values that can be statically resolved:
+  - Computed jump targets (address calculated at runtime)
+  - Table lookups with known base and index
+  - Simple decrypt loops with constant keys
+  - String deobfuscation via arithmetic
+- Characteristics:
+  - Constants flow through arithmetic operations
+  - Table bases are known (.rodata addresses)
+  - Index computations are bounded/deterministic
+  - Results used for jumps, calls, or data access
+- At least 5-10 resolvable computed values
+
+## Task
+Implement a limited evaluator over a function:
+
+1. Track register constants through arithmetic:
+   - Propagate known values through add, sub, xor, and, or, shl, shr
+   - Handle mov, lea instructions
+   - Track across basic block boundaries (limited)
+
+2. Evaluate table lookups:
+   - When base address is known (.rodata, .data)
+   - When index is constant or bounded
+   - Read actual values from IDB
+
+3. Detect resolution opportunities:
+   - Computed jump targets that become constant
+   - Computed call targets
+   - Decrypted parameters (XOR with known key)
+
+4. Apply results:
+   - Add comments with resolved values
+   - Create xrefs to resolved targets
+   - Optionally patch in resolved constants
+
+## Expected Output
+- Resolution report:
+  - EA of computed value usage
+  - Expression that was evaluated
+  - Resolved constant value
+  - Applied annotations/xrefs
+- Annotated IDA database
+
+## Expected Class of Solution
+- Abstract interpretation / symbolic execution (simplified)
+- Instruction semantics for basic operations
+- Value lattice (constant, unknown, range)
+- Memory model for known regions (.rodata reads)
+- Conservative handling of unknowns
+
+## Evaluation Criteria
+- Correctness of resolved values
+- Coverage of resolvable patterns
+- Handling of partial information
+- Performance (doesn't hang on complex functions)

@@ -3,290 +3,337 @@ name: ida-domain-scripting
 description: Write and execute Python scripts using the IDA Domain API for reverse engineering. Analyze binaries, extract functions, strings, cross-references, decompile code, work with IDA Pro databases (.i64/.idb). Use when user wants to analyze binaries, reverse engineer executables, or automate IDA Pro tasks.
 ---
 
+**IMPORTANT - Path Resolution:**
+This skill can be installed in different locations. Before executing any commands, determine the skill directory based on where you loaded this SKILL.md file, and use that path in all commands below. Replace `$SKILL_DIR` with the actual discovered path.
+
+Common installation paths:
+- Project-specific: `<project>/.claude/skills/ida-domain-scripting`
+- Manual global: `~/.claude/skills/ida-domain-scripting`
+
 # IDA Domain Scripting
 
-Write and execute Python scripts using the IDA Domain API for
-reverse engineering analysis of binaries and IDA databases.
+General-purpose binary analysis skill. I'll write custom IDAPython code for any reverse engineering task you request and execute it via the universal executor.
 
-## Setup (Required First)
+**CRITICAL WORKFLOW - Follow these steps in order:**
 
-Run setup before first use:
+1. **Check API_REFERENCE.md exists** - Always check that $SKILL_DIR/API_REFERENCE.md exists. Inform the user to run 
+   the bootstrap if not. 
+
+2. **Write scripts to /tmp** - NEVER write scripts to skill directory; always use `/tmp/ida-domain-*.py`
+
+3. **Execute from skill directory** - Always run: `cd $SKILL_DIR && uv run python run.py /tmp/script.py -f <binary>`
+
+4. **Ask before saving** - Scripts that modify the database require explicit user confirmation before using `--save`
+
+## How It Works
+
+1. You describe what you want to analyze/extract
+2. I write custom IDA Domain API code in `/tmp/ida-domain-*.py` (won't clutter your project)
+3. I execute it via: `cd $SKILL_DIR && uv run python run.py /tmp/script.py -f <binary>`
+4. Results displayed in real-time
+5. Script files auto-cleaned from /tmp by your OS
+
+## Setup (First Time)
+
 ```bash
 cd $SKILL_DIR && uv run python setup.py
 ```
 
-Setup clones the ida-domain repository from GitHub and installs it in editable mode.
-By default, it uses the latest release tag.
+This clones ida-domain from GitHub and installs dependencies. Only needed once.
 
-**Using a specific version or branch:**
+**Using a specific version:**
 ```bash
-# Use latest release (default)
-uv run python setup.py
-
-# Use a specific release tag
-uv run python setup.py --ref v0.1.0
-
-# Use main branch (bleeding edge)
-uv run python setup.py --ref main
-
-# Use a development branch
-uv run python setup.py --ref develop
+uv run python setup.py --ref v0.1.0   # Specific release
+uv run python setup.py --ref main     # Bleeding edge
 ```
 
 Requirements:
 - uv package manager
-- git (for cloning ida-domain)
+- git
 - IDA Pro 9.1+
 - IDADIR environment variable pointing to IDA installation
 
-## Critical Workflow
+## Execution Pattern
 
-1. Always write scripts to `/tmp/ida-domain-*.py`
-2. Execute via: `cd $SKILL_DIR && uv run python run.py /tmp/script.py -f <binary>`
-3. For modifications: **ASK USER** before generating scripts with `--save`
+**Step 1: Write analysis script to /tmp**
 
-## Input Modes
+```python
+# /tmp/ida-domain-analysis.py
+for func in db.functions:
+    name = db.functions.get_name(func)
+    print(f"{name}: 0x{func.start_ea:08X}")
+```
 
-| Mode | Command |
-|------|---------|
-| File | `uv run python run.py /tmp/script.py -f binary.exe` |
-| Inline | `uv run python run.py -c "code" -f binary.exe` |
-| Stdin | `cat script.py \| uv run python run.py -f binary.exe` |
+**Step 2: Execute from skill directory**
 
-## Command-Line Flags
+```bash
+cd $SKILL_DIR && uv run python run.py /tmp/ida-domain-analysis.py -f /path/to/binary
+```
 
-| Flag | Description |
-|------|-------------|
-| `-f, --file` | Target binary or .i64 file (required) |
-| `-c, --code` | Inline code string |
-| `-s, --save` | Enable `save_on_close=True` (default: False) |
-| `--no-wrap` | Skip auto-wrapping (for complete scripts) |
-| `--timeout` | Execution timeout in seconds (default: 1800, 0 for no timeout) |
+**Step 3: Review results**
 
-## Script Conventions
-
-- Scripts are auto-wrapped with `Database.open()` boilerplate
-- Use `db` variable to access all entities:
-  - `db.functions` - Function analysis (iterate, search, decompile)
-  - `db.strings` - String detection and enumeration
-  - `db.xrefs` - Cross-references (to/from addresses)
-  - `db.bytes` - Raw byte access and pattern search
-  - `db.segments` - Memory segments
-  - `db.types` - Type information
-  - `db.names` - Symbol names
-  - `db.comments` - Code comments
-  - `db.instructions` - Instruction decoding
-  - `db.heads` - Instruction/data heads
-  - `db.entries` - Entry points
-- Database metadata: `db.module`, `db.path`, `db.architecture`, `db.bitness`, `db.format`, `db.md5`, `db.sha256`
-- Use `--no-wrap` for complete standalone scripts
-
-## Modification Warning
-
-Scripts that rename, comment, patch, or modify the database require
-explicit user confirmation. Always ask:
-
-> "This script will modify the database. Should I include `--save` to persist changes?"
+Scripts are auto-wrapped with `Database.open()` boilerplate. The `db` variable is available for accessing all entities.
 
 ## Common Patterns
 
-### List all functions
+### List All Functions
+
 ```python
+# /tmp/ida-domain-list-functions.py
 for func in db.functions:
     name = db.functions.get_name(func)
-    print(f"{name}: {hex(func.start_ea)} - {hex(func.end_ea)}")
+    size = func.end_ea - func.start_ea
+    print(f"{name}: 0x{func.start_ea:08X} - 0x{func.end_ea:08X} ({size} bytes)")
 ```
 
-### Find functions by name pattern
-```python
-matches = find_functions_by_pattern(db, r".*crypt.*")
-for func, name in matches:
-    print(f"{name} at {format_address(func.start_ea)}")
-```
+### Find Function by Name
 
-### Get database summary
 ```python
-summary = get_db_summary(db)
-print(f"Binary: {summary['module']}")
-print(f"Architecture: {summary['architecture']} {summary['bitness']}-bit")
-print(f"Functions: {summary['function_count']}")
-print(f"Strings: {summary['string_count']}")
-```
-
-### Find interesting strings
-```python
-interesting = find_interesting_strings(db)
-for string_item, keyword in interesting:
-    print(f"[{keyword}] {format_address(string_item.address)}: {string_item}")
-```
-
-### Search strings with regex
-```python
-# Find URLs
-urls = search_strings(db, r"https?://[\w./]+")
-for s in urls:
-    print(f"{format_address(s.address)}: {s}")
-
-# Find IP addresses
-ips = search_strings(db, r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}")
-```
-
-### Get function callers
-```python
-func = db.functions.get_function_by_name("malloc")
+# /tmp/ida-domain-find-function.py
+func = db.functions.get_function_by_name("main")
 if func:
-    callers = get_function_callers(db, func)
-    print(f"malloc called by {len(callers)} functions:")
+    print(f"Found main at 0x{func.start_ea:08X}")
+
+    # Get callers
+    callers = db.functions.get_callers(func)
+    print(f"Called by {len(callers)} functions:")
     for caller in callers:
         print(f"  - {db.functions.get_name(caller)}")
+else:
+    print("main not found")
 ```
 
-### Get function callees
+### Search Strings
+
 ```python
+# /tmp/ida-domain-search-strings.py
+import re
+
+# Find all strings
+for s in db.strings:
+    print(f"0x{s.address:08X}: {s}")
+
+# Find URLs
+url_pattern = re.compile(r"https?://[\w./]+", re.IGNORECASE)
+for s in db.strings:
+    try:
+        content = str(s)
+        if url_pattern.search(content):
+            print(f"URL found: {content}")
+    except:
+        pass
+```
+
+### Analyze Cross-References
+
+```python
+# /tmp/ida-domain-xrefs.py
+# Get xrefs TO an address
+target = 0x00401000
+print(f"References TO 0x{target:08X}:")
+for xref in db.xrefs.to_ea(target):
+    print(f"  From 0x{xref.from_ea:08X} (type: {xref.type.name})")
+
+# Get xrefs FROM an address
+print(f"References FROM 0x{target:08X}:")
+for xref in db.xrefs.from_ea(target):
+    print(f"  To 0x{xref.to_ea:08X} (type: {xref.type.name})")
+```
+
+### Decompile Function
+
+```python
+# /tmp/ida-domain-decompile.py
 func = db.functions.get_function_by_name("main")
 if func:
-    callees = get_function_callees(db, func)
-    for callee in callees:
-        print(f"main calls: {db.functions.get_name(callee)}")
+    try:
+        lines = db.functions.get_pseudocode(func)
+        print("\n".join(lines))
+    except RuntimeError as e:
+        print(f"Decompilation failed: {e}")
 ```
 
-### Decompile a function
+### Analyze Function Complexity
+
 ```python
-func = db.functions.get_function_by_name("main")
-if func:
-    pseudocode = decompile_function(db, func)
-    if pseudocode:
-        print(pseudocode)
+# /tmp/ida-domain-complexity.py
+complex_funcs = []
+for func in db.functions:
+    flowchart = db.functions.get_flowchart(func)
+    if flowchart:
+        block_count = len(flowchart)
+        edge_count = sum(b.count_successors() for b in flowchart)
+        cyclomatic = edge_count - block_count + 2
+
+        if cyclomatic > 10:
+            name = db.functions.get_name(func)
+            complex_funcs.append((name, func.start_ea, cyclomatic))
+
+complex_funcs.sort(key=lambda x: x[2], reverse=True)
+print("Most complex functions:")
+for name, addr, cc in complex_funcs[:10]:
+    print(f"  {name}: complexity={cc} at 0x{addr:08X}")
 ```
 
-### Analyze function complexity
+### Search Byte Patterns
+
 ```python
+# /tmp/ida-domain-patterns.py
+# Search for NOP sled
+pattern = b"\x90\x90\x90\x90"
+results = db.bytes.find_binary_sequence(pattern)
+for addr in results:
+    print(f"Found NOP sled at 0x{addr:08X}")
+
+# Search for x64 function prologue
+prologue = b"\x55\x48\x89\xE5"  # push rbp; mov rbp, rsp
+for addr in db.bytes.find_binary_sequence(prologue):
+    print(f"Prologue at 0x{addr:08X}")
+```
+
+### Export to JSON
+
+```python
+# /tmp/ida-domain-export.py
+import json
+from pathlib import Path
+
+functions = []
 for func in db.functions:
     name = db.functions.get_name(func)
-    metrics = get_function_complexity(db, func)
-    if metrics['cyclomatic_complexity'] > 10:
-        print(f"{name}: complexity={metrics['cyclomatic_complexity']}, "
-              f"blocks={metrics['basic_block_count']}")
+    functions.append({
+        "name": name,
+        "start": f"0x{func.start_ea:08X}",
+        "end": f"0x{func.end_ea:08X}",
+        "size": func.end_ea - func.start_ea,
+    })
+
+output = {"module": db.module, "functions": functions}
+Path("/tmp/functions.json").write_text(json.dumps(output, indent=2))
+print(f"Exported {len(functions)} functions to /tmp/functions.json")
 ```
 
-### Find byte patterns
-```python
-# Search for NOP sled
-nops = find_pattern(db, b"\x90\x90\x90\x90\x90")
+## Inline Execution (Simple Tasks)
 
-# Search using hex string
-pattern_addrs = find_pattern(db, "48 89 E5")  # mov rbp, rsp
-for addr in pattern_addrs:
-    print(f"Found at {format_address(addr)}")
+For quick one-off tasks, you can execute code inline without creating files:
+
+```bash
+# Quick function count
+cd $SKILL_DIR && uv run python run.py -c "print(f'Functions: {len(db.functions)}')" -f binary
+
+# Get binary info
+cd $SKILL_DIR && uv run python run.py -c "print(f'{db.module}: {db.architecture} {db.bitness}-bit')" -f binary
 ```
 
-### Detect crypto constants
-```python
-crypto = find_crypto_constants(db)
-for name, addresses in crypto.items():
-    print(f"{name} found at {[format_address(a) for a in addresses]}")
-```
+**When to use inline vs files:**
+- **Inline**: Quick one-off tasks (count functions, get binary info, check if symbol exists)
+- **Files**: Complex analysis, multi-step tasks, anything user might want to re-run
 
-### Find undiscovered functions
-```python
-prologues = find_function_prologues(db)
-known_funcs = {func.start_ea for func in db.functions}
-undiscovered = [p for p in prologues if p not in known_funcs]
-print(f"Found {len(undiscovered)} potential undiscovered functions")
-```
+## Advanced Usage
 
-### Get cross-references to a string
-```python
-for string_item in db.strings:
-    xrefs = get_string_xrefs(db, string_item.address)
-    if len(xrefs) > 5:
-        print(f"'{string_item}' referenced {len(xrefs)} times")
-```
+For comprehensive IDA Domain API documentation, see [API_REFERENCE.md](API_REFERENCE.md):
 
-### Generate summary report
-```python
-report = generate_summary_report(db)
-print(report)
-# Or save to file:
-from pathlib import Path
-Path("/tmp/report.md").write_text(report)
-```
-
-### Export data to JSON
-```python
-count = export_functions_json(db, "/tmp/functions.json")
-print(f"Exported {count} functions")
-
-count = export_strings_json(db, "/tmp/strings.json")
-print(f"Exported {count} strings")
-```
-
-### Print formatted table
-```python
-headers = ["Name", "Address", "Size"]
-rows = []
-for func in list(db.functions)[:10]:
-    name = db.functions.get_name(func)
-    rows.append([name, format_address(func.start_ea), func.end_ea - func.start_ea])
-print_table(headers, rows)
-```
-
-## Helper Functions Reference
-
-All helpers are automatically available in wrapped scripts via `from helpers import *`.
-
-### Database Helpers
-- `quick_open(path, save=False, auto_analysis=True)` - Simplified database opening
-- `get_db_summary(db)` - Returns dict with file info and statistics
-
-### Function Analysis
-- `find_functions_by_pattern(db, pattern, case_sensitive=False)` - Regex match on function names
-- `get_function_callers(db, func)` - Get functions that call this function
-- `get_function_callees(db, func)` - Get functions called by this function
-- `decompile_function(db, func)` - Get pseudocode as string (requires Hex-Rays)
-- `get_function_complexity(db, func)` - Returns dict with block count, edges, cyclomatic complexity
-
-### String Analysis
-- `find_interesting_strings(db, keywords=None)` - Find passwords, URLs, paths, etc.
-- `get_string_xrefs(db, string_addr)` - Get cross-references to a string
-- `search_strings(db, pattern, case_sensitive=False)` - Regex search in strings
-
-### Byte Patterns
-- `find_pattern(db, pattern, start_ea=None, end_ea=None)` - Find byte pattern (hex string or bytes)
-- `find_crypto_constants(db)` - Detect AES, SHA256, MD5, RSA, RC4, DES, Blowfish constants
-- `find_function_prologues(db, architecture=None)` - Find function entry patterns
-
-### Output Formatting
-- `format_function(db, func)` - Pretty string like "main @ 0x00401000 - 0x00401100 (256 bytes)"
-- `format_xref(xref)` - Format like "0x00401000 -> 0x00402000 (CALL_NEAR)"
-- `format_address(ea)` - Format address like "0x00401000"
-- `print_table(headers, rows)` - Print aligned ASCII table
-
-### Report Generation
-- `generate_summary_report(db)` - Generate Markdown analysis report
-- `export_functions_json(db, path)` - Export functions to JSON file
-- `export_strings_json(db, path)` - Export strings to JSON file
-
-## API Reference
-
-For complete IDA Domain API documentation, see [API_REFERENCE.md](API_REFERENCE.md).
-
-Key classes and their methods:
-- `Database` - Main entry point for all operations
-- `Functions` - Function enumeration, creation, analysis
-- `Strings` - String detection and access
-- `Xrefs` - Cross-reference queries
-- `Bytes` - Raw byte access and binary search
-- `Segments` - Memory segment information
-- `Types` - Type library access
-- `Names` - Symbol name management
-- `Comments` - Comment access and modification
+- Database properties and metadata
+- Function enumeration and analysis
+- String detection and searching
+- Cross-reference queries
+- Byte pattern matching
+- Control flow analysis
+- Decompilation (Hex-Rays)
+- Type information
+- Comments and names
 
 ## Tips
 
-- Always run setup first if you get import errors
-- Use `--no-wrap` when your script already has `Database.open()`
-- Default is read-only; use `--save` only when modifications should persist
-- Check `IDADIR` environment variable if IDA SDK fails to load
-- Use `--timeout 0` for long-running analysis scripts
-- Scripts are auto-cleaned from `/tmp` after 1 hour
+- **Use /tmp for scripts** - Write to `/tmp/ida-domain-*.py`, never to skill directory or user's project
+- **Default is read-only** - Use `--save` only when modifications should persist (and ask user first!)
+- **Timeout** - Default 30 minutes; use `--timeout 0` for long-running analysis
+- **No-wrap mode** - Use `--no-wrap` when your script already has `Database.open()`
+- **Error handling** - Always use try-except for decompilation and string operations
+- **Check for None** - Functions like `get_function_by_name()` return None if not found
+
+## Troubleshooting
+
+**When encountering errors:**
+Check the ida-domain source code first by searching for the method signature in `$SKILL_DIR/ida-domain/ida_domain/`. The API may differ from what's documented or expected.
+
+**Virtual environment not found:**
+```bash
+cd $SKILL_DIR && uv run python setup.py
+```
+
+**IDA SDK fails to load / IDADIR error:**
+```bash
+export IDADIR=/path/to/ida
+```
+
+**Script timeout:**
+```bash
+cd $SKILL_DIR && uv run python run.py --timeout 3600 ...  # 1 hour
+cd $SKILL_DIR && uv run python run.py --timeout 0 ...     # No timeout
+```
+
+**AttributeError: 'Xrefs' has no attribute 'get_xrefs_to':**
+Use `db.xrefs.to_ea(addr)` not `db.xrefs.get_xrefs_to(addr)`
+
+**AttributeError on func_t object:**
+Call methods on `db.functions`, not on the func object:
+```python
+# Wrong: func.get_callers()
+# Right: db.functions.get_callers(func)
+```
+
+**UnicodeDecodeError when reading strings:**
+```python
+for s in db.strings:
+    try:
+        content = str(s)
+    except:
+        continue  # Skip problematic strings
+```
+
+## Example Usage
+
+```
+User: "How many functions are in this binary?"
+
+Claude: I'll count the functions. Let me analyze the binary...
+[Writes: /tmp/ida-domain-count.py]
+[Runs: cd $SKILL_DIR && uv run python run.py /tmp/ida-domain-count.py -f binary]
+[Output: Functions: 250]
+
+The binary contains 250 functions.
+```
+
+```
+User: "Find all functions that call malloc"
+
+Claude: I'll find all callers of malloc...
+[Writes: /tmp/ida-domain-malloc-callers.py]
+[Runs: cd $SKILL_DIR && uv run python run.py /tmp/ida-domain-malloc-callers.py -f binary]
+[Output: malloc called by 15 functions: sub_401000, sub_402000, ...]
+
+Found 15 functions that call malloc:
+- sub_401000 at 0x00401000
+- sub_402000 at 0x00402000
+...
+```
+
+```
+User: "Decompile the main function and save it"
+
+Claude: I'll decompile main and save the output...
+[Writes: /tmp/ida-domain-decompile-main.py]
+[Runs: cd $SKILL_DIR && uv run python run.py /tmp/ida-domain-decompile-main.py -f binary]
+[Output: Saved to /tmp/main.c]
+
+Done! The decompiled code is saved to /tmp/main.c
+```
+
+## Notes
+
+- Each analysis script is custom-written for your specific request
+- Not limited to pre-built scripts - any IDA analysis task possible
+- Scripts written to `/tmp` for automatic cleanup (no clutter)
+- Code executes reliably with proper module resolution via `run.py`
+- Database opened read-only by default to prevent accidental modifications

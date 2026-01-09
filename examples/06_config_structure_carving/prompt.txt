@@ -1,0 +1,53 @@
+# Exercise 06: Configuration Structure Carving
+Category: B. Strings, Dataflow-ish Heuristics, and Configuration Recovery
+
+## Binary
+input.i64
+
+## Binary Requirements
+- Binary with embedded configuration blob:
+  - High-entropy region (possibly encrypted outer layer)
+  - Unusual alignment or padding
+  - Referenced from initialization code
+- Config should contain mixed field types:
+  - C strings (URLs, paths, keys)
+  - Integers (ports, flags, timeouts)
+  - Pointers or offsets to other data
+  - Fixed-size arrays (IP lists, key material)
+  - Nested structures
+- Config size: 256-2048 bytes
+
+## Task
+Find the likely config blob and script a "carver" that:
+1. Identifies base address(es) of config data
+2. Parses fields by type inference:
+   - String detection (null-terminated, length-prefixed)
+   - Integer fields (ports, sizes, flags)
+   - Pointer/offset fields
+   - Array boundaries
+3. Creates an IDA struct type matching the layout
+4. Applies the struct to the blob in IDA
+5. Annotates each field with decoded meaning
+
+## Expected Output
+- Identified config blob location(s)
+- Generated IDA struct definition
+- Applied struct type in IDA
+- Field annotations with semantic meaning
+- Decoded config values report
+
+## Expected Class of Solution
+- Entropy analysis for blob location
+- Heuristic field boundary detection
+- Type inference from:
+  - Value ranges (port numbers, sizes)
+  - Pointer-like values
+  - String patterns
+- IDA struct creation via idc/idaapi
+- Comment/name application for fields
+
+## Evaluation Criteria
+- Correct blob identification
+- Reasonable field boundary detection
+- Struct definition quality
+- Semantic annotation usefulness

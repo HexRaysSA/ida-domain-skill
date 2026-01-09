@@ -1,0 +1,60 @@
+# Exercise 18: Binary-to-SARIF (or Similar) Audit Export
+Category: E. Patch Planning & Analysis Workflow Automation
+
+## Binary
+input.i64
+
+## Binary Requirements
+- Binary with various security-relevant patterns:
+  - Dangerous API usage (strcpy, sprintf, gets, etc.)
+  - Hardcoded secrets (keys, passwords, tokens)
+  - High-entropy regions (potential crypto keys, packed data)
+  - Anti-debug checks
+  - Self-modifying code indicators
+  - Insecure random number generation
+- Mix of severity levels:
+  - Critical: hardcoded keys, command injection
+  - High: buffer overflow potential
+  - Medium: anti-analysis techniques
+  - Low: deprecated API usage
+
+## Task
+Write a script that exports security findings into a standard format (SARIF or similar JSON):
+
+1. Detect and categorize:
+   - Dangerous APIs used (location + context)
+   - Hardcoded keys/secrets (high-entropy strings, known patterns)
+   - Suspicious entropy regions
+   - Anti-debug checks (IsDebuggerPresent, timing checks, etc.)
+   - Self-modifying code indicators
+   - Insecure patterns (weak crypto, predictable random)
+
+2. For each finding, include:
+   - Precise EA
+   - Category and severity
+   - Instruction range / code snippet
+   - Context (function, callsite)
+   - Remediation suggestion (where applicable)
+
+3. Export in structured format:
+   - SARIF (preferred, for tool integration)
+   - Or well-structured JSON
+
+## Expected Output
+- SARIF/JSON report with all findings
+- Findings grouped by category and severity
+- Each finding with precise location and context
+- Summary statistics
+
+## Expected Class of Solution
+- API usage scanning with context
+- Entropy analysis for secrets detection
+- Pattern matching for known bad patterns
+- Anti-debug API and technique detection
+- SARIF schema compliance (or documented JSON schema)
+
+## Evaluation Criteria
+- Detection coverage
+- False positive rate
+- Output format correctness
+- Integration-readiness (can other tools consume it?)

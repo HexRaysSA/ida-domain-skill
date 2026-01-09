@@ -1,0 +1,54 @@
+# Exercise 10: Detect and Fix Bad Function Chunks / Tails
+Category: C. Function Boundary, Signature, Types, and ABI Reality Checks
+
+## Binary
+input.i64
+
+## Binary Requirements
+- Binary compiled with aggressive optimization:
+  - -O2 or -O3 with tail merging enabled
+  - Shared tail blocks between functions
+  - Tail call optimization
+  - Code factoring / identical code folding
+- Characteristics:
+  - Functions that "end" with a jump to shared code
+  - Basic blocks claimed by multiple functions
+  - IDA's auto-analysis showing warnings or oddities
+  - Some functions with discontiguous chunks
+- At least 5-10 instances of shared/merged tails
+
+## Task
+Write a script to detect suspicious function boundaries:
+1. Identify shared tail blocks (blocks with multiple function owners)
+2. Detect tail merge patterns (common epilogue shared)
+3. Find functions with suspicious chunk arrangements
+
+Then repair:
+1. Create separate functions or function chunks where appropriate
+2. Properly assign ownership of shared blocks
+3. Patch up xrefs and names to reflect true ownership
+4. Document decisions made
+
+## Expected Output
+- Report of detected issues:
+  - Shared blocks with their "owners"
+  - Tail merge instances
+  - Suspicious chunk arrangements
+- Repaired function definitions in IDA
+- Before/after function boundary comparison
+
+## Expected Class of Solution
+- Function chunk enumeration via IDA APIs
+- Cross-reference analysis for block ownership
+- Heuristics for determining "true" owner:
+  - Prologue presence
+  - Call site analysis
+  - Code flow patterns
+- IDA function manipulation APIs
+- Conservative approach (report vs. auto-fix options)
+
+## Evaluation Criteria
+- Detection accuracy for shared/merged tails
+- Repair decisions correctness
+- Preservation of analysis correctness
+- Handling of edge cases without breaking IDA state

@@ -1,0 +1,54 @@
+# Exercise 12: Systematically Rename Parameters/Locals in Decompiler
+Category: C. Function Boundary, Signature, Types, and ABI Reality Checks
+
+## Binary
+input.i64
+
+## Binary Requirements
+- Stripped binary with meaningful internal functions
+- Functions that use well-known APIs:
+  - Memory operations (memcpy, malloc, free)
+  - String operations (strlen, strcpy, strcmp)
+  - Crypto APIs (if any)
+  - File I/O (read, write, open)
+  - Network (send, recv, connect)
+- Decompiler should produce reasonable output
+- At least 20-30 functions worth analyzing
+
+## Task
+Pick a subset of key functions (using heuristics or manual selection).
+Script renaming of parameters/locals based on API usage and dataflow hints:
+
+1. Identify variable roles from API usage:
+   - Buffer passed to memcpy → `buf`, `dest`, `src`
+   - Size argument → `len`, `size`, `count`
+   - Return from malloc → `ptr`, `mem`
+   - Context structures → `ctx`
+   - Crypto material → `key`, `iv`, `plaintext`, `ciphertext`
+   - File handles → `fd`, `file`, `handle`
+   - Network → `sock`, `addr`, `port`
+
+2. Apply consistent naming scheme across the project
+
+3. Handle conflicts and multiple uses of same variable
+
+## Expected Output
+- Renamed variables in decompiler output
+- Naming report:
+  - Function EA
+  - Original name → new name mappings
+  - Reasoning/source of inference
+- Consistent naming across all processed functions
+
+## Expected Class of Solution
+- Decompiler API usage (cfunc_t, lvar_t)
+- API argument position analysis
+- Dataflow tracking for name propagation
+- Naming convention rules engine
+- Conflict resolution strategy
+
+## Evaluation Criteria
+- Naming accuracy and consistency
+- Coverage of common patterns
+- Decompiler output readability improvement
+- Handling of edge cases (reused variables, unclear usage)

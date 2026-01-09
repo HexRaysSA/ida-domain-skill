@@ -1,0 +1,41 @@
+# Exercise 03: Deobfuscation Pass for Thunk Forests
+Category: A. Triage & Global Mapping
+
+## Binary
+input.i64
+
+## Binary Requirements
+- Binary with heavy thunking/indirection:
+  - Chains of jmp-only functions
+  - Tail-call optimized wrappers
+  - Import thunks through multiple layers
+  - PLT/GOT-style indirection (or Windows IAT equivalent)
+- At least 3-4 levels deep in some chains
+- Mix of direct and indirect jumps
+
+## Task
+Write a script that resolves thunk chains (including tailcalls) to their ultimate targets:
+1. Identify thunk functions (single jmp/tailcall, no other logic)
+2. Follow chains to ultimate destination
+3. Rename thunks to `thunk_<targetname>` pattern
+4. Optionally collapse them in exported graph representation
+
+## Expected Output
+- Renamed thunk functions in IDA
+- Report of resolved chains: thunk_ea -> ... -> ultimate_target
+- Optional: simplified callgraph export with thunks collapsed
+
+## Expected Class of Solution
+- Pattern matching for thunk identification (jmp-only, lea+jmp, etc.)
+- Iterative/recursive chain resolution with cycle detection
+- Robust handling of:
+  - Direct jumps
+  - Indirect jumps through GOT/IAT
+  - Tail calls
+  - Partial thunks (thunk + minor setup)
+
+## Evaluation Criteria
+- Correctly identifies all thunk patterns
+- Resolves chains without infinite loops
+- Naming convention is consistent and useful
+- Handles edge cases (broken chains, unresolved targets)

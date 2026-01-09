@@ -180,7 +180,7 @@ def wrap_code(user_code: str, target_file: str, save_on_close: bool) -> str:
     The wrapper provides:
     - ida_domain imports
     - Database.open() context manager
-    - Helper functions from lib/helpers.py
+    - The `db` variable for accessing all database entities
 
     Args:
         user_code: The user's script code.
@@ -190,8 +190,6 @@ def wrap_code(user_code: str, target_file: str, save_on_close: bool) -> str:
     Returns:
         Wrapped code string ready for execution.
     """
-    skill_dir = get_skill_dir()
-    lib_dir = skill_dir / "lib"
     save_flag = "True" if save_on_close else "False"
 
     # Escape target file path for Python string
@@ -204,11 +202,6 @@ def wrap_code(user_code: str, target_file: str, save_on_close: bool) -> str:
 # Auto-wrapped by IDA Domain run.py
 from ida_domain import Database
 from ida_domain.database import IdaCommandOptions
-import sys
-
-# Add skill lib directory to path for helpers
-sys.path.insert(0, '{lib_dir}')
-from helpers import *
 
 with Database.open('{target_file_escaped}', IdaCommandOptions(auto_analysis=True), save_on_close={save_flag}) as db:
     # --- User code starts here ---

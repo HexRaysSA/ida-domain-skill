@@ -1,0 +1,52 @@
+# Exercise 05: Recover Encrypted/Obfuscated Strings (Static)
+Category: B. Strings, Dataflow-ish Heuristics, and Configuration Recovery
+
+## Binary
+input.i64
+
+## Binary Requirements
+- Binary with encrypted/obfuscated strings:
+  - XOR-encoded strings (single-byte or rolling key)
+  - RC4-encrypted string table
+  - Base64 + XOR combinations
+  - Stack-constructed strings (char-by-char)
+- Decryptor functions with identifiable patterns:
+  - Tight loops with XOR/ADD operations
+  - S-box table references (RC4)
+  - Unusual entropy in referenced data sections
+- At least 20-30 obfuscated strings
+
+## Task
+1. Identify candidate decryptor functions by patterns:
+   - Tight loops with XOR/ADD/SUB operations
+   - RC4-ish table initialization and usage
+   - High-entropy data references
+
+2. Automate extraction:
+   - Pattern-match and decode (for simple XOR)
+   - Or emulate enough of the decryptor
+   - Recover plaintext strings
+   - Create new string literals in IDA
+   - Add xrefs from usage sites to recovered strings
+
+## Expected Output
+- List of recovered strings with:
+  - Original encrypted blob EA
+  - Decryptor function EA
+  - Decryption method identified
+  - Plaintext result
+- IDA database updated with string definitions
+
+## Expected Class of Solution
+- Heuristic-based decryptor identification
+- Multiple decryption strategy support (XOR, RC4, custom)
+- Either:
+  - Pattern matching + static decode, OR
+  - Lightweight emulation (Unicorn or similar)
+- Proper IDA string/xref creation via APIs
+
+## Evaluation Criteria
+- Decryptor function detection accuracy
+- String recovery completeness
+- Handling of multiple encryption schemes
+- IDA integration quality (strings visible in UI)

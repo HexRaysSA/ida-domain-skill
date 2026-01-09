@@ -1,0 +1,64 @@
+# Exercise 16: Find and Verify Auth/License Checks
+Category: E. Patch Planning & Analysis Workflow Automation
+
+## Binary
+input.i64
+
+## Binary Requirements
+- Binary with authentication or license verification:
+  - License key validation
+  - Serial number checking
+  - Time-based trial logic
+  - Feature unlock checks
+  - Online validation calls
+- Observable patterns:
+  - Crypto API usage (hashing, signature verification)
+  - String comparisons against expected values
+  - Registry/file reads for stored licenses
+  - Date/time comparisons
+  - Network calls to license servers
+- Clear success/failure code paths
+
+## Task
+Using strings, imports, and control-flow, locate likely auth/license enforcement points:
+
+1. Identify candidate check functions:
+   - Functions calling crypto APIs
+   - Functions with license-related strings
+   - Functions checking registry/files for keys
+   - Functions with network calls + validation logic
+
+2. Analyze each candidate:
+   - Locate decision branches (success vs failure)
+   - Trace success/failure paths
+   - Identify what triggers each outcome
+
+3. Produce a report:
+   - Candidate check functions
+   - Call sites (where checks are invoked)
+   - Decision branches with conditions
+   - Suggested patch points (identification only, not actual patches)
+
+**Note: Do NOT actually patch - just identify and document**
+
+## Expected Output
+- License check enumeration report:
+  - Function EA and name
+  - Evidence (strings, APIs, patterns)
+  - Decision point locations
+  - Success/failure branch targets
+  - Suggested patch strategy (NOP, force return, etc.)
+
+## Expected Class of Solution
+- Multi-signal detection:
+  - Import analysis (crypto, registry, network)
+  - String pattern matching (license, serial, trial, expired)
+  - Control flow analysis for decision points
+- Call chain analysis to find invocation points
+- Branch target classification
+
+## Evaluation Criteria
+- Detection completeness
+- Correct identification of decision points
+- Quality of patch point suggestions
+- False positive handling

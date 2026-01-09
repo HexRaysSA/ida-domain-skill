@@ -1,0 +1,62 @@
+# Exercise 14: Opaque Predicate Candidate Detection
+Category: D. Control-Flow Obfuscation and Normalization
+
+## Binary
+input.i64
+
+## Binary Requirements
+- Binary with opaque predicates inserted:
+  - Always-true conditions (x*x >= 0, x^x == 0)
+  - Always-false paths (dead code)
+  - Complex math identities
+  - Environmental checks that are constant in practice
+- Mix of:
+  - Simple arithmetic opaque predicates
+  - Aliasing-based predicates
+  - Loop-invariant predicates
+- At least 10-15 opaque predicate instances
+
+## Task
+Find suspicious conditional branches that appear constant:
+
+1. Detect patterns:
+   - Mathematical identities (x² >= 0, x^x == 0, 2|x*(x+1))
+   - Trivial comparisons (x == x, x != x)
+   - Constants compared to constants
+   - Loop-invariant conditions
+
+2. Classify confidence:
+   - High: provably constant
+   - Medium: likely constant (pattern match)
+   - Low: suspicious but uncertain
+
+3. Create IDA annotations:
+   - Tag suspect blocks
+   - Comment explaining why suspected
+   - Mark dead branch if identified
+
+4. Optional: patch microcode/decompiler hints if possible
+
+## Expected Output
+- List of opaque predicate candidates:
+  - Branch EA
+  - Condition pattern
+  - Confidence level
+  - Always-true or always-false prediction
+- Annotated IDA database
+- Dead code block identification
+
+## Expected Class of Solution
+- Pattern matching for known opaque predicate forms
+- Expression analysis from:
+  - Disassembly patterns
+  - Decompiler AST
+  - Microcode (advanced)
+- Confidence scoring based on pattern strength
+- Conservative false-positive handling
+
+## Evaluation Criteria
+- Detection coverage
+- False positive rate
+- Accuracy of true/false prediction
+- Annotation quality

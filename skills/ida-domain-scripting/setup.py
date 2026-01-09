@@ -42,7 +42,7 @@ class Colors:
 
 def print_step(step_num: int, message: str) -> None:
     """Print a numbered step header."""
-    print(f"\n{Colors.BLUE}{Colors.BOLD}[{step_num}/6]{Colors.RESET} {message}")
+    print(f"\n{Colors.BLUE}{Colors.BOLD}[{step_num}/5]{Colors.RESET} {message}")
 
 
 def print_warning(message: str) -> None:
@@ -273,55 +273,14 @@ def run_uv_sync() -> bool:
         return False
 
 
-def generate_api_reference() -> bool:
-    """
-    Step 4: Generate API_REFERENCE.md from ida-domain source code.
-
-    Returns:
-        True if generation succeeds, False otherwise.
-    """
-    print_step(4, "Generating API reference from source code...")
-
-    skill_dir = get_skill_dir()
-
-    # Import and run the bootstrap module
-    try:
-        # We need to import bootstrap dynamically since it's in the same directory
-        import importlib.util
-
-        bootstrap_path = skill_dir / "bootstrap.py"
-        if not bootstrap_path.exists():
-            print_error("bootstrap.py not found")
-            return False
-
-        spec = importlib.util.spec_from_file_location("bootstrap", bootstrap_path)
-        if spec is None or spec.loader is None:
-            print_error("Failed to load bootstrap module")
-            return False
-
-        bootstrap = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(bootstrap)
-
-        # Generate the API reference
-        if bootstrap.generate_api_reference(skill_dir, create_backup=True):
-            return True
-        else:
-            print_error("Failed to generate API reference")
-            return False
-
-    except Exception as e:
-        print_error(f"API reference generation failed: {e}")
-        return False
-
-
 def check_idadir() -> bool:
     """
-    Step 5: Verify IDADIR environment variable is set and points to valid IDA installation.
+    Step 4: Verify IDADIR environment variable is set and points to valid IDA installation.
 
     Returns:
         True if IDADIR is valid, False otherwise.
     """
-    print_step(5, "Checking IDADIR environment variable...")
+    print_step(4, "Checking IDADIR environment variable...")
 
     idadir = os.environ.get("IDADIR")
 
@@ -395,12 +354,12 @@ def check_idadir() -> bool:
 
 def run_validation_test() -> bool:
     """
-    Step 6: Run a minimal script to verify IDA Domain can load.
+    Step 5: Run a minimal script to verify IDA Domain can load.
 
     Returns:
         True if validation succeeds, False otherwise.
     """
-    print_step(6, "Running IDA Domain validation test...")
+    print_step(5, "Running IDA Domain validation test...")
 
     skill_dir = get_skill_dir()
 
@@ -512,15 +471,11 @@ def main() -> int:
     if not run_uv_sync():
         return 1
 
-    # Step 4: Generate API reference
-    if not generate_api_reference():
-        return 1
-
-    # Step 5: Check IDADIR
+    # Step 4: Check IDADIR
     if not check_idadir():
         return 1
 
-    # Step 6: Validation test
+    # Step 5: Validation test
     if not run_validation_test():
         return 1
 

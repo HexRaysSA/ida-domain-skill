@@ -1,0 +1,79 @@
+# Exercise 20: Scalable Project Annotator Over Huge Binaries
+Category: F. Advanced: Emulation-ish, Microcode, and Scalability
+
+## Binary
+input.i64
+
+## Binary Requirements
+- Very large binary:
+  - Tens of thousands of functions (10k-50k+)
+  - Mix of library code and application code
+  - Realistic complexity (not artificially inflated)
+- Examples: game engine, office suite component, browser engine
+- Analysis should take minutes, not hours
+- Binary may be updated between runs (version changes)
+
+## Task
+Write an IDAPython pipeline that efficiently processes huge binaries:
+
+1. Incremental processing:
+   - Cache function analysis by hash (bytes hash or structural hash)
+   - Only re-analyze changed/new functions
+   - Persist cache between IDA sessions
+
+2. Run analysis passes:
+   - Import usage classification
+   - String reference mapping
+   - Dispatcher/switch detection
+   - Vtable discovery (if C++)
+   - Apply heuristic naming
+
+3. Apply annotations:
+   - Function names (prefixes by category)
+   - Type information where inferred
+   - Comments for key patterns
+
+4. Export final report:
+   - Summary statistics
+   - Per-function analysis results
+   - Delta from previous run (if applicable)
+
+5. Robustness:
+   - Handle partial failures gracefully
+   - Resume capability after interruption
+   - Progress reporting
+
+## Expected Output
+- Annotated IDA database
+- Analysis cache (persistent)
+- Summary report with:
+  - Functions processed (new, cached, failed)
+  - Findings by category
+  - Performance metrics
+- Delta report (if re-run)
+
+## Expected Class of Solution
+- Batch processing architecture
+- Caching layer (SQLite, JSON, or pickle)
+- Function hashing for change detection
+- Modular analysis passes
+- Error isolation (one function failure doesn't stop pipeline)
+- Progress callbacks / UI updates
+
+## Evaluation Criteria
+- Scalability: Does it handle 10k+ functions efficiently?
+- Incrementality: Does re-run skip unchanged functions?
+- Robustness: Does it handle errors gracefully?
+- Output quality: Are annotations useful?
+- Code architecture: Is it maintainable and extensible?
+
+## Meta-Exercise Component
+This exercise particularly tests:
+
+> "Given this binary isn't quite what you expected, how would you adapt your script?"
+
+The candidate should demonstrate:
+- Diagnostic approach when analysis fails
+- Ability to add new heuristics on the fly
+- Balance between automation and manual intervention
+- Understanding of when to cache vs. recompute
