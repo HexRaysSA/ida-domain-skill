@@ -19,7 +19,7 @@ General-purpose binary analysis skill. I'll write custom IDAPython code for any 
 1. **Check API_REFERENCE.md exists** - Always check that $SKILL_DIR/API_REFERENCE.md exists. Inform the user to run 
    the bootstrap if not. 
 
-2. **Write scripts to /tmp** - NEVER write scripts to skill directory; always use `/tmp/ida-domain-*.py`
+2. **Write scripts to /tmp with timestamp** - NEVER write scripts to skill directory; always use `/tmp/ida-domain-YYYYMMDD_HHMMSS_ffffff-<name>.py` with microseconds for uniqueness (e.g., `/tmp/ida-domain-20260109_143052_847291-thunk-analysis.py`). Generate timestamp with: `datetime.now().strftime('%Y%m%d_%H%M%S_%f')`
 
 3. **Execute from skill directory** - Always run: `cd $SKILL_DIR && uv run python run.py /tmp/script.py -f <binary>`
 
@@ -28,7 +28,7 @@ General-purpose binary analysis skill. I'll write custom IDAPython code for any 
 ## How It Works
 
 1. You describe what you want to analyze/extract
-2. I write custom IDA Domain API code in `/tmp/ida-domain-*.py` (won't clutter your project)
+2. I write custom IDA Domain API code in `/tmp/ida-domain-YYYYMMDD_HHMMSS_ffffff-<name>.py` (timestamped with microseconds for parallel execution)
 3. I execute it via: `cd $SKILL_DIR && uv run python run.py /tmp/script.py -f <binary>`
 4. Results displayed in real-time
 5. Script files auto-cleaned from /tmp by your OS
@@ -245,7 +245,7 @@ For comprehensive IDA Domain API documentation, see [API_REFERENCE.md](API_REFER
 
 ## Tips
 
-- **Use /tmp for scripts** - Write to `/tmp/ida-domain-*.py`, never to skill directory or user's project
+- **Use /tmp for scripts with timestamp** - Write to `/tmp/ida-domain-YYYYMMDD_HHMMSS_ffffff-<name>.py` (include microseconds `%f` to avoid collisions in parallel execution)
 - **Default is read-only** - Use `--save` only when modifications should persist (and ask user first!)
 - **Timeout** - Default 30 minutes; use `--timeout 0` for long-running analysis
 - **No-wrap mode** - Use `--no-wrap` when your script already has `Database.open()`
@@ -298,8 +298,8 @@ for s in db.strings:
 User: "How many functions are in this binary?"
 
 Claude: I'll count the functions. Let me analyze the binary...
-[Writes: /tmp/ida-domain-count.py]
-[Runs: cd $SKILL_DIR && uv run python run.py /tmp/ida-domain-count.py -f binary]
+[Writes: /tmp/ida-domain-20260109_143052_847291-count.py]
+[Runs: cd $SKILL_DIR && uv run python run.py /tmp/ida-domain-20260109_143052_847291-count.py -f binary]
 [Output: Functions: 250]
 
 The binary contains 250 functions.
@@ -309,8 +309,8 @@ The binary contains 250 functions.
 User: "Find all functions that call malloc"
 
 Claude: I'll find all callers of malloc...
-[Writes: /tmp/ida-domain-malloc-callers.py]
-[Runs: cd $SKILL_DIR && uv run python run.py /tmp/ida-domain-malloc-callers.py -f binary]
+[Writes: /tmp/ida-domain-20260109_143105_392847-malloc-callers.py]
+[Runs: cd $SKILL_DIR && uv run python run.py /tmp/ida-domain-20260109_143105_392847-malloc-callers.py -f binary]
 [Output: malloc called by 15 functions: sub_401000, sub_402000, ...]
 
 Found 15 functions that call malloc:
@@ -323,8 +323,8 @@ Found 15 functions that call malloc:
 User: "Decompile the main function and save it"
 
 Claude: I'll decompile main and save the output...
-[Writes: /tmp/ida-domain-decompile-main.py]
-[Runs: cd $SKILL_DIR && uv run python run.py /tmp/ida-domain-decompile-main.py -f binary]
+[Writes: /tmp/ida-domain-20260109_143120_518263-decompile-main.py]
+[Runs: cd $SKILL_DIR && uv run python run.py /tmp/ida-domain-20260109_143120_518263-decompile-main.py -f binary]
 [Output: Saved to /tmp/main.c]
 
 Done! The decompiled code is saved to /tmp/main.c
@@ -334,6 +334,6 @@ Done! The decompiled code is saved to /tmp/main.c
 
 - Each analysis script is custom-written for your specific request
 - Not limited to pre-built scripts - any IDA analysis task possible
-- Scripts written to `/tmp` for automatic cleanup (no clutter)
+- Scripts written to `/tmp` with microsecond timestamps for traceability and collision-free parallel execution
 - Code executes reliably with proper module resolution via `run.py`
 - Database opened read-only by default to prevent accidental modifications

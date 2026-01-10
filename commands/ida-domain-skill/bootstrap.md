@@ -22,6 +22,7 @@ The ida-domain source code is checked out at: `$SKILL_DIR/ida-domain/`
 
 1. **Explore the ida-domain source code** in `$SKILL_DIR/ida-domain/ida_domain/`
 2. **Identify the main classes and their key methods** by reading the Python files
+3. **Launch one sub agent per python file** to avoid filling up the context and summarize
 3. **Generate `API_REFERENCE.md`** in the skill root directory
 
 ## Output Format (API_REFERENCE.md)
