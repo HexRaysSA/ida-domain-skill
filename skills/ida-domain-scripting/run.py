@@ -16,13 +16,10 @@ Input file isolation:
 
 Usage:
     # 1. Execute a script file
-    uv run python run.py /tmp/analyze.py -f /path/to/binary.exe
+    uv run python run.py <work_dir>/script.py -f /path/to/binary.exe
 
     # 2. Execute inline code
     uv run python run.py -c "for f in db.functions: print(f.name)" -f binary.exe
-
-    # 3. Execute from stdin
-    cat /tmp/analyze.py | uv run python run.py -f binary.exe
 
 Command-line flags:
     -f, --file      Target binary or .i64 file (required)

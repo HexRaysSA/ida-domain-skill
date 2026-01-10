@@ -4,32 +4,42 @@ description: Write and execute Python scripts using the IDA Domain API for rever
 ---
 
 **IMPORTANT - Path Resolution:**
-This skill can be installed in different locations. Before executing any commands, determine the skill directory based on where you loaded this SKILL.md file, and use that path in all commands below. Replace `$SKILL_DIR` with the actual discovered path.
+This skill can be installed in different locations. Before executing any commands, determine the skill directory based
+on where you loaded this SKILL.md file, and use that path in all commands below. Replace `$SKILL_DIR` with the actual
+discovered path.
 
 Common installation paths:
+
 - Project-specific: `<project>/.claude/skills/ida-domain-scripting`
 - Manual global: `~/.claude/skills/ida-domain-scripting`
 
 # IDA Domain Scripting
 
-General-purpose binary analysis skill. I'll write custom IDAPython code for any reverse engineering task you request and execute it via the universal executor.
+General-purpose binary analysis skill. I'll write custom IDAPython code for any reverse engineering task you request and
+execute it via the universal executor.
 
 **CRITICAL WORKFLOW - Follow these steps in order:**
 
-1. **Check API_REFERENCE.md exists** - Always check that $SKILL_DIR/API_REFERENCE.md exists. Inform the user to run 
-   the bootstrap if not. 
+1. **Create a work dir in /tmp with timestamp** - NEVER write scripts to skill directory; always create a workdir
+   `/tmp/ida-domain-YYYYMMDD_HHMMSS_ffffff-<name>` with microseconds for uniqueness (e.g.,
+   `/tmp/ida-domain-20260109_143052_847291-list-functions`). Generate timestamp with: `datetime.now().
+   strftime
+   ('%Y%m%d_%H%M%S_%f')`.
+   This will always be referenced as <work_dir>
 
-2. **Write scripts to /tmp with timestamp** - NEVER write scripts to skill directory; always use `/tmp/ida-domain-YYYYMMDD_HHMMSS_ffffff-<name>.py` with microseconds for uniqueness (e.g., `/tmp/ida-domain-20260109_143052_847291-thunk-analysis.py`). Generate timestamp with: `datetime.now().strftime('%Y%m%d_%H%M%S_%f')`
+2. **Check API_REFERENCE.md exists** - Always check that $SKILL_DIR/API_REFERENCE.md exists. Inform the user to run
+   the bootstrap if not.
 
-3. **Execute from skill directory** - Always run: `cd $SKILL_DIR && uv run python run.py /tmp/script.py -f <binary>`
+3. **Execute from skill directory** - Always run:
+   `cd $SKILL_DIR && uv run python run.py <work_dir>/script.py -f <binary>`
 
 4. **Ask before saving** - Scripts that modify the database require explicit user confirmation before using `--save`
 
 ## How It Works
 
 1. You describe what you want to analyze/extract
-2. I write custom IDA Domain API code in `/tmp/ida-domain-YYYYMMDD_HHMMSS_ffffff-<name>.py` (timestamped with microseconds for parallel execution)
-3. I execute it via: `cd $SKILL_DIR && uv run python run.py /tmp/script.py -f <binary>`
+2. I write custom IDA Domain API code in `<work_dir>/script.py` (timestamped with microseconds for parallel execution)
+3. I execute it via: `cd $SKILL_DIR && uv run python run.py <work_dir>/script.py -f <binary>`
 4. Results displayed in real-time
 5. Script files auto-cleaned from /tmp by your OS
 
@@ -42,12 +52,14 @@ cd $SKILL_DIR && uv run python setup.py
 This clones ida-domain from GitHub and installs dependencies. Only needed once.
 
 **Using a specific version:**
+
 ```bash
 uv run python setup.py --ref v0.1.0   # Specific release
 uv run python setup.py --ref main     # Bleeding edge
 ```
 
 Requirements:
+
 - uv package manager
 - git
 - IDA Pro 9.1+
@@ -55,10 +67,10 @@ Requirements:
 
 ## Execution Pattern
 
-**Step 1: Write analysis script to /tmp**
+**Step 1: Write analysis script to <work_dir>**
 
 ```python
-# /tmp/ida-domain-analysis.py
+# <work_dir>/script.py
 for func in db.functions:
     name = db.functions.get_name(func)
     print(f"{name}: 0x{func.start_ea:08X}")
@@ -67,7 +79,7 @@ for func in db.functions:
 **Step 2: Execute from skill directory**
 
 ```bash
-cd $SKILL_DIR && uv run python run.py /tmp/ida-domain-analysis.py -f /path/to/binary
+cd $SKILL_DIR && uv run python run.py <work_dir>/script.py -f /path/to/binary
 ```
 
 **Step 3: Review results**
@@ -79,7 +91,7 @@ Scripts are auto-wrapped with `Database.open()` boilerplate. The `db` variable i
 ### List All Functions
 
 ```python
-# /tmp/ida-domain-list-functions.py
+# <work_dir>/script.py
 for func in db.functions:
     name = db.functions.get_name(func)
     size = func.end_ea - func.start_ea
@@ -89,7 +101,7 @@ for func in db.functions:
 ### Find Function by Name
 
 ```python
-# /tmp/ida-domain-find-function.py
+# <work_dir>/script.py
 func = db.functions.get_function_by_name("main")
 if func:
     print(f"Found main at 0x{func.start_ea:08X}")
@@ -106,7 +118,7 @@ else:
 ### Search Strings
 
 ```python
-# /tmp/ida-domain-search-strings.py
+# <work_dir>/script.py
 import re
 
 # Find all strings
@@ -127,7 +139,7 @@ for s in db.strings:
 ### Analyze Cross-References
 
 ```python
-# /tmp/ida-domain-xrefs.py
+# <work_dir>/script.py
 # Get xrefs TO an address
 target = 0x00401000
 print(f"References TO 0x{target:08X}:")
@@ -143,7 +155,7 @@ for xref in db.xrefs.from_ea(target):
 ### Decompile Function
 
 ```python
-# /tmp/ida-domain-decompile.py
+# <work_dir>/script.py
 func = db.functions.get_function_by_name("main")
 if func:
     try:
@@ -156,7 +168,7 @@ if func:
 ### Analyze Function Complexity
 
 ```python
-# /tmp/ida-domain-complexity.py
+# <work_dir>/script.py
 complex_funcs = []
 for func in db.functions:
     flowchart = db.functions.get_flowchart(func)
@@ -178,7 +190,7 @@ for name, addr, cc in complex_funcs[:10]:
 ### Search Byte Patterns
 
 ```python
-# /tmp/ida-domain-patterns.py
+# <work_dir>/script.py
 # Search for NOP sled
 pattern = b"\x90\x90\x90\x90"
 results = db.bytes.find_binary_sequence(pattern)
@@ -194,7 +206,7 @@ for addr in db.bytes.find_binary_sequence(prologue):
 ### Export to JSON
 
 ```python
-# /tmp/ida-domain-export.py
+# <work_dir>/script.py
 import json
 from pathlib import Path
 
@@ -226,6 +238,7 @@ cd $SKILL_DIR && uv run python run.py -c "print(f'{db.module}: {db.architecture}
 ```
 
 **When to use inline vs files:**
+
 - **Inline**: Quick one-off tasks (count functions, get binary info, check if symbol exists)
 - **Files**: Complex analysis, multi-step tasks, anything user might want to re-run
 
@@ -245,7 +258,6 @@ For comprehensive IDA Domain API documentation, see [API_REFERENCE.md](API_REFER
 
 ## Tips
 
-- **Use /tmp for scripts with timestamp** - Write to `/tmp/ida-domain-YYYYMMDD_HHMMSS_ffffff-<name>.py` (include microseconds `%f` to avoid collisions in parallel execution)
 - **Default is read-only** - Use `--save` only when modifications should persist (and ask user first!)
 - **Timeout** - Default 30 minutes; use `--timeout 0` for long-running analysis
 - **No-wrap mode** - Use `--no-wrap` when your script already has `Database.open()`
@@ -255,19 +267,23 @@ For comprehensive IDA Domain API documentation, see [API_REFERENCE.md](API_REFER
 ## Troubleshooting
 
 **When encountering errors:**
-Check the ida-domain source code first by searching for the method signature in `$SKILL_DIR/ida-domain/ida_domain/`. The API may differ from what's documented or expected.
+Check the ida-domain source code first by searching for the method signature in `$SKILL_DIR/ida-domain/ida_domain/`. The
+API may differ from what's documented or expected.
 
 **Virtual environment not found:**
+
 ```bash
 cd $SKILL_DIR && uv run python setup.py
 ```
 
 **IDA SDK fails to load / IDADIR error:**
+
 ```bash
 export IDADIR=/path/to/ida
 ```
 
 **Script timeout:**
+
 ```bash
 cd $SKILL_DIR && uv run python run.py --timeout 3600 ...  # 1 hour
 cd $SKILL_DIR && uv run python run.py --timeout 0 ...     # No timeout
@@ -278,12 +294,14 @@ Use `db.xrefs.to_ea(addr)` not `db.xrefs.get_xrefs_to(addr)`
 
 **AttributeError on func_t object:**
 Call methods on `db.functions`, not on the func object:
+
 ```python
 # Wrong: func.get_callers()
 # Right: db.functions.get_callers(func)
 ```
 
 **UnicodeDecodeError when reading strings:**
+
 ```python
 for s in db.strings:
     try:
@@ -298,8 +316,8 @@ for s in db.strings:
 User: "How many functions are in this binary?"
 
 Claude: I'll count the functions. Let me analyze the binary...
-[Writes: /tmp/ida-domain-20260109_143052_847291-count.py]
-[Runs: cd $SKILL_DIR && uv run python run.py /tmp/ida-domain-20260109_143052_847291-count.py -f binary]
+[Writes: <work_dir>/script.py]
+[Runs: cd $SKILL_DIR && uv run python run.py <work_dir>/script.py -f binary]
 [Output: Functions: 250]
 
 The binary contains 250 functions.
@@ -309,8 +327,8 @@ The binary contains 250 functions.
 User: "Find all functions that call malloc"
 
 Claude: I'll find all callers of malloc...
-[Writes: /tmp/ida-domain-20260109_143105_392847-malloc-callers.py]
-[Runs: cd $SKILL_DIR && uv run python run.py /tmp/ida-domain-20260109_143105_392847-malloc-callers.py -f binary]
+[Writes: <work_dir>/script.py]
+[Runs: cd $SKILL_DIR && uv run python run.py <work_dir>/script.py -f binary]
 [Output: malloc called by 15 functions: sub_401000, sub_402000, ...]
 
 Found 15 functions that call malloc:
@@ -323,17 +341,10 @@ Found 15 functions that call malloc:
 User: "Decompile the main function and save it"
 
 Claude: I'll decompile main and save the output...
-[Writes: /tmp/ida-domain-20260109_143120_518263-decompile-main.py]
-[Runs: cd $SKILL_DIR && uv run python run.py /tmp/ida-domain-20260109_143120_518263-decompile-main.py -f binary]
+[Writes: <work_dir>/script.py]
+[Runs: cd $SKILL_DIR && uv run python run.py <work_dir>/script.py -f binary]
 [Output: Saved to /tmp/main.c]
 
 Done! The decompiled code is saved to /tmp/main.c
 ```
 
-## Notes
-
-- Each analysis script is custom-written for your specific request
-- Not limited to pre-built scripts - any IDA analysis task possible
-- Scripts written to `/tmp` with microsecond timestamps for traceability and collision-free parallel execution
-- Code executes reliably with proper module resolution via `run.py`
-- Database opened read-only by default to prevent accidental modifications
