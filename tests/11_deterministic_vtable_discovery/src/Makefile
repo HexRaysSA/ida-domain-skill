@@ -7,7 +7,7 @@
 # that are not available in Zig.
 
 CXX ?= g++
-BUILD_DIR = ../build
+BUILD_DIR = ../
 TARGET = input
 SRC = vtable_demo.cpp
 

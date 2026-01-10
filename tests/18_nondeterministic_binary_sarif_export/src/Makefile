@@ -3,7 +3,7 @@
 
 ZIG = zig
 SRC_DIR = src
-OUT_DIR = .
+OUT_DIR = ..
 TARGET = input
 
 # Source file

@@ -5,14 +5,19 @@ IDA Domain Universal Script Executor
 Executes Python scripts that use IDA Domain with automatic boilerplate wrapping.
 This is the main entry point for Claude-generated analysis scripts.
 
-Input file isolation:
-    The executor creates a temporary run directory (/tmp/ida-domain-run-<uuid>/)
-    and copies the input file there before execution. This prevents IDA from
-    creating artifact files (id0, id1, id2, nam, til) in the original directory.
-    The run directory is automatically cleaned up after execution.
+Input file caching:
+    The executor uses a persistent cache directory (/tmp/ida-domain-cache/)
+    to store input files and their IDA databases. The cache directory structure
+    is based on the full path of the input file (with path separators replaced
+    by underscores).
+
+    Benefits:
+    - Prevents IDA from creating artifact files in the original directory
+    - Allows reuse of IDA databases from previous runs, avoiding reanalysis
+    - Subsequent runs on the same binary are significantly faster
 
     When --save is used with an IDA database (.i64/.idb), the modified database
-    is copied back to the original location before cleanup.
+    is copied back to the original location.
 
 Usage:
     # 1. Execute a script file
@@ -40,7 +45,6 @@ import subprocess
 import sys
 import tempfile
 import time
-import uuid
 from pathlib import Path
 
 
@@ -154,6 +158,10 @@ def cleanup_old_run_directories() -> int:
 # IDA database file extensions (created when opening a binary)
 IDA_ARTIFACT_EXTENSIONS = {".i64", ".idb", ".id0", ".id1", ".id2", ".nam", ".til"}
 
+# Cache directory for persistent storage of IDA databases
+# This avoids reanalysis on subsequent runs of the same binary
+CACHE_DIR = Path(tempfile.gettempdir()) / "ida-domain-cache"
+
 
 def is_ida_database(path: Path) -> bool:
     """
@@ -168,63 +176,112 @@ def is_ida_database(path: Path) -> bool:
     return path.suffix.lower() in {".i64", ".idb"}
 
 
-def create_run_directory(target_path: Path) -> tuple[Path, Path]:
+def sanitize_path_for_cache(path: Path) -> str:
     """
-    Create a temporary run directory and copy the input file there.
+    Convert a file path to a safe cache directory name.
 
-    This isolates IDA's generated files (id0, id1, id2, nam, til) from the
-    original input directory.
+    Replaces path separators with underscores.
 
     Args:
-        target_path: Path to the target binary or .i64 file.
+        path: Absolute path to the file.
 
     Returns:
-        Tuple of (run_directory, copied_file_path).
+        Sanitized string suitable for use as a directory name.
     """
-    # Create a unique run directory
-    run_id = uuid.uuid4().hex[:8]
-    run_dir = Path(tempfile.gettempdir()) / f"ida-domain-run-{run_id}"
-    run_dir.mkdir(parents=True, exist_ok=True)
-
-    # Copy the input file to the run directory
-    copied_path = run_dir / target_path.name
-    shutil.copy2(target_path, copied_path)
-
-    print_info(f"Created run directory: {run_dir}")
-    return run_dir, copied_path
+    path_str = str(path)
+    # Replace both forward and back slashes with underscores
+    sanitized = path_str.replace("/", "_").replace("\\", "_")
+    # Remove leading underscore if present
+    if sanitized.startswith("_"):
+        sanitized = sanitized[1:]
+    return sanitized
 
 
-def cleanup_run_directory(
-    run_dir: Path,
+def get_or_create_cache_entry(target_path: Path) -> tuple[Path, Path, bool]:
+    """
+    Get or create a cache entry for the target file.
+
+    The cache uses a persistent directory structure based on the file path.
+    If the file already exists in the cache, it is reused (including any
+    IDA database files from previous runs).
+
+    Cache structure:
+        /tmp/ida-domain-cache/<sanitized_path>/<filename>
+
+    Args:
+        target_path: Absolute path to the target binary or .i64 file.
+
+    Returns:
+        Tuple of (cache_entry_dir, cached_file_path, already_existed).
+        already_existed is True if the file was already in the cache.
+    """
+    # Ensure cache root exists
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+
+    # Create cache entry directory based on sanitized path
+    cache_name = sanitize_path_for_cache(target_path)
+    cache_entry_dir = CACHE_DIR / cache_name
+    cache_entry_dir.mkdir(parents=True, exist_ok=True)
+
+    cached_file = cache_entry_dir / target_path.name
+
+    # Check if file already exists in cache
+    if cached_file.exists():
+        # Check if there's also a cached IDA database for binaries
+        if not is_ida_database(target_path):
+            cached_i64 = cache_entry_dir / (target_path.stem + ".i64")
+            if cached_i64.exists():
+                print_info(f"Using cached database: {cached_i64}")
+            else:
+                print_info(f"Using cached file: {cached_file}")
+        else:
+            print_info(f"Using cached database: {cached_file}")
+        return cache_entry_dir, cached_file, True
+
+    # Copy file to cache
+    shutil.copy2(target_path, cached_file)
+    print_info(f"Cached file to: {cached_file}")
+
+    return cache_entry_dir, cached_file, False
+
+
+def handle_save_if_requested(
+    cache_dir: Path,
     original_path: Path,
-    copied_path: Path,
+    cached_path: Path,
     save_requested: bool,
 ) -> None:
     """
-    Clean up the run directory after execution.
+    Handle --save flag after execution.
 
     If save was requested and the input was an IDA database, copy the
     modified database back to the original location.
 
+    Note: The cache directory is NOT cleaned up - this is intentional
+    to allow subsequent runs to reuse the cached IDA database.
+
     Args:
-        run_dir: The temporary run directory to clean up.
+        cache_dir: The cache entry directory.
         original_path: Original path to the input file.
-        copied_path: Path to the copied file in the run directory.
+        cached_path: Path to the cached file.
         save_requested: Whether --save was requested.
     """
+    if not save_requested:
+        return
+
     try:
         # If save was requested and input was an IDA database, copy it back
-        if save_requested and is_ida_database(original_path):
-            if copied_path.exists():
-                shutil.copy2(copied_path, original_path)
+        if is_ida_database(original_path):
+            if cached_path.exists():
+                shutil.copy2(cached_path, original_path)
                 print_info(f"Saved modified database back to: {original_path}")
-
-        # Clean up the entire run directory
-        if run_dir.exists():
-            shutil.rmtree(run_dir)
-            print_info(f"Cleaned up run directory: {run_dir}")
+        else:
+            # For binaries, the .i64 stays in the cache for reuse
+            cached_i64 = cache_dir / (original_path.stem + ".i64")
+            if cached_i64.exists():
+                print_info(f"Database saved in cache: {cached_i64}")
     except OSError as e:
-        print_warning(f"Failed to clean up run directory: {e}")
+        print_warning(f"Failed to save database: {e}")
 
 
 def get_user_code(args: argparse.Namespace) -> tuple[str, str]:
@@ -478,14 +535,7 @@ def main() -> int:
     if cleaned_files > 0 or cleaned_dirs > 0:
         print_info(f"Cleaned up {cleaned_files} old temp file(s) and {cleaned_dirs} orphaned run dir(s).")
 
-    # Step 3: Get user code
-    try:
-        user_code, source_desc = get_user_code(args)
-    except ValueError as e:
-        print_error(str(e))
-        return 1
-
-    # Step 4: Validate target file
+    # Step 3: Validate target file (moved before cache lookup)
     target_path = Path(args.target)
     if not target_path.exists():
         print_error(f"Target file not found: {args.target}")
@@ -497,30 +547,37 @@ def main() -> int:
     # Resolve to absolute path
     original_path = target_path.resolve()
 
-    # Step 5: Create isolated run directory with copied input file
-    # This prevents IDA from creating artifacts (id0, id1, id2, nam, til)
-    # in the original input directory
-    run_dir, copied_path = create_run_directory(original_path)
+    # Step 4: Get or create cache entry for the input file
+    # This prevents IDA from creating artifacts in the original directory
+    # and allows reuse of IDA databases from previous runs
+    cache_dir, cached_path, _ = get_or_create_cache_entry(original_path)
 
+    # Step 5: Get user code
     try:
-        # Step 6: Wrap code (unless --no-wrap)
-        # Use the copied file path so IDA operates in the temp directory
-        if args.no_wrap:
-            final_code = user_code
-            print_info(f"Executing {source_desc} without wrapping...")
-        else:
-            final_code = wrap_code(user_code, str(copied_path), args.save)
-            print_info(f"Executing wrapped {source_desc}...")
+        user_code, source_desc = get_user_code(args)
+    except ValueError as e:
+        print_error(str(e))
+        return 1
 
-        # Step 7: Execute
-        # Convert timeout: 0 means no timeout (None), otherwise use the value
-        timeout = args.timeout if args.timeout > 0 else None
-        exit_code = execute_script(final_code, timeout=timeout)
-        return exit_code
-    finally:
-        # Step 8: Clean up run directory
-        # If --save was used with an IDA database, copy it back first
-        cleanup_run_directory(run_dir, original_path, copied_path, args.save)
+    # Step 6: Wrap code (unless --no-wrap)
+    # Use the cached file path so IDA operates in the cache directory
+    if args.no_wrap:
+        final_code = user_code
+        print_info(f"Executing {source_desc} without wrapping...")
+    else:
+        final_code = wrap_code(user_code, str(cached_path), args.save)
+        print_info(f"Executing wrapped {source_desc}...")
+
+    # Step 7: Execute
+    # Convert timeout: 0 means no timeout (None), otherwise use the value
+    timeout = args.timeout if args.timeout > 0 else None
+    exit_code = execute_script(final_code, timeout=timeout)
+
+    # Step 8: Handle --save if requested
+    # Note: Cache directory is NOT cleaned up to allow reuse on subsequent runs
+    handle_save_if_requested(cache_dir, original_path, cached_path, args.save)
+
+    return exit_code
 
 
 if __name__ == "__main__":

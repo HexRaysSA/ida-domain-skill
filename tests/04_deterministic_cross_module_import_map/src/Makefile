@@ -1,8 +1,8 @@
 # Makefile for Cross-Module Import Usage Map test binary
 # Compiles Zig source to produce a binary with diverse imports
 
-TARGET = input
-SRC_DIR = src
+TARGET = ../input
+SRC_DIR = .
 SRC = $(SRC_DIR)/main.zig
 
 .PHONY: all clean release debug

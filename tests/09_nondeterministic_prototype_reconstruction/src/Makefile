@@ -1,7 +1,7 @@
 # Makefile for prototype reconstruction exercise binary
 # Creates a stripped binary demonstrating varied function signatures
 
-BINARY = input
+BINARY = ../input
 SRC_DIR = src
 SRC = $(SRC_DIR)/main.zig
 

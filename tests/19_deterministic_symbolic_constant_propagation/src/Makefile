@@ -2,13 +2,13 @@
 # Compiles Zig source with optimizations disabled to preserve patterns
 
 # Output binary name
-TARGET = symbolic_constants
+TARGET = input
 
 # Zig source file
 SRC = symbolic_constants.zig
 
 # Build directory
-BUILD_DIR = ../build
+BUILD_DIR = ../
 
 # Zig compiler flags
 # -O ReleaseFast would optimize away our patterns, so we use Debug or ReleaseSafe

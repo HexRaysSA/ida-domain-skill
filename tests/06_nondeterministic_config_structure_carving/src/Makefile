@@ -2,8 +2,8 @@
 # Builds a binary with embedded configuration blob for IDA analysis
 
 ZIG := zig
-SRC_DIR := src
-OUT_DIR := .
+SRC_DIR := .
+OUT_DIR := ..
 TARGET := input
 
 # Build for x86_64 macOS by default

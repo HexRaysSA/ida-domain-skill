@@ -7,8 +7,8 @@
 # Optimized builds (Release*) may inline thunks, reducing their visibility.
 
 ZIG ?= zig
-BUILD_DIR = ../build
-TARGET = thunk_forest
+BUILD_DIR = ../
+TARGET = input
 SRC = thunk_forest.zig
 
 # Default target - Debug mode preserves all thunk chains for IDA analysis

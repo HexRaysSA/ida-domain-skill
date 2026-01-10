@@ -1,7 +1,7 @@
 # Makefile for Exercise 12: Decompiler Renaming
 # Builds a stripped binary with libc API calls for variable renaming exercises
 
-BINARY = input
+BINARY = ../input
 SRC_DIR = src
 SRC = $(SRC_DIR)/main.zig
 

@@ -2,7 +2,7 @@
 # Builds a binary with switch/jump-table based dispatch patterns
 
 ZIG ?= zig
-OUTPUT_DIR := .
+OUTPUT_DIR := ..
 SRC_DIR := src
 BINARY := $(OUTPUT_DIR)/input
 
