@@ -1,0 +1,1 @@
+- clone and analyze the following projects to cross check if our plugin writing assumptions in REFERENCE.md are correct. 

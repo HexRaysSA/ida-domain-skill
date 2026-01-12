@@ -1,0 +1,9 @@
+{
+  "name": "ida-plugin",
+  "description": "Develop IDA Python plugins for IDA Pro",
+  "version": "1.0.0",
+  "author": {
+    "name": "HexRaysSA",
+    "email": "support@hex-rays.com"
+  }
+}
