@@ -1,38 +1,24 @@
 {
-  "name": "ida-domain-skill",
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "ida-claude-plugins",
+  "version": "1.0.0",
+  "description": "Bundled plugins for Claude Code including IDA Domain scription and IDA Plugin development",
   "owner": {
     "name": "HexRaysSA",
     "email": "support@hex-rays.com"
   },
-  "metadata": {
-    "description": "IDA Domain scripting skill for Claude Code",
-    "version": "1.0.0"
-  },
   "plugins": [
     {
-      "name": "ida-domain-skill",
-      "source": "./",
+      "name": "ida-plugin",
       "description": "Claude Code Skill for reverse engineering with IDA Pro. Claude autonomously writes and executes IDA Domain scripts to analyze binaries, extract functions, decompile code, and automate any reverse engineering task.",
-      "version": "1.0.0",
-      "author": {
-        "name": "Hex-Rays SA"
-      },
-      "homepage": "https://github.com/HexRaysSA/ida-domain-skill",
-      "repository": "https://github.com/HexRaysSA/ida-domain-skill",
-      "license": "MIT",
-      "keywords": [
-        "claude-skill",
-        "claude-code",
-        "ida-pro",
-        "reverse-engineering",
-        "binary-analysis",
-        "ida-domain",
-        "hex-rays",
-        "decompiler",
-        "model-invoked"
-      ],
-      "category": "reverse-engineering",
-      "tags": ["ida-pro", "reverse-engineering", "binary-analysis", "decompiler", "hex-rays"]
+      "source": "./plugins/ida-plugin",
+      "category": "reverse-engineering"
+    },
+    {
+      "name": "ida-domain",
+      "description": "Claude Code Skill for reverse engineering with IDA Pro. Claude autonomously writes and executes IDA Domain scripts to analyze binaries, extract functions, decompile code, and automate any reverse engineering task.",
+      "source": "./plugins/ida-domain",
+      "category": "reverse-engineering"
     }
   ]
 }

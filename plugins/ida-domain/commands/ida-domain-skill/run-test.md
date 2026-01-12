@@ -21,11 +21,14 @@ The input binary for this exercise is located at: `tests/$ARGUMENTS/input`
 1. **Read prompt.txt** - Read and understand the exercise requirements from the prompt above
 2. **ALWAYS use the ida-domain-script-skill** - Always use the skill to solve the exercise. Stop if you don't have
    the skill
-4. **Use the input binary** - Execute the scripts against the input binary, never read the binary yourself.
-5. **Report the results** - Present the results as specified in the expected output section
-6. **Save the script** - Save the generated script and output to `tests/runs/`
+3. **Use the input binary** - Execute the scripts against the input binary, never read the binary yourself.
+4. **Report the results** - Present the results as specified in the expected output section
+5. **Save the script** - Save the generated script and output to `tests/runs/`
 
 Use the Skill tool to invoke `ida-domain-scripting` for writing and executing your analysis scripts.
+
+<IMPORTANT>You can ONLY read prompt.txt and pass the input file to the skill</IMPORTANT>
+<IMPORTANT>You can not read anything else from the tests folder</IMPORTANT>
 
 Remember:
 
