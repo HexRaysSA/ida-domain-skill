@@ -5,46 +5,35 @@ Quick reference for the IDA Domain API. For basic usage, see [SKILL.md](SKILL.md
 ## Table of Contents
 
 - [Database](#database)
-- [Analysis](#analysis)
 - [Functions](#functions)
-- [Segments](#segments)
 - [Instructions](#instructions)
-- [Bytes](#bytes)
-- [Xrefs](#xrefs)
+- [Segments](#segments)
 - [Strings](#strings)
+- [Xrefs](#xrefs)
 - [Names](#names)
 - [Types](#types)
+- [Bytes](#bytes)
 - [Comments](#comments)
-- [Decompiler](#decompiler)
-- [Imports](#imports)
 - [Entries](#entries)
-- [Search](#search)
-- [CallGraph](#callgraph)
 - [Heads](#heads)
-- [Fixups](#fixups)
-- [StackFrames](#stack-frames)
-- [Switches](#switches)
-- [Problems](#problems)
-- [Exporter](#exporter)
-- [TryBlocks](#try-blocks)
-- [FlowChart](#flowchart)
-- [Operands](#operands)
+- [Flowchart](#flowchart)
+- [Signature Files](#signature-files)
 - [Enums Reference](#enums-reference)
 
 ---
 
 ## Database
 
-The `Database` class is the entry point. In wrapped scripts, `db` is available automatically.
+The `Database` class is your entry point. Use `db` in auto-wrapped scripts.
 
 ### Opening a Database
 
 ```python
-# Library mode: open a database file
+# Library mode: Open and automatically close
 with Database.open("path/to/file.exe", save_on_close=True) as db:
-    print(f"Loaded: {db.path}")
+    print(f"Loaded: {db.module}")
 
-# IDA GUI mode: get current database
+# IDA GUI mode: Get handle to current database
 db = Database.open()
 ```
 
@@ -52,661 +41,306 @@ db = Database.open()
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `path` | `str` | Input file path |
-| `module` | `str` | Module name (filename) |
-| `base_address` | `ea_t` | Image base address |
-| `minimum_ea` | `ea_t` | Minimum effective address |
-| `maximum_ea` | `ea_t` | Maximum effective address |
-| `filesize` | `int` | Input file size in bytes |
-| `md5` | `str` | MD5 hash of input file |
-| `sha256` | `str` | SHA256 hash of input file |
-| `crc32` | `int` | CRC32 checksum |
-| `architecture` | `str` | Processor architecture (e.g., "metapc") |
-| `bitness` | `int` | Application bitness (32 or 64) |
-| `format` | `str` | File format type (e.g., "PE") |
-| `load_time` | `str` | Database creation timestamp |
-| `execution_mode` | `ExecutionMode` | User or Kernel mode |
-| `compiler_information` | `CompilerInformation` | Compiler details |
-| `metadata` | `DatabaseMetadata` | All metadata as dataclass |
-| `current_ea` | `ea_t` | Current screen address (get/set) |
-| `start_ip` | `ea_t` | Start instruction pointer (get/set) |
+| `db.path` | `str` | Input file path |
+| `db.module` | `str` | Module name |
+| `db.base_address` | `ea_t` | Image base address |
+| `db.minimum_ea` | `ea_t` | Minimum effective address |
+| `db.maximum_ea` | `ea_t` | Maximum effective address |
+| `db.filesize` | `int` | Input file size |
+| `db.md5` | `str` | MD5 hash of input file |
+| `db.sha256` | `str` | SHA256 hash of input file |
+| `db.architecture` | `str` | Processor architecture |
+| `db.bitness` | `int` | Application bitness (32/64) |
+| `db.format` | `str` | File format type |
+| `db.execution_mode` | `ExecutionMode` | User or Kernel mode |
+| `db.current_ea` | `ea_t` | Current screen EA (readable/writable) |
+| `db.start_ip` | `ea_t` | Start instruction pointer |
 
 ### Database Methods
 
 ```python
-# Check if address is valid
-if db.is_valid_ea(0x401000):
-    print("Address is mapped")
-
-# Save database to new location
-db.save_as("analyzed.idb")
-
-# Execute a Python script
-db.execute_script("my_script.py")
+db.is_valid_ea(ea, strict_check=True)  # Check if address is valid
+db.is_open()                            # Check if database is loaded
+db.execute_script(file_path)            # Execute a Python script
+db.close(save=True)                     # Close database (library mode only)
 ```
 
----
+### Entity Handlers
 
-## Analysis
-
-Control IDA's auto-analysis engine via `db.analysis`.
+Access all IDA data through these handlers:
 
 ```python
-# Wait for analysis to complete (most common)
-db.analysis.wait()
-
-# Check analysis state
-if db.analysis.is_complete:
-    print("Analysis finished")
-
-# Analyze a specific range
-db.analysis.analyze(0x401000, 0x402000, wait=True)
-
-# Schedule analysis at address
-db.analysis.schedule(0x401000, "code")      # or AnalysisType.CODE
-db.analysis.schedule(0x401000, "function")  # or AnalysisType.FUNCTION
-
-# Cancel pending analysis
-db.analysis.cancel(0x401000, 0x402000)
-
-# Temporarily disable auto-analysis
-prev = db.analysis.set_enabled(False)
-# ... do batch operations ...
-db.analysis.set_enabled(prev)
-db.analysis.wait()
+db.functions      # Function operations
+db.instructions   # Instruction operations
+db.segments       # Segment operations
+db.strings        # String operations
+db.xrefs          # Cross-reference operations
+db.names          # Name/symbol operations
+db.types          # Type information operations
+db.bytes          # Raw byte operations
+db.comments       # Comment operations
+db.entries        # Entry point operations
+db.heads          # Head (item) operations
+db.signature_files # FLIRT signature operations
 ```
-
-### AnalysisType Enum
-
-| Value | Description |
-|-------|-------------|
-| `CODE` | Schedule instruction creation |
-| `FUNCTION` | Schedule function creation |
-| `REANALYSIS` | Schedule reanalysis |
 
 ---
 
 ## Functions
-
-Access functions via `db.functions`.
 
 ### Iterating Functions
 
 ```python
 # Iterate all functions
 for func in db.functions:
-    name = db.functions.get_name(func)
-    print(f"{name} at 0x{func.start_ea:x}")
+    print(db.functions.get_name(func))
 
 # Get function count
-print(f"Total functions: {len(db.functions)}")
-
-# Paginated access
-page = db.functions.get_page(offset=0, limit=100)
-
-# Chunked processing
-for chunk in db.functions.get_chunked(1000):
-    process_batch(chunk)
+count = len(db.functions)
 ```
 
 ### Finding Functions
 
 ```python
-# Get function at/containing address
-func = db.functions.get_at(0x401000)
+func = db.functions.get_at(0x401000)           # By address
+func = db.functions.get_function_by_name("main")  # By name
+func = db.functions.get_next(ea)               # Next function after ea
 
-# Get function by name
-func = db.functions.get_function_by_name("main")
-
-# Get functions in range
-for func in db.functions.get_between(0x401000, 0x410000):
-    print(db.functions.get_name(func))
-
-# Check if function exists
-if db.functions.exists_at(0x401000):
-    print("Function exists")
-
-# Navigate functions
-next_func = db.functions.get_next(0x401000)
-prev_func = db.functions.get_previous(0x401000)
+# Functions in range
+for func in db.functions.get_between(start_ea, end_ea):
+    print(func.start_ea)
 ```
 
 ### Function Properties
 
 ```python
-func = db.functions.get_at(0x401000)
-
-# Basic info
 name = db.functions.get_name(func)
 signature = db.functions.get_signature(func)
-flags = db.functions.get_flags(func)
-comment = db.functions.get_comment(func, repeatable=False)
+flags = db.functions.get_flags(func)  # Returns FunctionFlags
 
 # Check function attributes
-if db.functions.does_return(func):
-    print("Function returns")
-if db.functions.is_far(func):
-    print("Far function")
+db.functions.is_far(func)
+db.functions.does_return(func)
 ```
 
 ### Function Code
 
 ```python
 # Get disassembly lines
-for line in db.functions.get_disassembly(func):
-    print(line)
+lines = db.functions.get_disassembly(func, remove_tags=True)
 
 # Get decompiled pseudocode
-for line in db.functions.get_pseudocode(func):
-    print(line)
+pseudocode = db.functions.get_pseudocode(func, remove_tags=True)
 
-# Get instructions
+# Get microcode
+microcode = db.functions.get_microcode(func, remove_tags=True)
+```
+
+### Function Analysis
+
+```python
+# Get instructions in function
 for insn in db.functions.get_instructions(func):
-    print(f"0x{insn.ea:x}: {db.instructions.get_mnemonic(insn)}")
+    print(insn.ea)
 
-# Get flowchart (basic blocks)
+# Get flowchart for basic blocks
 flowchart = db.functions.get_flowchart(func)
 for block in flowchart:
-    print(f"Block 0x{block.start_ea:x} - 0x{block.end_ea:x}")
+    print(f"Block: {block.start_ea:#x} - {block.end_ea:#x}")
+
+# Get callers/callees
+callers = db.functions.get_callers(func)
+callees = db.functions.get_callees(func)
+
+# Get function chunks
+for chunk in db.functions.get_chunks(func):
+    print(f"Chunk: {chunk.start_ea:#x}, main={chunk.is_main}")
+
+# Get data items within function
+for data_ea in db.functions.get_data_items(func):
+    print(f"Data at {data_ea:#x}")
 ```
 
 ### Local Variables
 
 ```python
 # Get all local variables
-for lvar in db.functions.get_local_variables(func):
-    print(f"{lvar.name}: {lvar.type_str} (arg={lvar.is_argument})")
+lvars = db.functions.get_local_variables(func)
+for lvar in lvars:
+    print(f"{lvar.name}: {lvar.type_str}, arg={lvar.is_argument}")
 
 # Find variable by name
-lvar = db.functions.get_local_variable_by_name(func, "buffer")
+lvar = db.functions.get_local_variable_by_name(func, "result")
 
 # Get variable references in pseudocode
 refs = db.functions.get_local_variable_references(func, lvar)
 for ref in refs:
-    print(f"{ref.access_type} at line {ref.line_number}")
-```
-
-### Function Relationships
-
-```python
-# Get callers (functions that call this one)
-for caller in db.functions.get_callers(func):
-    print(f"Called by: {db.functions.get_name(caller)}")
-
-# Get callees (functions called by this one)
-for callee in db.functions.get_callees(func):
-    print(f"Calls: {db.functions.get_name(callee)}")
+    print(f"Line {ref.line_number}: {ref.access_type} in {ref.context}")
 ```
 
 ### Modifying Functions
 
 ```python
-# Rename function
-db.functions.set_name(func, "my_function")
-
-# Set comment
-db.functions.set_comment(func, "This function does X", repeatable=True)
-
-# Create new function
-db.functions.create_at(0x401000)
-
-# Delete function
-db.functions.remove(0x401000)
-
-# Force reanalysis
-db.functions.reanalyze(func)
+db.functions.set_name(func, "new_name")
+db.functions.set_comment(func, "This function does X", repeatable=False)
+db.functions.create(ea)   # Create function at address
+db.functions.remove(ea)   # Remove function at address
 ```
-
-### FunctionFlags Enum
-
-| Flag | Description |
-|------|-------------|
-| `NORET` | Function doesn't return |
-| `LIB` | Library function |
-| `THUNK` | Thunk (jump) function |
-| `HIDDEN` | Hidden function chunk |
-| `FRAME` | Uses frame pointer |
-
----
-
-## Segments
-
-Access memory segments via `db.segments`.
-
-### Iterating Segments
-
-```python
-for seg in db.segments:
-    name = db.segments.get_name(seg)
-    size = db.segments.get_size(seg)
-    print(f"{name}: 0x{seg.start_ea:x} - 0x{seg.end_ea:x} ({size} bytes)")
-```
-
-### Finding Segments
-
-```python
-# Get segment containing address
-seg = db.segments.get_at(0x401000)
-
-# Get segment by name
-seg = db.segments.get_by_name(".text")
-
-# Get by index
-seg = db.segments.get_by_index(0)
-
-# Navigation
-first = db.segments.get_first()
-last = db.segments.get_last()
-next_seg = db.segments.get_next(seg)
-```
-
-### Segment Properties
-
-```python
-name = db.segments.get_name(seg)
-size = db.segments.get_size(seg)
-bitness = db.segments.get_bitness(seg)      # 16, 32, or 64
-seg_class = db.segments.get_class(seg)       # "CODE", "DATA", etc.
-seg_type = db.segments.get_type(seg)         # SegmentType enum
-comment = db.segments.get_comment(seg)
-```
-
-### Modifying Segments
-
-```python
-# Rename segment
-db.segments.set_name(seg, ".mycode")
-
-# Set class
-db.segments.set_class(seg, PredefinedClass.CODE)
-
-# Set permissions
-db.segments.set_permissions(seg, SegmentPermissions.READ | SegmentPermissions.EXEC)
-
-# Add/remove permissions
-db.segments.add_permissions(seg, SegmentPermissions.WRITE)
-db.segments.remove_permissions(seg, SegmentPermissions.WRITE)
-
-# Change bounds
-db.segments.set_start(seg, 0x400000)
-db.segments.set_end(seg, 0x500000)
-```
-
-### Creating/Deleting Segments
-
-```python
-# Add new segment
-seg = db.segments.add(
-    seg_para=0,
-    start_ea=0x401000,
-    end_ea=0x402000,
-    seg_name=".custom",
-    seg_class=PredefinedClass.CODE
-)
-
-# Delete segment
-db.segments.delete(seg, keep_data=False)
-
-# Move segment
-result = db.segments.move(seg, to=0x500000)
-
-# Rebase entire program
-result = db.segments.rebase(delta=0x10000)
-```
-
-### Segment Enums
-
-**SegmentPermissions:**
-`NONE`, `READ`, `WRITE`, `EXEC`, `ALL`
-
-**PredefinedClass:**
-`CODE`, `DATA`, `CONST`, `STACK`, `BSS`, `XTRN`
-
-**SegmentType:**
-`NORM`, `XTRN`, `CODE`, `DATA`, `BSS`
 
 ---
 
 ## Instructions
-
-Access instructions via `db.instructions`.
-
-### Getting Instructions
-
-```python
-# Decode instruction at address
-insn = db.instructions.get_at(0x401000)
-
-# Get disassembly text
-text = db.instructions.get_disassembly(insn)
-mnemonic = db.instructions.get_mnemonic(insn)
-size = db.instructions.get_size(0x401000)
-
-# Check if can decode
-if db.instructions.can_decode(0x401000):
-    insn = db.instructions.get_at(0x401000)
-```
 
 ### Iterating Instructions
 
 ```python
 # All instructions in database
 for insn in db.instructions:
-    print(f"0x{insn.ea:x}: {db.instructions.get_mnemonic(insn)}")
-
-# Instructions in range
-for insn in db.instructions.get_between(0x401000, 0x402000):
     print(db.instructions.get_disassembly(insn))
 
-# Paginated/chunked access
-page = db.instructions.get_page(offset=0, limit=100)
-for chunk in db.instructions.get_chunked(1000):
-    process_batch(chunk)
+# Instructions in range
+for insn in db.instructions.get_between(start_ea, end_ea):
+    print(insn.ea)
 ```
 
-### Navigation
+### Getting Instructions
 
 ```python
-insn = db.instructions.get_at(0x401000)
-next_insn = db.instructions.get_next(insn.ea)
-prev_insn = db.instructions.get_previous(insn.ea)
-
-# Get preceding instruction (following flow)
-prev, is_far = db.instructions.get_preceding(0x401100)
+insn = db.instructions.get_at(ea)          # Decode at address
+insn = db.instructions.get_previous(ea)    # Previous instruction
 ```
 
-### Instruction Classification
+### Instruction Properties
 
 ```python
-if db.instructions.is_call_instruction(insn):
-    print("This is a call")
-if db.instructions.is_indirect_jump_or_call(insn):
-    print("Indirect transfer")
-if db.instructions.breaks_sequential_flow(insn):
-    print("Flow stops here (ret, jmp, etc.)")
+disasm = db.instructions.get_disassembly(insn)
+mnemonic = db.instructions.get_mnemonic(insn)  # "mov", "push", etc.
+db.instructions.is_valid(insn)
 ```
 
-### Operands
+### Control Flow Analysis
 
 ```python
-# Get operand count
+db.instructions.is_call_instruction(insn)      # Is this a call?
+db.instructions.is_indirect_jump_or_call(insn) # Indirect jump/call?
+db.instructions.breaks_sequential_flow(insn)   # Stops flow (ret, jmp)?
+```
+
+### Working with Operands
+
+```python
 count = db.instructions.get_operands_count(insn)
+operands = db.instructions.get_operands(insn)  # List of Operand objects
 
-# Get specific operand (returns Operand object)
-op = db.instructions.get_operand(insn, 0)
-if op:
-    print(f"Type: {op.type}, Value: {op.get_value()}")
+for op in operands:
+    info = op.get_info()
+    print(f"Operand {op.number}: {op.type.name}")
 
-# Get all operands
-for op in db.instructions.get_operands(insn):
-    print(f"Operand {op.number}: {op.type}")
-
-# Format operand as text
-text = db.instructions.format_operand(insn.ea, 0)
-```
-
-### Creating Instructions
-
-```python
-# Convert bytes to instruction
-db.instructions.create_at(0x401000)
+    if isinstance(op, RegisterOperand):
+        print(f"  Register: {op.get_register_name()}")
+    elif isinstance(op, ImmediateOperand):
+        print(f"  Value: 0x{op.get_value():x}")
+    elif isinstance(op, MemoryOperand):
+        if op.is_direct_memory():
+            print(f"  Memory: 0x{op.get_address():x}")
 ```
 
 ---
 
-## Bytes
+## Segments
 
-Access raw memory via `db.bytes`.
-
-### Reading Data
+### Iterating Segments
 
 ```python
-# Read single values
-byte_val = db.bytes.get_byte_at(0x401000)
-word_val = db.bytes.get_word_at(0x401000)
-dword_val = db.bytes.get_dword_at(0x401000)
-qword_val = db.bytes.get_qword_at(0x401000)
-float_val = db.bytes.get_float_at(0x401000)
-double_val = db.bytes.get_double_at(0x401000)
+for segment in db.segments:
+    name = db.segments.get_name(segment)
+    size = db.segments.get_size(segment)
+    print(f"{name}: {segment.start_ea:#x} - {segment.end_ea:#x}")
 
-# Read multiple bytes
-data = db.bytes.get_bytes_at(0x401000, size=16)
-
-# Read strings
-string = db.bytes.get_string_at(0x401000)
-cstring = db.bytes.get_cstring_at(0x401000, max_length=256)
+count = len(db.segments)
 ```
 
-### Writing/Patching Data
+### Finding Segments
 
 ```python
-# Set values (direct write)
-db.bytes.set_byte_at(0x401000, 0x90)
-db.bytes.set_bytes_at(0x401000, b"\x90\x90\x90")
-
-# Patch values (saves originals for reverting)
-db.bytes.patch_byte_at(0x401000, 0x90)
-db.bytes.patch_bytes_at(0x401000, b"\x90\x90\x90")
-
-# Revert patches
-db.bytes.revert_byte_at(0x401000)
-
-# Get original values
-orig = db.bytes.get_original_byte_at(0x401000)
+seg = db.segments.get_at(0x401000)      # Segment containing address
+seg = db.segments.get_by_name(".text")  # By name
 ```
 
-### Searching
+### Segment Properties
 
 ```python
-# Find byte pattern
-addr = db.bytes.find_bytes_between(b"\x55\x8B\xEC", 0x401000, 0x410000)
-
-# Find with wildcards (IDA pattern syntax)
-addr = db.bytes.find_pattern("55 8B EC ?? ?? 90", 0x401000, 0x410000)
-all_matches = db.bytes.find_pattern_all("CC ?? 90", 0x401000, 0x410000)
-
-# Find text
-addr = db.bytes.find_text_between("error", 0x401000, 0x410000)
-
-# Find immediate value in instructions
-addr = db.bytes.find_immediate_between(0x12345678, 0x401000, 0x410000)
+name = db.segments.get_name(segment)
+size = db.segments.get_size(segment)
+bitness = db.segments.get_bitness(segment)  # 16, 32, or 64
+seg_class = db.segments.get_class(segment)   # "CODE", "DATA", etc.
 ```
 
-### Type Checking
+### Creating Segments
 
 ```python
-if db.bytes.is_code_at(0x401000):
-    print("Contains code")
-if db.bytes.is_data_at(0x401000):
-    print("Contains data")
-if db.bytes.is_unknown_at(0x401000):
-    print("Undefined bytes")
-if db.bytes.is_head_at(0x401000):
-    print("Start of an item")
+from ida_domain.segments import PredefinedClass, AddSegmentFlags
+
+# Add segment with explicit range
+seg = db.segments.add(
+    seg_para=0,
+    start_ea=0x1000,
+    end_ea=0x2000,
+    seg_name="MySegment",
+    seg_class=PredefinedClass.CODE
+)
+
+# Append segment after last one
+seg = db.segments.append(seg_para=0, seg_size=0x1000, seg_name="NewSeg")
 ```
 
-### Creating Data Items
+### Modifying Segments
 
 ```python
-db.bytes.create_byte_at(0x401000, count=4)
-db.bytes.create_dword_at(0x401000)
-db.bytes.create_string_at(0x401000, length=10, string_type=StringType.C)
-db.bytes.create_struct_at(0x401000, count=1, tid=struct_id)
+from ida_domain.segments import SegmentPermissions, AddressingMode
+
+db.segments.set_name(segment, "new_name")
+db.segments.set_permissions(segment, SegmentPermissions.READ | SegmentPermissions.EXEC)
+db.segments.add_permissions(segment, SegmentPermissions.WRITE)
+db.segments.remove_permissions(segment, SegmentPermissions.WRITE)
+db.segments.set_addressing_mode(segment, AddressingMode.BIT64)
+db.segments.set_comment(segment, "Code section", repeatable=False)
 ```
-
-### Item Navigation
-
-```python
-head = db.bytes.get_item_head_at(0x401002)  # Get start of item
-end = db.bytes.get_item_end_at(0x401000)     # Get end of item
-size = db.bytes.get_item_size_at(0x401000)
-
-next_head = db.bytes.get_next_head(0x401000)
-prev_head = db.bytes.get_previous_head(0x401000)
-```
-
----
-
-## Xrefs
-
-Access cross-references via `db.xrefs`.
-
-### Getting References TO an Address
-
-```python
-# All references to address (returns XrefInfo objects)
-for xref in db.xrefs.to_ea(0x401000):
-    print(f"From 0x{xref.from_ea:x}, type: {xref.type}")
-
-# Code references only
-for addr in db.xrefs.code_refs_to_ea(0x401000, flow=False):
-    print(f"Code ref from 0x{addr:x}")
-
-# Data references only
-for addr in db.xrefs.data_refs_to_ea(0x401000):
-    print(f"Data ref from 0x{addr:x}")
-
-# Specific reference types
-for addr in db.xrefs.calls_to_ea(0x401000):
-    print(f"Called from 0x{addr:x}")
-for addr in db.xrefs.jumps_to_ea(0x401000):
-    print(f"Jump from 0x{addr:x}")
-```
-
-### Getting References FROM an Address
-
-```python
-# All references from address
-for xref in db.xrefs.from_ea(0x401000):
-    print(f"To 0x{xref.to_ea:x}, type: {xref.type}")
-
-# Code references from address
-for addr in db.xrefs.code_refs_from_ea(0x401000):
-    print(f"Code ref to 0x{addr:x}")
-
-# Calls from address
-for addr in db.xrefs.calls_from_ea(0x401000):
-    print(f"Calls 0x{addr:x}")
-```
-
-### Data Access References
-
-```python
-# Who reads this data?
-for addr in db.xrefs.reads_of_ea(0x404000):
-    print(f"Read at 0x{addr:x}")
-
-# Who writes this data?
-for addr in db.xrefs.writes_to_ea(0x404000):
-    print(f"Write at 0x{addr:x}")
-```
-
-### Checking References
-
-```python
-if db.xrefs.has_any_refs_to(0x401000):
-    print("Has incoming references")
-if db.xrefs.has_code_refs_to(0x401000):
-    print("Has code references")
-
-count = db.xrefs.count_refs_to(0x401000)
-```
-
-### LLM-Friendly Unified Interface
-
-```python
-# Unified interface with string kinds
-for xref in db.xrefs.get_refs_to(0x401000, kind="all"):
-    print(xref)
-for addr in db.xrefs.get_refs_to(0x401000, kind="calls"):
-    print(f"0x{addr:x}")
-
-# Valid kinds: "all", "code", "data", "calls", "jumps", "reads", "writes"
-```
-
-### Getting Caller Info
-
-```python
-for caller in db.xrefs.get_callers(0x401000):
-    print(f"Called from {caller.name} at 0x{caller.ea:x}")
-```
-
-### Modifying References
-
-```python
-# Add cross-reference
-db.xrefs.add_code_xref(from_ea, to_ea, XrefType.CALL_NEAR)
-db.xrefs.add_data_xref(from_ea, to_ea, XrefType.READ)
-
-# Delete cross-reference
-db.xrefs.delete_xref(from_ea, to_ea)
-```
-
-### XrefType Enum
-
-**Code References:**
-`CALL_FAR`, `CALL_NEAR`, `JUMP_FAR`, `JUMP_NEAR`, `ORDINARY_FLOW`
-
-**Data References:**
-`OFFSET`, `READ`, `WRITE`, `TEXT`, `INFORMATIONAL`
 
 ---
 
 ## Strings
 
-Access extracted strings via `db.strings`.
-
 ### Iterating Strings
 
 ```python
-for s in db.strings:
-    print(f"0x{s.address:x}: {str(s)}")
-
-# Total count
-print(f"Found {len(db.strings)} strings")
+for string in db.strings:
+    print(f"{string.address:#x}: {string}")
 
 # By index
 first_string = db.strings[0]
+count = len(db.strings)
 ```
 
 ### Finding Strings
 
 ```python
-# Get string at address
-s = db.strings.get_at(0x404000)
-if s:
-    print(f"String: {str(s)}, Length: {s.length}")
+string = db.strings.get_at(0x402000)  # String at address
 
-# Get by index
-s = db.strings.get_by_index(5)
+# Strings in range
+for s in db.strings.get_between(start_ea, end_ea):
+    print(s.contents)
 ```
 
-### StringItem Properties
+### String Properties
 
 ```python
-s = db.strings.get_at(0x404000)
-print(f"Address: 0x{s.address:x}")
-print(f"Length: {s.length}")
-print(f"Type: {s.type}")           # StringType enum
-print(f"Encoding: {s.encoding}")
-print(f"Contents: {s.contents}")    # bytes
-print(f"Text: {str(s)}")            # decoded string
-```
-
-### Paginated Access
-
-```python
-# Get page of strings
-page = db.strings.get_page(offset=0, limit=25)
-
-# Process in chunks
-for chunk in db.strings.get_chunked(100):
-    for s in chunk:
-        process(s)
-
-# Get strings in range
-for s in db.strings.get_between(0x404000, 0x405000):
-    print(str(s))
+print(string.address)       # Address
+print(string.length)        # Length in characters
+print(string.type)          # StringType enum
+print(string.encoding)      # Internal encoding
+print(string.contents)      # UTF-8 bytes
+print(str(string))          # Decoded string
 ```
 
 ### Rebuilding String List
@@ -716,589 +350,543 @@ from ida_domain.strings import StringListConfig, StringType
 
 config = StringListConfig(
     string_types=[StringType.C, StringType.C_16],
-    min_len=4,
+    min_len=3,
     only_ascii_7bit=False
 )
 db.strings.rebuild(config)
+db.strings.clear()  # Clear string list
+```
+
+---
+
+## Xrefs
+
+### Getting References TO an Address
+
+```python
+# All xrefs to an address
+for xref in db.xrefs.to_ea(target_ea):
+    print(f"{xref.from_ea:#x} -> {xref.to_ea:#x} ({xref.type.name})")
+
+# Just code references
+for ea in db.xrefs.code_refs_to_ea(target_ea, flow=False):
+    print(f"Code ref from {ea:#x}")
+
+# Just data references
+for ea in db.xrefs.data_refs_to_ea(target_ea):
+    print(f"Data ref from {ea:#x}")
+
+# Call references only
+for ea in db.xrefs.calls_to_ea(func_ea):
+    print(f"Called from {ea:#x}")
+
+# Detailed caller information
+for caller in db.xrefs.get_callers(func_ea):
+    print(f"Called from {caller.name} at {caller.ea:#x}")
+```
+
+### Getting References FROM an Address
+
+```python
+# All xrefs from an address
+for xref in db.xrefs.from_ea(source_ea):
+    print(f"{xref.from_ea:#x} -> {xref.to_ea:#x}")
+
+# Code/data refs from
+for ea in db.xrefs.code_refs_from_ea(source_ea):
+    print(f"Code ref to {ea:#x}")
+
+for ea in db.xrefs.calls_from_ea(source_ea):
+    print(f"Calls {ea:#x}")
+```
+
+### Data Access Analysis
+
+```python
+# Who reads this data?
+for ea in db.xrefs.reads_of_ea(data_ea):
+    print(f"Read by {ea:#x}")
+
+# Who writes to this data?
+for ea in db.xrefs.writes_to_ea(data_ea):
+    print(f"Written by {ea:#x}")
+```
+
+### XrefInfo Properties
+
+```python
+xref.is_call    # Is this a call reference?
+xref.is_jump    # Is this a jump reference?
+xref.is_read    # Is this a data read?
+xref.is_write   # Is this a data write?
+xref.is_flow    # Is this ordinary flow?
+xref.user       # Is this user-defined?
 ```
 
 ---
 
 ## Names
 
-Access symbols and labels via `db.names`.
-
 ### Iterating Names
 
 ```python
 for ea, name in db.names:
-    print(f"0x{ea:x}: {name}")
+    print(f"{ea:#x}: {name}")
 
-# Count
-print(f"Total names: {len(db.names)}")
+count = len(db.names)
 ```
 
 ### Getting Names
 
 ```python
-# Get name at address
 name = db.names.get_at(0x401000)
-
-# Get visible name (as shown in disassembly)
-visible = db.names.get_visible_name(0x401000)
-
-# Resolve name to address
-addr = db.names.resolve_name("main")
+ea, name = db.names[0]  # By index
 ```
 
 ### Setting Names
 
 ```python
-# Set name
-db.names.set_name(0x401000, "my_function")
+from ida_domain.names import SetNameFlags
 
-# Force name (tries variations if exists)
-db.names.force_name(0x401000, "my_function")
-
-# Delete name
-db.names.delete_at(0x401000)
+db.names.set_name(ea, "my_function")
+db.names.set_name(ea, "my_func", flags=SetNameFlags.CHECK)  # Validate chars
+db.names.force_name(ea, "func")  # Creates func_2 if func exists
+db.names.delete(ea)              # Remove name
 ```
 
 ### Name Properties
 
 ```python
-# Check name type
-if db.names.is_public_name(0x401000):
-    print("Public symbol")
-if db.names.is_weak_name(0x401000):
-    print("Weak symbol")
+db.names.is_valid_name("my_name")   # Check if valid
+db.names.is_public_name(ea)         # Is public?
+db.names.is_weak_name(ea)           # Is weak?
 
-# Modify properties
-db.names.make_name_public(0x401000)
-db.names.make_name_non_public(0x401000)
+db.names.make_name_public(ea)
+db.names.make_name_non_public(ea)
+db.names.make_name_weak(ea)
+db.names.make_name_non_weak(ea)
 ```
 
 ### Demangling
 
 ```python
-# Get demangled name
-demangled = db.names.get_demangled_name(0x401000)
+from ida_domain.names import DemangleFlags
 
-# Demangle a string
-demangled = db.names.demangle_name("_ZN3Foo3barEv")
-```
-
-### Validation
-
-```python
-# Check if valid name
-if db.names.is_valid_name("my_var"):
-    print("Valid")
-
-# Validate and clean
-is_valid, cleaned = db.names.validate("my-var")
+demangled = db.names.get_demangled_name(ea)
+demangled = db.names.get_demangled_name(ea, DemangleFlags.NORETTYPE)
+demangled = db.names.demangle_name("?main@@YAXXZ")
 ```
 
 ---
 
 ## Types
 
-Access type information via `db.types`.
-
 ### Getting Types
 
 ```python
 # By name
-tinfo = db.types.get_by_name("HWND")
+tinfo = db.types.get_by_name("MyStruct")
 
 # At address
-tinfo = db.types.get_at(0x401000)
+tinfo = db.types.get_at(ea)
 
-# By ordinal
-tinfo = db.types.get_by_ordinal(5)
-
-# Guess type at address
-tinfo = db.types.guess_at(0x401000)
-
-# LLM-friendly unified interface
-tinfo = db.types.get("size_t", by="name")
-tinfo = db.types.get(0x401000, by="address")
-```
-
-### Applying Types
-
-```python
-# Apply by name
-db.types.apply_by_name(0x401000, "HWND")
-
-# Apply from declaration
-db.types.apply_declaration(0x401000, "int *")
-
-# Apply tinfo object
-db.types.apply_at(0x401000, tinfo)
-
-# LLM-friendly unified interface
-db.types.apply(0x401000, "HWND", by="name")
-db.types.apply(0x401000, "int *", by="decl")
-```
-
-### Type Information
-
-```python
-# Format as C declaration
-decl = db.types.format_type(tinfo)
-
-# Get detailed info
-details = db.types.get_details(tinfo)
-print(f"Name: {details.name}, Size: {details.size}")
-
-# Check type category
-if db.types.is_struct(tinfo):
-    print("Structure type")
-if db.types.is_enum(tinfo):
-    print("Enum type")
+# Iterate all types
+for tinfo in db.types:
+    print(tinfo)
 ```
 
 ### Parsing Types
 
 ```python
-# Parse single declaration
-tinfo = db.types.parse_one_declaration(library, "struct Foo { int x; };", "Foo")
+# Parse declarations from string
+errors = db.types.parse_declarations(None, "struct Point { int x; int y; };")
 
-# Parse multiple declarations
-count = db.types.parse_declarations(library, "typedef int BOOL; typedef void* HANDLE;")
+# Parse single declaration
+tinfo = db.types.parse_one_declaration(None, "int (*callback)(void*)", "callback_t")
 
 # Parse header file
-count = db.types.parse_header_file(library, Path("myheader.h"))
+errors = db.types.parse_header_file(library, Path("header.h"))
+```
+
+### Applying Types
+
+```python
+from ida_domain.types import TypeApplyFlags
+
+db.types.apply_at(tinfo, ea, flags=TypeApplyFlags.DEFINITE)
+```
+
+### Type Details
+
+```python
+details = db.types.get_details(tinfo)
+print(details.name)
+print(details.size)
+print(details.attributes)
+
+# For structs/unions
+if details.udt:
+    print(details.udt.num_members)
+    print(details.udt.attributes)
+
+# For functions
+if details.func:
+    print(details.func.attributes)
 ```
 
 ### Type Libraries
 
 ```python
-# Load library
-lib = db.types.load_library(Path("windows.til"))
+# Load/create libraries
+lib = db.types.load_library(Path("types.til"))
+lib = db.types.create_library(Path("new.til"), "My Types")
 
-# Import types from library
-db.types.import_from_library(lib)
+# Import/export types
+db.types.import_type(source_lib, "MyStruct")
+db.types.export_type(dest_lib, "MyStruct")
 
-# Unload
+# Save library
+db.types.save_library(lib, Path("output.til"))
 db.types.unload_library(lib)
+```
+
+---
+
+## Bytes
+
+### Reading Values
+
+```python
+byte = db.bytes.get_byte_at(ea)
+word = db.bytes.get_word_at(ea)
+dword = db.bytes.get_dword_at(ea)
+qword = db.bytes.get_qword_at(ea)
+float_val = db.bytes.get_float_at(ea)
+double_val = db.bytes.get_double_at(ea)
+
+# Read multiple bytes
+data = db.bytes.get_bytes_at(ea, size=16)
+original = db.bytes.get_original_bytes_at(ea, size=16)
+
+# Read strings
+string = db.bytes.get_string_at(ea)
+cstring = db.bytes.get_cstring_at(ea, max_length=256)
+```
+
+### Writing Values
+
+```python
+db.bytes.set_byte_at(ea, 0x90)
+db.bytes.set_word_at(ea, 0x1234)
+db.bytes.set_dword_at(ea, 0x12345678)
+db.bytes.set_qword_at(ea, 0x123456789ABCDEF0)
+db.bytes.set_bytes_at(ea, b"\x90\x90\x90")
+```
+
+### Patching (with History)
+
+```python
+db.bytes.patch_byte_at(ea, 0x90)     # Saves original
+db.bytes.patch_bytes_at(ea, data)
+db.bytes.revert_byte_at(ea)          # Restore original
+
+# Get original values
+orig = db.bytes.get_original_byte_at(ea)
+```
+
+### Searching
+
+```python
+from ida_domain.bytes import SearchFlags
+
+# Find bytes
+ea = db.bytes.find_bytes_between(b"\x55\x89\xe5", start_ea, end_ea)
+
+# Find all occurrences
+addresses = db.bytes.find_binary_sequence(b"\x90\x90")
+
+# Find text
+ea = db.bytes.find_text_between("error", flags=SearchFlags.DOWN)
+
+# Find immediate value
+ea = db.bytes.find_immediate_between(0x1234)
+```
+
+### Creating Data Items
+
+```python
+from ida_domain.strings import StringType
+
+db.bytes.create_byte_at(ea, count=4)
+db.bytes.create_word_at(ea)
+db.bytes.create_dword_at(ea, count=10)  # Array of 10 dwords
+db.bytes.create_qword_at(ea)
+db.bytes.create_float_at(ea)
+db.bytes.create_double_at(ea)
+db.bytes.create_string_at(ea, string_type=StringType.C)
+db.bytes.create_struct_at(ea, count=1, tid=struct_tid)
+```
+
+### Querying Properties
+
+```python
+size = db.bytes.get_data_size_at(ea)
+db.bytes.is_value_initialized_at(ea)
+db.bytes.is_code_at(ea)
+db.bytes.is_data_at(ea)
+db.bytes.is_head_at(ea)
+db.bytes.is_tail_at(ea)
+db.bytes.is_unknown_at(ea)
+
+# Get disassembly at address
+disasm = db.bytes.get_disassembly_at(ea)
+```
+
+### Navigation
+
+```python
+next_head = db.bytes.get_next_head(ea)
+prev_head = db.bytes.get_previous_head(ea)
+next_addr = db.bytes.get_next_address(ea)
+prev_addr = db.bytes.get_previous_address(ea)
 ```
 
 ---
 
 ## Comments
 
-Access comments via `db.comments`.
-
 ### Regular Comments
 
 ```python
-# Get comment at address
-info = db.comments.get_at(0x401000)
+from ida_domain.comments import CommentKind
+
+# Get comment
+info = db.comments.get_at(ea, CommentKind.REGULAR)
 if info:
-    print(f"Comment: {info.comment}")
+    print(info.comment)
 
 # Set comment
-db.comments.set_at(0x401000, "This is important")
-
-# Set repeatable comment
-db.comments.set_at(0x401000, "Shows everywhere", CommentKind.REPEATABLE)
+db.comments.set_at(ea, "This is important", CommentKind.REGULAR)
+db.comments.set_at(ea, "Shows everywhere", CommentKind.REPEATABLE)
 
 # Delete comment
-db.comments.delete_at(0x401000)
+db.comments.delete_at(ea, CommentKind.ALL)
 ```
 
 ### Iterating Comments
 
 ```python
-for info in db.comments:
-    print(f"0x{info.ea:x}: {info.comment}")
+for comment_info in db.comments:
+    print(f"{comment_info.ea:#x}: {comment_info.comment}")
 
-# Get specific type
-for info in db.comments.get_all(CommentKind.REPEATABLE):
-    print(info.comment)
+# All comment types
+for info in db.comments.get_all(CommentKind.ALL):
+    print(f"{info.ea:#x} (repeatable={info.repeatable}): {info.comment}")
 ```
 
-### Extra Comments (Multi-line)
+### Extra Comments (Anterior/Posterior)
 
 ```python
-# Add multi-line comment before code
-idx = db.comments.get_first_free_extra_index(0x401000, ExtraCommentKind.ANTERIOR)
-db.comments.set_extra_at(0x401000, idx, "Line 1", ExtraCommentKind.ANTERIOR)
-db.comments.set_extra_at(0x401000, idx+1, "Line 2", ExtraCommentKind.ANTERIOR)
+from ida_domain.comments import ExtraCommentKind
 
-# Get all extra comments
-for line in db.comments.get_all_extra_at(0x401000, ExtraCommentKind.ANTERIOR):
-    print(line)
+# Set extra comment
+db.comments.set_extra_at(ea, index=0, comment="Before line", kind=ExtraCommentKind.ANTERIOR)
+db.comments.set_extra_at(ea, index=0, comment="After line", kind=ExtraCommentKind.POSTERIOR)
+
+# Get extra comments
+comment = db.comments.get_extra_at(ea, index=0, kind=ExtraCommentKind.ANTERIOR)
+for comment in db.comments.get_all_extra_at(ea, ExtraCommentKind.ANTERIOR):
+    print(comment)
 
 # Delete
-db.comments.delete_all_extra_at(0x401000, ExtraCommentKind.ANTERIOR)
-```
-
----
-
-## Decompiler
-
-Access Hex-Rays decompiler via `db.decompiler`.
-
-```python
-# Check availability
-if db.decompiler.is_available:
-    # Decompile function
-    lines = db.decompiler.decompile(0x401000)
-    if lines:
-        for line in lines:
-            print(line)
-```
-
----
-
-## Imports
-
-Access import table via `db.imports`.
-
-### Iterating Imports
-
-```python
-# Iterate modules
-for module in db.imports:
-    print(f"{module.name}: {module.import_count} imports")
-    for entry in module.imports:
-        print(f"  {entry.full_name}")
-
-# Iterate all entries directly
-for entry in db.imports.get_all_entries():
-    print(f"0x{entry.address:x}: {entry.full_name}")
-```
-
-### Finding Imports
-
-```python
-# By name
-entry = db.imports.get_by_name("VirtualAlloc")
-entry = db.imports.get_by_name("VirtualAlloc", module_name="kernel32.dll")
-
-# By address
-entry = db.imports.get_at(0x401000)
-
-# Search with regex
-for entry in db.imports.search_by_pattern(r'^Create'):
-    print(entry.full_name)
-```
-
-### Import Information
-
-```python
-# Check if address is import
-if db.imports.is_import(0x401000):
-    print("This is an import entry")
-
-# Get statistics
-stats = db.imports.get_statistics()
-print(f"Modules: {stats.module_count}, Total: {stats.total_imports}")
+db.comments.delete_extra_at(ea, index=0, kind=ExtraCommentKind.ANTERIOR)
 ```
 
 ---
 
 ## Entries
 
-Access entry points via `db.entries`.
+### Iterating Entry Points
 
 ```python
-# Iterate all entries
 for entry in db.entries:
-    print(f"{entry.name} at 0x{entry.address:x}")
+    print(f"{entry.ordinal}: {entry.name} at {entry.address:#x}")
 
-# Count
-print(f"Total entries: {len(db.entries)}")
-
-# Find by name
-entry = db.entries.get_by_name("main")
-
-# Find by ordinal
-entry = db.entries.get_by_ordinal(1)
-
-# Add new entry
-db.entries.add(0x401000, "my_entry")
+count = len(db.entries)
+first = db.entries[0]
 ```
 
----
-
-## Search
-
-Find addresses by criteria via `db.search`.
-
-### Unified Search Interface
+### Finding Entries
 
 ```python
-# Find next of type
-addr = db.search.find_next(0x401000, "undefined", direction="down")
-addr = db.search.find_next(0x401000, "code")
-addr = db.search.find_next(0x401000, "data")
-addr = db.search.find_next(0x401000, "code_outside_function")
-
-# Find all in range
-for addr in db.search.find_all(0x401000, 0x410000, "undefined"):
-    print(f"Undefined at 0x{addr:x}")
+entry = db.entries.get_at(ea)              # By address
+entry = db.entries.get_by_ordinal(1)       # By ordinal
+entry = db.entries.get_by_name("main")     # By name
+entry = db.entries.get_at_index(0)         # By index
 ```
 
-### Specific Search Methods
+### Entry Properties
 
 ```python
-# State-based
-addr = db.search.next_undefined(0x401000)
-addr = db.search.next_defined(0x401000)
-
-# Type-based
-addr = db.search.next_code(0x401000)
-addr = db.search.next_data(0x401000)
-
-# Iterators
-for addr in db.search.all_undefined(0x401000, 0x410000):
-    print(f"0x{addr:x}")
-for addr in db.search.all_code_outside_functions():
-    print(f"Orphan code at 0x{addr:x}")
+print(entry.ordinal)
+print(entry.address)
+print(entry.name)
+print(entry.forwarder_name)
+entry.has_forwarder()
 ```
 
-### Problem Search
+### Modifying Entries
 
 ```python
-# Find errors
-addr, op = db.search.next_error(0x401000)
-addr, op = db.search.next_untyped_operand(0x401000)
-
-# Iterate all errors
-for addr, op in db.search.all_errors():
-    print(f"Error at 0x{addr:x}, operand {op}")
+db.entries.add(address=ea, name="new_entry", ordinal=10)
+db.entries.rename(ordinal=10, new_name="renamed_entry")
+db.entries.set_forwarder(ordinal=10, forwarder_name="other.dll!func")
+db.entries.exists(ordinal=10)
 ```
 
----
-
-## CallGraph
-
-Multi-hop call graph traversal via `db.callgraph`.
+### Utility Iterators
 
 ```python
-# Get callers (direct and transitive)
-for caller in db.callgraph.callers_of(func_ea, max_depth=3):
-    print(f"Caller: 0x{caller:x}")
+for ordinal in db.entries.get_ordinals():
+    print(ordinal)
 
-# Get callees (functions called)
-for callee in db.callgraph.callees_of(func_ea, max_depth=3):
-    print(f"Callee: 0x{callee:x}")
+for addr in db.entries.get_addresses():
+    print(f"{addr:#x}")
 
-# Find call paths between functions
-for path in db.callgraph.paths_between(src_ea, dst_ea, max_depth=10):
-    print(path)  # CallPath(0x401000 -> 0x401100 -> 0x401200)
+for name in db.entries.get_names():
+    print(name)
 
-# Get all reachable functions
-reachable = db.callgraph.reachable_from(func_ea)
-
-# Get all functions that can reach this one
-callers = db.callgraph.reaches(func_ea)
+for fwd in db.entries.get_forwarders():
+    print(f"{fwd.ordinal}: {fwd.name}")
 ```
 
 ---
 
 ## Heads
 
-Iterate over items (instructions/data) via `db.heads`.
+### Iterating Heads
 
 ```python
-# Iterate all heads
 for ea in db.heads:
-    if db.heads.is_code(ea):
-        print(f"Code at 0x{ea:x}")
+    print(f"Head at {ea:#x}")
 
-# Get heads in range
-for ea in db.heads.get_between(0x401000, 0x402000):
-    size = db.heads.get_size(ea)
-    print(f"0x{ea:x}: {size} bytes")
+# In range
+for ea in db.heads.get_between(start_ea, end_ea):
+    print(ea)
+```
 
-# Navigation
-next_ea = db.heads.get_next(0x401000)
-prev_ea = db.heads.get_previous(0x401000)
+### Navigation
 
-# Check type
-if db.heads.is_head(0x401000):
-    print("Start of item")
+```python
+next_ea = db.heads.get_next(ea)
+prev_ea = db.heads.get_previous(ea)
+```
+
+### Head Properties
+
+```python
+db.heads.is_head(ea)      # Is start of item?
+db.heads.is_tail(ea)      # Is part of multi-byte item?
+db.heads.is_code(ea)      # Is instruction?
+db.heads.is_data(ea)      # Is data?
+db.heads.is_unknown(ea)   # Is unclassified?
+
+size = db.heads.size(ea)
+start, end = db.heads.bounds(ea)
 ```
 
 ---
 
-## Fixups
+## Flowchart
 
-Manage relocations via `db.fixups`.
+### Creating Flowcharts
 
 ```python
-# Get fixup at address
-fixup = db.fixups.get_at(0x401000)
-if fixup:
-    print(f"Target: 0x{fixup.target:x}, Type: {fixup.type}")
+from ida_domain.flowchart import FlowChart, FlowChartFlags
 
-# Check for fixup
-if db.fixups.has_fixup(0x401000):
-    print("Has relocation")
+# From function
+flowchart = FlowChart(db, func=my_func)
 
-# Iterate fixups
-for fixup in db.fixups.get_all():
-    print(f"0x{fixup.address:x} -> 0x{fixup.target:x}")
+# From address range
+flowchart = FlowChart(db, bounds=(start_ea, end_ea))
 
-# Add fixup
-db.fixups.add(0x401000, FixupType.OFF32, target_offset=0x402000)
+# With predecessor info
+flowchart = FlowChart(db, func=my_func, flags=FlowChartFlags.PREDS)
 ```
 
----
-
-## Stack Frames
-
-Manage function stack frames via `db.stack_frames`.
+### Iterating Basic Blocks
 
 ```python
-# Get frame for function
-frame = db.stack_frames.get_at(func_ea)
-if frame:
-    print(f"Frame size: {frame.size}")
-    print(f"Locals: {frame.local_size}, Args: {frame.argument_size}")
-
-    # Iterate variables
-    for var in frame.variables:
-        print(f"  {var.name}: offset {var.offset}, size {var.size}")
-
-# Define new variable
-db.stack_frames.define_variable(func_ea, "buffer", -0x40, "char[64]")
-
-# Rename variable
-db.stack_frames.rename_variable(func_ea, -0x40, "my_buffer")
-```
-
----
-
-## Switches
-
-Analyze switch statements via `db.switches`.
-
-```python
-# Get switch at address
-switch = db.switches.get_at(0x401000)
-if switch:
-    print(f"Cases: {switch.ncases}")
-
-    # Get jump targets
-    targets = db.switches.get_jump_table_addresses(switch)
-    for target in targets:
-        print(f"  Target: 0x{target:x}")
-
-    # Get case values
-    values = db.switches.get_case_values(switch)
-```
-
----
-
-## Problems
-
-Track analysis issues via `db.problems`.
-
-```python
-# Get all problems
-for problem in db.problems.get_all():
-    print(f"0x{problem.address:x}: {problem.type_name}")
-
-# Get problems of specific type
-for problem in db.problems.get_all(ProblemType.NONAME):
-    print(f"Missing name at 0x{problem.address:x}")
-
-# Check for problem
-if db.problems.has_problem(0x401000):
-    print("Has problem")
-
-# Count by type
-count = db.problems.count_by_type(ProblemType.BADSTACK)
-```
-
----
-
-## Exporter
-
-Export analysis results via `db.exporter`.
-
-```python
-# Export to various formats
-db.exporter.export("output.map", ExportFormat.MAP)
-db.exporter.export("output.asm", ExportFormat.ASM)
-db.exporter.export("output.lst", ExportFormat.LST)
-
-# Export specific range
-db.exporter.export_range("output.asm", 0x401000, 0x402000, ExportFormat.ASM)
-
-# Export raw bytes
-db.exporter.export_bytes("output.bin", 0x401000, 0x402000)
-```
-
----
-
-## Try Blocks
-
-Analyze exception handling via `db.try_blocks`.
-
-```python
-# Get try blocks in range
-for block in db.try_blocks.get_in_range(0x401000, 0x410000):
-    print(f"Try: 0x{block.start_ea:x} - 0x{block.end_ea:x}")
-    if block.is_cpp:
-        for catch in block.catches:
-            print(f"  Catch: 0x{catch.start_ea:x}")
-    elif block.is_seh:
-        print(f"  SEH handler: 0x{block.seh_handler.start_ea:x}")
-
-# Check if address is in try block
-if db.try_blocks.is_in_try_block(0x401000):
-    print("Inside try block")
-```
-
----
-
-## FlowChart
-
-Analyze control flow via `db.functions.get_flowchart()`.
-
-```python
-func = db.functions.get_at(0x401000)
-flowchart = db.functions.get_flowchart(func)
-
 for block in flowchart:
-    print(f"Block 0x{block.start_ea:x} - 0x{block.end_ea:x}")
-    print(f"  Successors: {block.count_successors()}")
-    print(f"  Predecessors: {block.count_predecessors()}")
+    print(f"Block {block.id}: {block.start_ea:#x} - {block.end_ea:#x}")
 
-    for succ in block.get_successors():
-        print(f"  -> 0x{succ.start_ea:x}")
+# By index
+block = flowchart[0]
+count = len(flowchart)
+```
 
-    for insn in block.get_instructions():
-        print(f"    0x{insn.ea:x}")
+### Block Navigation
+
+```python
+for succ in block.get_successors():
+    print(f"Successor: {succ.id}")
+
+for pred in block.get_predecessors():
+    print(f"Predecessor: {pred.id}")
+
+succ_count = block.count_successors()
+pred_count = block.count_predecessors()
+```
+
+### Block Instructions
+
+```python
+for insn in block.get_instructions():
+    print(f"{insn.ea:#x}")
 ```
 
 ---
 
-## Operands
+## Signature Files
 
-Detailed operand analysis (via `db.instructions.get_operand()`).
+### Applying Signatures
 
 ```python
-insn = db.instructions.get_at(0x401000)
-for op in db.instructions.get_operands(insn):
-    print(f"Operand {op.number}:")
-    print(f"  Type: {op.type}")
-    print(f"  Size: {op.size_bytes} bytes")
-    print(f"  Access: {op.get_access_type()}")
+from pathlib import Path
 
-    if op.type == OperandType.REGISTER:
-        print(f"  Register: {op.get_register_name()}")
-    elif op.type == OperandType.IMMEDIATE:
-        print(f"  Value: {op.get_value()}")
-    elif op.type == OperandType.MEMORY:
-        print(f"  Address: 0x{op.get_address():x}")
+# Apply single file
+results = db.signature_files.apply(Path("/path/to/file.sig"))
+
+# Apply all in directory
+results = db.signature_files.apply(Path("/path/to/sigs/"))
+
+# Probe only (don't persist)
+results = db.signature_files.apply(Path("file.sig"), probe_only=True)
+
+for result in results:
+    print(f"{result.path}: {result.matches} matches")
+    for func in result.functions:
+        print(f"  {func.addr:#x}: {func.name}")
+```
+
+### Finding Signature Files
+
+```python
+# Default IDA sig directories
+sig_files = db.signature_files.get_files()
+
+# Include custom directories
+sig_files = db.signature_files.get_files([Path("/custom/sigs")])
+```
+
+### Creating Signatures
+
+```python
+# Create .sig and .pat files from current database
+files = db.signature_files.create()
+
+# Create only .pat file
+files = db.signature_files.create(pat_only=True)
 ```
 
 ---
@@ -1310,17 +898,71 @@ for op in db.instructions.get_operands(insn):
 ```python
 from ida_domain.xrefs import XrefType
 
-# Code references
-XrefType.CALL_NEAR    # Near call
-XrefType.CALL_FAR     # Far call
-XrefType.JUMP_NEAR    # Near jump
-XrefType.JUMP_FAR     # Far jump
-XrefType.ORDINARY_FLOW # Sequential flow
-
-# Data references
 XrefType.OFFSET       # Offset reference
-XrefType.READ         # Read access
 XrefType.WRITE        # Write access
+XrefType.READ         # Read access
+XrefType.CALL_FAR     # Far call
+XrefType.CALL_NEAR    # Near call
+XrefType.JUMP_FAR     # Far jump
+XrefType.JUMP_NEAR    # Near jump
+XrefType.ORDINARY_FLOW  # Sequential flow
+
+xref_type.is_code_ref()  # Check if code ref
+xref_type.is_data_ref()  # Check if data ref
+```
+
+### FunctionFlags
+
+```python
+from ida_domain.functions import FunctionFlags
+
+FunctionFlags.NORET      # Doesn't return
+FunctionFlags.LIB        # Library function
+FunctionFlags.THUNK      # Thunk function
+FunctionFlags.HIDDEN     # Hidden chunk
+FunctionFlags.LUMINA     # From Lumina
+FunctionFlags.FAR        # Far function
+FunctionFlags.FRAME      # Uses frame pointer
+```
+
+### LocalVariableAccessType
+
+```python
+from ida_domain.functions import LocalVariableAccessType
+
+LocalVariableAccessType.READ     # Variable is read
+LocalVariableAccessType.WRITE    # Variable is written
+LocalVariableAccessType.ADDRESS  # Address taken (&var)
+```
+
+### LocalVariableContext
+
+```python
+from ida_domain.functions import LocalVariableContext
+
+LocalVariableContext.ASSIGNMENT    # var = expr
+LocalVariableContext.CONDITION     # if (var)
+LocalVariableContext.CALL_ARG      # func(var)
+LocalVariableContext.RETURN        # return var
+LocalVariableContext.ARITHMETIC    # var + 1
+LocalVariableContext.COMPARISON    # var == x
+LocalVariableContext.ARRAY_INDEX   # arr[var]
+LocalVariableContext.POINTER_DEREF # *var
+LocalVariableContext.CAST          # (type)var
+```
+
+### OperandType
+
+```python
+from ida_domain.operands import OperandType
+
+OperandType.REGISTER      # Register
+OperandType.MEMORY        # Direct memory
+OperandType.PHRASE        # Register addressing
+OperandType.DISPLACEMENT  # Reg + displacement
+OperandType.IMMEDIATE     # Immediate value
+OperandType.FAR_ADDRESS   # Far address
+OperandType.NEAR_ADDRESS  # Near address
 ```
 
 ### StringType
@@ -1328,9 +970,12 @@ XrefType.WRITE        # Write access
 ```python
 from ida_domain.strings import StringType
 
-StringType.C          # C-style null-terminated
-StringType.C_16       # C-style 16-bit (Unicode)
-StringType.PASCAL     # Pascal-style with length prefix
+StringType.C        # C-style null-terminated
+StringType.C_16     # C-style 16-bit
+StringType.C_32     # C-style 32-bit
+StringType.PASCAL   # Pascal-style
+StringType.LEN2     # 2-byte length prefix
+StringType.LEN4     # 4-byte length prefix
 ```
 
 ### SegmentPermissions
@@ -1341,54 +986,30 @@ from ida_domain.segments import SegmentPermissions
 SegmentPermissions.READ
 SegmentPermissions.WRITE
 SegmentPermissions.EXEC
-SegmentPermissions.ALL  # READ | WRITE | EXEC
+SegmentPermissions.ALL
 ```
 
-### FunctionFlags
+### AddressingMode
 
 ```python
-from ida_domain.functions import FunctionFlags
+from ida_domain.segments import AddressingMode
 
-FunctionFlags.NORET     # Doesn't return
-FunctionFlags.LIB       # Library function
-FunctionFlags.THUNK     # Thunk function
-FunctionFlags.FRAME     # Uses frame pointer
+AddressingMode.BIT16  # 16-bit segment
+AddressingMode.BIT32  # 32-bit segment
+AddressingMode.BIT64  # 64-bit segment
 ```
 
-### OperandType
+### PredefinedClass
 
 ```python
-from ida_domain.operands import OperandType
+from ida_domain.segments import PredefinedClass
 
-OperandType.VOID
-OperandType.REGISTER
-OperandType.MEMORY
-OperandType.IMMEDIATE
-OperandType.NEAR_ADDRESS
-OperandType.FAR_ADDRESS
-```
-
-### SearchTarget
-
-```python
-from ida_domain.search import SearchTarget
-
-SearchTarget.UNDEFINED
-SearchTarget.DEFINED
-SearchTarget.CODE
-SearchTarget.DATA
-SearchTarget.CODE_OUTSIDE_FUNCTION
-```
-
-### ProblemType
-
-```python
-from ida_domain.problems import ProblemType
-
-ProblemType.NONAME     # Missing name
-ProblemType.BADSTACK   # Stack analysis issue
-ProblemType.ATTN       # Needs attention
-ProblemType.NOBASE     # Missing base
+PredefinedClass.CODE
+PredefinedClass.DATA
+PredefinedClass.CONST
+PredefinedClass.STACK
+PredefinedClass.BSS
+PredefinedClass.XTRN
 ```
 
 ### CommentKind
@@ -1396,23 +1017,100 @@ ProblemType.NOBASE     # Missing base
 ```python
 from ida_domain.comments import CommentKind
 
-CommentKind.REGULAR    # Regular comment
-CommentKind.REPEATABLE # Repeatable comment
-CommentKind.ALL        # Both types
+CommentKind.REGULAR     # Normal comment
+CommentKind.REPEATABLE  # Shows at all refs
+CommentKind.ALL         # Both types
+```
+
+### ExtraCommentKind
+
+```python
+from ida_domain.comments import ExtraCommentKind
+
+ExtraCommentKind.ANTERIOR   # Before the line
+ExtraCommentKind.POSTERIOR  # After the line
+```
+
+### TypeAttr
+
+```python
+from ida_domain.types import TypeAttr
+
+TypeAttr.INT, TypeAttr.UINT
+TypeAttr.FLOAT, TypeAttr.DOUBLE
+TypeAttr.PTR, TypeAttr.ARRAY
+TypeAttr.FUNC, TypeAttr.STRUCT
+TypeAttr.UNION, TypeAttr.ENUM
+TypeAttr.CONST, TypeAttr.VOLATILE
+```
+
+### FlowChartFlags
+
+```python
+from ida_domain.flowchart import FlowChartFlags
+
+FlowChartFlags.NONE   # Default
+FlowChartFlags.NOEXT  # Don't compute external blocks
+FlowChartFlags.PREDS  # Compute predecessors
 ```
 
 ---
 
-## Quick Tips
+## Common Patterns
 
-1. **Always wait for analysis**: Call `db.analysis.wait()` before querying results after modifications.
+### Find All Calls to a Function
 
-2. **Use iterators for large datasets**: Methods like `get_all()` return iterators to avoid memory issues.
+```python
+func = db.functions.get_function_by_name("malloc")
+if func:
+    for caller in db.xrefs.get_callers(func.start_ea):
+        print(f"Called from {caller.name} at {caller.ea:#x}")
+```
 
-3. **Check for None**: Most `get_*` methods return `None` if not found rather than raising exceptions.
+### Rename Functions Based on Strings
 
-4. **Use unified interfaces**: Methods like `db.xrefs.get_refs_to(ea, kind="calls")` are LLM-friendly.
+```python
+for func in db.functions:
+    for insn in db.functions.get_instructions(func):
+        for xref in db.xrefs.from_ea(insn.ea):
+            string = db.strings.get_at(xref.to_ea)
+            if string and "error" in str(string).lower():
+                db.functions.set_name(func, f"func_with_error_{func.start_ea:x}")
+                break
+```
 
-5. **Batch operations**: Use `get_chunked()` for processing with progress updates.
+### Analyze Function Complexity
 
-6. **Address validation**: Use `db.is_valid_ea(ea)` before operations on untrusted addresses.
+```python
+func = db.functions.get_at(ea)
+flowchart = db.functions.get_flowchart(func)
+print(f"Basic blocks: {len(flowchart)}")
+
+total_edges = sum(block.count_successors() for block in flowchart)
+print(f"Cyclomatic complexity: {total_edges - len(flowchart) + 2}")
+```
+
+### Export Function Pseudocode
+
+```python
+for func in db.functions:
+    name = db.functions.get_name(func)
+    try:
+        pseudocode = db.functions.get_pseudocode(func)
+        print(f"// {name}")
+        for line in pseudocode:
+            print(line)
+    except RuntimeError:
+        print(f"// Could not decompile {name}")
+```
+
+### Find Cross-References to Strings
+
+```python
+for string in db.strings:
+    refs = list(db.xrefs.to_ea(string.address))
+    if refs:
+        print(f'"{string}" referenced from:')
+        for xref in refs:
+            print(f"  {xref.from_ea:#x}")
+```
